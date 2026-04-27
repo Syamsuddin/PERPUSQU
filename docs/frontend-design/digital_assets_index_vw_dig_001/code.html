@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Assets Index - PERPUSQU</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Scripts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c3c5d7",
+                        "on-tertiary-container": "#ffd4c5",
+                        "on-surface-variant": "#434654",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#007230",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1353d8",
+                        "secondary-container": "#7cf994",
+                        "on-secondary-fixed": "#002109",
+                        "primary": "#003fb1",
+                        "inverse-surface": "#2a313d",
+                        "surface-variant": "#dce2f3",
+                        "secondary": "#006e2d",
+                        "on-tertiary-fixed": "#380d00",
+                        "tertiary-fixed-dim": "#ffb59a",
+                        "surface-container": "#e7eefe",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#dce2f3",
+                        "secondary-fixed-dim": "#62df7d",
+                        "on-primary-fixed-variant": "#003dab",
+                        "on-surface": "#151c27",
+                        "on-secondary-fixed-variant": "#005320",
+                        "on-background": "#151c27",
+                        "on-primary-container": "#d4dcff",
+                        "surface-container-high": "#e2e8f8",
+                        "surface": "#f9f9ff",
+                        "primary-container": "#1a56db",
+                        "on-primary-fixed": "#00174d",
+                        "outline": "#737686",
+                        "inverse-primary": "#b5c4ff",
+                        "on-tertiary-fixed-variant": "#802a00",
+                        "surface-dim": "#d3daea",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-container": "#ad3b00",
+                        "secondary-fixed": "#7ffc97",
+                        "background": "#f9f9ff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary": "#852b00",
+                        "inverse-on-surface": "#ebf1ff",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand { font-family: 'Manrope', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- NavigationDrawer Shell -->
+<aside class="fixed left-0 top-0 bottom-0 z-50 flex flex-col h-screen w-72 rounded-r-[1.5rem] py-8 bg-[#f0f3ff] dark:bg-[#1e2632] no-border tonal-transition flat no-shadows">
+<div class="font-['Manrope'] font-extrabold text-[#003fb1] dark:text-blue-400 text-2xl mb-8 px-4">
+            PERPUSQU
+        </div>
+<nav class="flex-1 space-y-2">
+<a class="text-[#151c27] dark:text-[#f9f9ff] mx-4 px-6 py-3 opacity-60 flex items-center gap-4 font-['Inter'] text-sm font-medium hover:bg-[#e2e8f8] dark:hover:bg-[#2d3748] hover:opacity-100 rounded-full transition-all active:scale-95 translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="bg-[#003fb1] text-white rounded-full mx-4 px-6 py-3 shadow-lg shadow-blue-500/20 flex items-center gap-4 font-['Inter'] text-sm font-medium translate-x-1 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                Digital Assets
+            </a>
+<a class="text-[#151c27] dark:text-[#f9f9ff] mx-4 px-6 py-3 opacity-60 flex items-center gap-4 font-['Inter'] text-sm font-medium hover:bg-[#e2e8f8] dark:hover:bg-[#2d3748] hover:opacity-100 rounded-full transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">cloud_upload</span>
+                Upload Asset
+            </a>
+<a class="text-[#151c27] dark:text-[#f9f9ff] mx-4 px-6 py-3 opacity-60 flex items-center gap-4 font-['Inter'] text-sm font-medium hover:bg-[#e2e8f8] dark:hover:bg-[#2d3748] hover:opacity-100 rounded-full transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">library_books</span>
+                Cataloging
+            </a>
+<a class="text-[#151c27] dark:text-[#f9f9ff] mx-4 px-6 py-3 opacity-60 flex items-center gap-4 font-['Inter'] text-sm font-medium hover:bg-[#e2e8f8] dark:hover:bg-[#2d3748] hover:opacity-100 rounded-full transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+                Archives
+            </a>
+<a class="text-[#151c27] dark:text-[#f9f9ff] mx-4 px-6 py-3 opacity-60 flex items-center gap-4 font-['Inter'] text-sm font-medium hover:bg-[#e2e8f8] dark:hover:bg-[#2d3748] hover:opacity-100 rounded-full transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-72 flex-1 flex flex-col">
+<!-- TopAppBar Shell -->
+<header class="sticky top-0 z-40 w-full px-8 flex justify-between items-center h-20 bg-[#f9f9ff] dark:bg-[#151c27] shadow-[0_24px_24px_0_rgba(21,28,39,0.04)]">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#003fb1] dark:text-[#1a56db] active:scale-95 transition-transform">menu</button>
+<h1 class="font-['Manrope'] font-bold tracking-tight text-2xl text-[#151c27] dark:text-[#f9f9ff]">Digital Repository</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-8 text-sm">
+<a class="text-[#003fb1] dark:text-[#1a56db] font-bold" href="#">Assets Overview</a>
+<a class="text-[#151c27] dark:text-[#f9f9ff] opacity-70 hover:opacity-100 transition-colors" href="#">Reports</a>
+<a class="text-[#151c27] dark:text-[#f9f9ff] opacity-70 hover:opacity-100 transition-colors" href="#">Security</a>
+</div>
+<div class="h-10 w-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden active:scale-95 transition-transform border-2 border-primary/20">
+<img alt="Administrator Profile" data-alt="close-up portrait of a professional administrator with a clean tech background and soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC11HUF40MqQPLWiFaBP2ZCoinDWeGihiIKkpfVyVq8FvK1U9_1IuB33tvrQe_Zk8Aw9978sOhUG7c5nxUqQIWGhLgXLqFkTnYuRCQAXW91Hiyc27WGoIDh2Euk6-ahVi9I0IiUX4E1sVsU3q6kdhs46N5r3NpQPnPw574yEVPROmi2v4OB8OJ-XuL2T8crIVzitjBN0kl-s0NuHkYskU5QtcynPOBGQtyj456aDPSeaNzzZzc0OnfONMmLahkB_3pccO-UiqBSz9xK"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 space-y-8">
+<!-- Page Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<h2 class="text-3xl font-black tracking-tight text-on-surface">Digital Assets Index</h2>
+<p class="text-on-surface-variant opacity-70 font-medium">VW-DIG-001 | Managing institutional digital repositories</p>
+</div>
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg shadow-primary/25 active:scale-95 transition-transform group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">cloud_upload</span>
+                    Upload Asset
+                </button>
+</section>
+<!-- Bento Stats Grid (Editorial Insight) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl space-y-4 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">description</span>
+<span class="text-xs font-bold text-secondary uppercase tracking-widest">+12%</span>
+</div>
+<div>
+<p class="text-4xl font-black text-on-surface">12.4k</p>
+<p class="text-sm font-medium text-on-surface-variant opacity-60">Total Documents</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl space-y-4 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-tertiary bg-tertiary/10 p-2 rounded-lg">speed</span>
+<span class="text-xs font-bold text-tertiary uppercase tracking-widest">Active</span>
+</div>
+<div>
+<p class="text-4xl font-black text-on-surface">89%</p>
+<p class="text-sm font-medium text-on-surface-variant opacity-60">OCR Completion</p>
+</div>
+</div>
+<div class="bg-surface-container-low col-span-1 md:col-span-2 p-6 rounded-xl flex items-center justify-between relative overflow-hidden">
+<div class="relative z-10 space-y-2">
+<h3 class="text-xl font-bold">Storage Optimization</h3>
+<p class="text-sm opacity-70 max-w-xs">Your repository is currently using 64% of allocated cloud storage. Consider archiving old logs.</p>
+</div>
+<div class="relative z-10 text-right">
+<p class="text-3xl font-black text-primary">1.2 TB</p>
+<p class="text-xs font-bold opacity-50 uppercase tracking-tighter">Available</p>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- Top Toolbar & Table Section -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_24px_48px_-12px_rgba(0,63,177,0.08)] overflow-hidden">
+<!-- Toolbar -->
+<div class="p-6 flex flex-col md:flex-row gap-4 items-center justify-between bg-surface-container-low/50">
+<div class="relative w-full md:w-96 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg py-3 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 text-sm placeholder:text-outline-variant font-medium" placeholder="Search by file title, tag, or ID..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-high text-on-surface px-4 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                            Filters
+                        </button>
+<div class="h-6 w-px bg-outline-variant/30"></div>
+<div class="flex items-center bg-surface-container-high rounded-lg p-1">
+<button class="px-3 py-1.5 rounded-md bg-surface-container-lowest shadow-sm text-sm font-bold">1</button>
+<button class="px-3 py-1.5 text-sm font-medium opacity-60">2</button>
+<button class="px-3 py-1.5 text-sm font-medium opacity-60">3</button>
+<button class="px-3 py-1.5 material-symbols-outlined text-sm opacity-60">chevron_right</button>
+</div>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant text-xs font-bold uppercase tracking-widest">
+<th class="px-8 py-5">File Title</th>
+<th class="px-6 py-5">Type</th>
+<th class="px-6 py-5">OCR Status</th>
+<th class="px-6 py-5">Access Rule</th>
+<th class="px-8 py-5 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low/20 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-12 bg-red-50 rounded-md flex flex-col items-center justify-center border border-red-100/50">
+<span class="text-[8px] font-black text-red-600 uppercase">PDF</span>
+<span class="material-symbols-outlined text-red-500 text-lg">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">Annual_Budget_2023_Final.pdf</p>
+<p class="text-xs text-on-surface-variant opacity-60">Added 2 hours ago • 4.2 MB</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-bold text-on-surface-variant bg-surface-container-high px-2.5 py-1 rounded-md">Document</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 text-xs font-bold text-secondary bg-secondary-container/20 px-3 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                        Success
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">public</span>
+<span class="text-sm font-medium text-on-surface">Public</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low/20 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-12 bg-blue-50 rounded-md flex flex-col items-center justify-center border border-blue-100/50">
+<span class="text-[8px] font-black text-blue-600 uppercase">IMG</span>
+<span class="material-symbols-outlined text-blue-500 text-lg">image</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">Campus_Heritage_Scan_01.jpg</p>
+<p class="text-xs text-on-surface-variant opacity-60">Added 5 hours ago • 12.8 MB</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-bold text-on-surface-variant bg-surface-container-high px-2.5 py-1 rounded-md">Image</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#b58c00] bg-yellow-100/30 px-3 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                                        Pending
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-lg">lock</span>
+<span class="text-sm font-medium text-on-surface">Restricted</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low/20 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-12 bg-red-50 rounded-md flex flex-col items-center justify-center border border-red-100/50">
+<span class="text-[8px] font-black text-red-600 uppercase">PDF</span>
+<span class="material-symbols-outlined text-red-500 text-lg">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">Archival_Manuscript_X44.pdf</p>
+<p class="text-xs text-on-surface-variant opacity-60">Added 1 day ago • 25.1 MB</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-bold text-on-surface-variant bg-surface-container-high px-2.5 py-1 rounded-md">Document</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 text-xs font-bold text-error bg-error-container/20 px-3 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                        Failed
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">public</span>
+<span class="text-sm font-medium text-on-surface">Public</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Empty State Suggestion Footer -->
+<div class="p-8 text-center border-t border-surface-container-low">
+<p class="text-sm text-on-surface-variant opacity-50 italic">Showing 3 of 12,402 assets. Use search for deep indexing.</p>
+</div>
+</section>
+<!-- Visual Dashboard Preview (Asymmetric Pattern) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2 bg-primary rounded-xl p-8 text-on-primary relative overflow-hidden group">
+<div class="relative z-10 space-y-6">
+<div class="inline-block bg-white/10 backdrop-blur-md px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">System Health</div>
+<h3 class="text-4xl font-black max-w-md leading-tight">Automated Cataloging is now at 94% accuracy.</h3>
+<div class="flex gap-4">
+<button class="bg-white text-primary px-6 py-3 rounded-lg font-bold text-sm active:scale-95 transition-transform">Review Log</button>
+<button class="border border-white/30 text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-white/10 transition-colors">Dismiss</button>
+</div>
+</div>
+<!-- Abstract Background Graphic -->
+<div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-white/10 to-transparent pointer-events-none"></div>
+<div class="absolute -right-20 -top-20 w-80 h-80 bg-primary-container rounded-full blur-3xl opacity-50 group-hover:opacity-80 transition-opacity"></div>
+</div>
+<div class="bg-surface-container-high rounded-xl p-8 flex flex-col justify-between">
+<div class="space-y-4">
+<h4 class="font-bold text-lg">Asset Distribution</h4>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold opacity-60">PDF Documents</span>
+<span class="text-xs font-bold">72%</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[72%]"></div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold opacity-60">Research Images</span>
+<span class="text-xs font-bold">18%</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[18%]"></div>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<div class="w-full aspect-video rounded-lg overflow-hidden relative">
+<img alt="Library Archive" class="w-full h-full object-cover grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-700" data-alt="dramatic wide angle shot of a modern minimalist digital archive facility with blue ambient lighting and glass partitions" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYsNLKZA3W7pU0ISKkkp3G_iWgkjzdbETCnMAH0TKSjNL7llaccPo0OHtmyk-dE_RU2eoso77IVMGJvuoHMlIY9gFL7ywEQsqSg510x3BgdSnECkrb8-hTLTPCGSnjJQojv-yKF1vjBbpRbv7NL0FUU-1UXvyj-kZemQksSy-qC_Ppwy78zlf1UzCCmipjn5gOO0tLN2LVvZ2LY9eNypckQhjlUTDT8OMj56eVUzNDI1DPXexyRwKpvFVacuYOOfzlb8uQ73XhiVgS"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<span class="absolute bottom-3 left-4 text-[10px] font-bold text-white uppercase tracking-widest">Main Vault View</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Tonal Base -->
+<footer class="mt-auto py-6 px-8 border-t border-surface-container-low bg-surface">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs font-medium text-on-surface-variant opacity-60">© 2024 PERPUSQU Digital Infrastructure. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-xs font-bold text-primary hover:underline" href="#">Documentation</a>
+<a class="text-xs font-bold text-primary hover:underline" href="#">API Support</a>
+<a class="text-xs font-bold text-primary hover:underline" href="#">System Status</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

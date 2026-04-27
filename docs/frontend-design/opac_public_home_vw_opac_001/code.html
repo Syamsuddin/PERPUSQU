@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PERPUSQU | Digital Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#f9f9ff",
+                      "inverse-on-surface": "#ebf1ff",
+                      "surface-bright": "#f9f9ff",
+                      "surface-container-high": "#e2e8f8",
+                      "on-background": "#151c27",
+                      "surface-container-low": "#f0f3ff",
+                      "on-secondary-container": "#007230",
+                      "on-error": "#ffffff",
+                      "outline-variant": "#c3c5d7",
+                      "on-tertiary-fixed-variant": "#802a00",
+                      "secondary-fixed-dim": "#62df7d",
+                      "primary-container": "#1a56db",
+                      "surface-variant": "#dce2f3",
+                      "surface-container": "#e7eefe",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#7ffc97",
+                      "on-surface-variant": "#434654",
+                      "primary-fixed-dim": "#b5c4ff",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#ffdbcf",
+                      "surface-tint": "#1353d8",
+                      "on-tertiary-fixed": "#380d00",
+                      "inverse-primary": "#b5c4ff",
+                      "secondary-container": "#7cf994",
+                      "outline": "#737686",
+                      "background": "#f9f9ff",
+                      "primary-fixed": "#dbe1ff",
+                      "on-primary-fixed-variant": "#003dab",
+                      "on-primary-fixed": "#00174d",
+                      "on-primary-container": "#d4dcff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#002109",
+                      "error-container": "#ffdad6",
+                      "secondary": "#006e2d",
+                      "tertiary-container": "#ad3b00",
+                      "tertiary-fixed-dim": "#ffb59a",
+                      "surface-dim": "#d3daea",
+                      "on-secondary-fixed-variant": "#005320",
+                      "inverse-surface": "#2a313d",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#ffd4c5",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#852b00",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#dce2f3",
+                      "primary": "#003fb1",
+                      "on-surface": "#151c27"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "1rem",
+                      "xl": "1.5rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                "section": "5rem"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope", "sans-serif"],
+                      "body": ["Inter", "sans-serif"],
+                      "label": ["Inter", "sans-serif"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<nav class="fixed z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl docked full-width top-0">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-700 dark:text-blue-400 text-3xl">account_balance</span>
+<span class="text-xl font-extrabold tracking-tighter text-blue-700 dark:text-blue-400">Digital Curator</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-700 dark:text-blue-400 font-semibold border-b-2 border-blue-700 transition-all" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Collections</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300" href="#">Advanced Search</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2.5 rounded-xl font-semibold text-sm bg-primary text-on-primary hover:opacity-90 transition-all">
+                    Admin Login
+                </button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[751px] flex items-center justify-center pt-20 px-6 overflow-hidden">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="modern minimalist library with high ceilings, tall bookshelves, and soft natural sunlight filtering through large windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1dXMVqlbWYfbJJhsgXAg6hxjH91nahkmcwUW_gpjEpumItb4D4fcLOVxwDS4oFNUp5zuL-T_gVNpns84fsoKHfQkjhlUyBudpfeBlwKy7yi0iyy9_PM6BPR0lkpJe3qP09h_vrhsCMUz-1gpavQvVWaAbOCiX6OneCpih-jJatMA8FQmVGqhEtCSVkphsUM6PvffjKpMOhdM9EFUetxmNVtgu8mEYgQ5U30F5wqUe54YW5SsQfKp0LwcDBVxmxpINg3XS_sisEr0V"/>
+<div class="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary-container/90 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-4xl text-center">
+<h1 class="text-5xl md:text-7xl font-extrabold text-white mb-8 tracking-tight leading-tight">
+                    Temukan Pengetahuan <br/><span class="text-secondary-fixed">di PerpusQu.</span>
+</h1>
+<!-- Search Component -->
+<div class="relative max-w-3xl mx-auto group">
+<div class="glass-panel p-2 rounded-xl shadow-2xl transition-all group-focus-within:ring-4 group-focus-within:ring-primary/20">
+<div class="flex items-center bg-surface-container-lowest rounded-lg overflow-hidden">
+<span class="material-symbols-outlined px-4 text-outline text-2xl">search</span>
+<input class="w-full py-5 bg-transparent border-none focus:ring-0 text-lg placeholder:text-outline/60 text-on-surface" placeholder="Cari judul, pengarang, subjek..." type="text"/>
+<button class="mr-2 px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary-container transition-colors">
+                                Cari
+                            </button>
+</div>
+</div>
+<!-- Popular Search Pills -->
+<div class="mt-6 flex flex-wrap justify-center gap-3">
+<span class="text-white/80 text-sm font-medium self-center mr-2">Populer:</span>
+<a class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm backdrop-blur-md transition-all border border-white/20" href="#">Metodologi Penelitian</a>
+<a class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm backdrop-blur-md transition-all border border-white/20" href="#">Kecerdasan Buatan</a>
+<a class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm backdrop-blur-md transition-all border border-white/20" href="#">Sejarah Indonesia</a>
+<a class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm backdrop-blur-md transition-all border border-white/20" href="#">Ekonomi Digital</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Collections Grid -->
+<section class="max-w-screen-2xl mx-auto px-8 py-24">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="text-3xl font-bold text-on-surface tracking-tight mb-2">Koleksi Terkurasi</h2>
+<p class="text-on-surface-variant max-w-xl">Akses berbagai materi akademik pilihan untuk mendukung riset dan pembelajaran Anda secara efisien.</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-2 hover:underline">
+                    Lihat Semua <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Bento Grid Style -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Large Feature -->
+<div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl bg-primary-container text-on-primary-container p-8 min-h-[400px] flex flex-col justify-end">
+<div class="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-110">
+<img class="w-full h-full object-cover" data-alt="stacks of academic books in a professional research library setting with warm atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBMbrhdiE0cJA0VY8TPmFcgf1MdkJk2xCJ8QOEJxE6Pu6JHqL3IcQPHtw9_RM_gwRqXrx12Y4EmUnq7NrIoE1f9MagYwMYNIbw3QNCWuwWtGMFoIyK6x8e9piWG_9qOrAv6fXCTgvWNOP3Prou-4AZ1DFfj4xLierId5wZ_41M_eEi68Jbc2Fo_rujJJw9yco2RALxYG9RuV9AlIsQB0zsT7HLxwHUhrZQ7VOrY0oq_ZOhoKUQqQ0BCD8PHE-2B-MBrxboeuh1fSt0"/>
+</div>
+<div class="relative z-10">
+<span class="inline-block px-3 py-1 rounded-md bg-secondary text-white text-xs font-bold uppercase tracking-widest mb-4">New Arrival</span>
+<h3 class="text-3xl font-bold mb-4 leading-tight">Arsip Digital Sejarah Nasional 1945-1950</h3>
+<p class="text-primary-fixed/80 mb-6 text-lg">Eksplorasi ribuan dokumen primer dari era revolusi kemerdekaan yang kini terdigitalisasi sepenuhnya.</p>
+<button class="px-6 py-3 rounded-lg bg-surface-container-lowest text-primary font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                            Eksplorasi Arsip <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Secondary Cards -->
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">school</span>
+<div>
+<h4 class="text-xl font-bold mb-2">Tesis &amp; Disertasi</h4>
+<p class="text-sm text-on-surface-variant">Koleksi karya ilmiah mahasiswa dan dosen dalam format digital.</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">menu_book</span>
+<div>
+<h4 class="text-xl font-bold mb-2">E-Journal</h4>
+<p class="text-sm text-on-surface-variant">Akses ribuan jurnal ilmiah terindeks Scopus dan Sinta.</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">mic_external_on</span>
+<div>
+<h4 class="text-xl font-bold mb-2">Audio Visual</h4>
+<p class="text-sm text-on-surface-variant">Rekaman kuliah tamu, webinar, dan dokumentasi universitas.</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">auto_stories</span>
+<div>
+<h4 class="text-xl font-bold mb-2">Buku Referensi</h4>
+<p class="text-sm text-on-surface-variant">Ensiklopedia, kamus, dan buku pegangan mata kuliah umum.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="bg-surface-container-low py-20 px-8">
+<div class="max-w-screen-xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+<div>
+<div class="text-4xl font-extrabold text-primary mb-2">120K+</div>
+<div class="text-on-surface-variant font-medium">Buku Fisik</div>
+</div>
+<div>
+<div class="text-4xl font-extrabold text-primary mb-2">45K+</div>
+<div class="text-on-surface-variant font-medium">E-Books</div>
+</div>
+<div>
+<div class="text-4xl font-extrabold text-primary mb-2">850</div>
+<div class="text-on-surface-variant font-medium">Jurnal Aktif</div>
+</div>
+<div>
+<div class="text-4xl font-extrabold text-primary mb-2">15K+</div>
+<div class="text-on-surface-variant font-medium">Anggota Aktif</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-blue-50 dark:bg-slate-900 full-width py-12 px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-screen-2xl mx-auto">
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-700 dark:text-blue-400 text-2xl">account_balance</span>
+<span class="font-['Manrope'] font-bold text-blue-800 dark:text-blue-300 text-xl">PERPUSQU</span>
+</div>
+<p class="font-['Inter'] text-sm text-slate-600 dark:text-slate-400 max-w-md">
+                    © 2024 University Library. Bridging the physical and digital archive through state-of-the-art curation tools and accessible knowledge bases.
+                </p>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-blue-600 transition-colors" href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
+<a class="text-slate-500 hover:text-blue-600 transition-colors" href="#"><span class="material-symbols-outlined">language</span></a>
+<a class="text-slate-500 hover:text-blue-600 transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<h5 class="font-bold text-on-background">Quick Links</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 hover:underline underline-offset-4 text-sm" href="#">Advanced Search</a></li>
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 hover:underline underline-offset-4 text-sm" href="#">Institutional Branding</a></li>
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 hover:underline underline-offset-4 text-sm" href="#">Library Hours</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-bold text-on-background">Legal</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 hover:underline underline-offset-4 text-sm" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 hover:underline underline-offset-4 text-sm" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-blue-600 hover:underline underline-offset-4 text-sm" href="#">Accessibility</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

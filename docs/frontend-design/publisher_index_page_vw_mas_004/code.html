@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Publisher Index - Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9ff",
+                        "surface": "#f9f9ff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-tertiary-fixed-variant": "#802a00",
+                        "tertiary-container": "#ad3b00",
+                        "on-background": "#151c27",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#62df7d",
+                        "on-primary-container": "#d4dcff",
+                        "on-secondary-container": "#007230",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2a313d",
+                        "error": "#ba1a1a",
+                        "tertiary": "#852b00",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#434654",
+                        "on-secondary-fixed": "#002109",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-fixed": "#00174d",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "secondary-container": "#7cf994",
+                        "primary": "#003fb1",
+                        "background": "#f9f9ff",
+                        "on-surface": "#151c27",
+                        "tertiary-fixed-dim": "#ffb59a",
+                        "on-tertiary-container": "#ffd4c5",
+                        "surface-tint": "#1353d8",
+                        "primary-container": "#1a56db",
+                        "surface-variant": "#dce2f3",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary-fixed-variant": "#005320",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b5c4ff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-primary-fixed-variant": "#003dab",
+                        "secondary": "#006e2d",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c3c5d7",
+                        "secondary-fixed": "#7ffc97",
+                        "surface-container-highest": "#dce2f3",
+                        "outline": "#737686",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface-dim": "#d3daea",
+                        "surface-container": "#e7eefe",
+                        "inverse-on-surface": "#ebf1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- NavigationDrawer -->
+<aside class="h-screen w-72 fixed left-0 top-0 bg-slate-100 dark:bg-slate-950 flex flex-col py-6 gap-2 z-50">
+<div class="px-8 mb-8">
+<h1 class="text-2xl font-black font-['Manrope'] text-blue-700">Perpusqu</h1>
+</div>
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-primary-container">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a librarian manager wearing glasses in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS5N6kZI7UyuT6tDcnVkaso1lcKJCdsK4KMZhDaVCSonI_xdDzsfs9ZXaTNkUIHZsS__Hi60MfpJlXOR-U1gIxY14qMIi2E6kVFYZusJUryV7ilW9tIx1T7qpDdZsMuKdCmW2IsGWKbRo6hF45KA5HKr1mtYrTwJLlokktfbkcCwjCIp9wGEkQjCQzgXJfgmJZQrKmQlB3I9uV6JBiKLkpoCgbxwaAnE-tXNt2_GG89ob2RuNEDYqVfMHKDrdELuimM6X3MH6tbQQt"/>
+</div>
+<div>
+<p class="font-['Inter'] text-sm font-bold text-on-background">Perpusqu Admin</p>
+<p class="font-['Inter'] text-xs text-slate-500">Systems Manager</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="text-slate-600 dark:text-slate-400 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-medium text-sm">Member Management</span>
+</a>
+<a class="bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-100 rounded-full mx-2 px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="font-medium text-sm">Master Data</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">swap_horiz</span>
+<span class="font-medium text-sm">Circulation</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 ml-72 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl docked w-full top-0 sticky flex items-center justify-between px-8 h-16 z-40">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-500 hover:bg-blue-50 p-2 rounded-full transition-colors active:scale-95">menu</button>
+<h2 class="font-['Manrope'] font-bold text-lg tracking-tight text-blue-700 dark:text-blue-400">Admin Dashboard</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary-container">
+<img class="w-full h-full object-cover" data-alt="close up of a professional user avatar with a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPynS1gq-6x-rAtktBDCPchHqUHKbs3Oh8vgznhfYKNCmgde4Ls4h0FVau36A2lylBcfML9OW7Sb4sagRiEa_tBZ3O-Ade-GUcEGStwSEFspYA1V1xYG4s2U6XzfCZ0sBtvkXWuemIs67Z5TW-pDJJcSyqAFIy-GirxViVAa3qShFE04iPeeUZoWwaVedXx7apDJMgXuhWisKHtni1Rlr2vCtmaq54xTVFVVB_-kRHl4KAdcZkonDPwsUXqYKBSzUgDb7FoyG-6Oxl"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 space-y-8">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500 mb-2">
+<span>Master Data</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-blue-700">Publisher Index</span>
+</nav>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-background">Penerbit</h1>
+<p class="text-slate-500 max-w-xl">Manage the list of official book publishers and their regional distribution centers.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                    Tambah Penerbit
+                </button>
+</section>
+<!-- Table Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
+<!-- Toolbar -->
+<div class="p-6 flex flex-col md:flex-row gap-4 justify-between items-center bg-surface-container-low/30">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface rounded-xl border-none ring-1 ring-outline-variant/20 focus:ring-2 focus:ring-primary transition-all placeholder:text-slate-400" placeholder="Cari nama penerbit atau kota..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-slate-600 uppercase text-[10px] font-bold tracking-widest">
+<th class="px-6 py-4">ID</th>
+<th class="px-6 py-4">Publisher Name</th>
+<th class="px-6 py-4">City</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-blue-50/30 transition-colors group">
+<td class="px-6 py-5 font-mono text-xs text-slate-400">PUB-001</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-700 font-bold">GP</div>
+<span class="font-bold text-on-background">Gramedia Pustaka Utama</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">Jakarta</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/30 rounded-full transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-blue-50/30 transition-colors group bg-surface-container-low/10">
+<td class="px-6 py-5 font-mono text-xs text-slate-400">PUB-002</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold">MI</div>
+<span class="font-bold text-on-background">Mizan Indonesia</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">Bandung</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/30 rounded-full transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-blue-50/30 transition-colors group">
+<td class="px-6 py-5 font-mono text-xs text-slate-400">PUB-003</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-700 font-bold">EP</div>
+<span class="font-bold text-on-background">Erlangga Publisher</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">Jakarta</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/30 rounded-full transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-blue-50/30 transition-colors group bg-surface-container-low/10">
+<td class="px-6 py-5 font-mono text-xs text-slate-400">PUB-004</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-700 font-bold">BK</div>
+<span class="font-bold text-on-background">Bentang Kabar</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">Yogyakarta</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/30 rounded-full transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-blue-50/30 transition-colors group">
+<td class="px-6 py-5 font-mono text-xs text-slate-400">PUB-005</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center text-pink-700 font-bold">RP</div>
+<span class="font-bold text-on-background">Republika Penerbit</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">Depok</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/30 rounded-full transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-6 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
+<p class="text-sm text-slate-500">Showing <span class="font-bold text-on-background">1</span> to <span class="font-bold text-on-background">5</span> of <span class="font-bold text-on-background">124</span> results</p>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 rounded-lg text-slate-600 hover:bg-slate-100 font-medium">2</button>
+<button class="w-10 h-10 rounded-lg text-slate-600 hover:bg-slate-100 font-medium">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="w-10 h-10 rounded-lg text-slate-600 hover:bg-slate-100 font-medium">25</button>
+<button class="p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Insights Section (Asymmetric Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-gradient-to-br from-primary to-primary-container p-8 rounded-xl text-on-primary shadow-xl relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-2xl font-bold mb-2">Publisher Growth Hub</h3>
+<p class="text-primary-fixed/80 max-w-md mb-6">Our database has grown by 15% this quarter. Manage your distribution networks efficiently from this dashboard.</p>
+<div class="flex gap-4">
+<div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+<p class="text-xs uppercase tracking-widest opacity-60 mb-1">Total Active</p>
+<p class="text-2xl font-black">428</p>
+</div>
+<div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+<p class="text-xs uppercase tracking-widest opacity-60 mb-1">New this month</p>
+<p class="text-2xl font-black">+12</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -bottom-8 -right-8 text-[12rem] opacity-10 rotate-12 group-hover:rotate-0 transition-transform duration-700">corporate_fare</span>
+</div>
+<div class="bg-surface-container-high p-8 rounded-xl flex flex-col justify-between border border-outline-variant/20">
+<div>
+<h3 class="text-lg font-bold text-on-background mb-4">Quick Actions</h3>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-sm text-slate-600 group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">print</span>
+</div>
+                                Print Labels
+                            </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">mail</span>
+</div>
+                                Email Directory
+                            </li>
+<li class="flex items-center gap-3 text-sm text-slate-600 group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-primary shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">sync</span>
+</div>
+                                Refresh Data
+                            </li>
+</ul>
+</div>
+<div class="pt-6 border-t border-slate-200">
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Last synced: Today, 09:41 AM</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Space -->
+<footer class="mt-auto py-8 px-8 border-t border-slate-100 flex justify-between items-center text-slate-400 text-xs">
+<p>© 2024 Perpusqu Management System. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-blue-600 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-blue-600 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-blue-600 transition-colors" href="#">Help Center</a>
+</div>
+</footer>
+</main>
+</body></html>

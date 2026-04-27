@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Circulation: Return Page (VW-CIRC-002) - PERPUSQU</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#003fb1",
+                        "tertiary-container": "#ad3b00",
+                        "outline-variant": "#c3c5d7",
+                        "on-primary-fixed-variant": "#003dab",
+                        "on-primary-fixed": "#00174d",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-tertiary-fixed-variant": "#802a00",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#1353d8",
+                        "on-primary": "#ffffff",
+                        "outline": "#737686",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#7cf994",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-secondary-fixed": "#002109",
+                        "on-primary-container": "#d4dcff",
+                        "tertiary": "#852b00",
+                        "on-tertiary-container": "#ffd4c5",
+                        "on-secondary-fixed-variant": "#005320",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb59a",
+                        "surface": "#f9f9ff",
+                        "secondary-fixed": "#7ffc97",
+                        "on-background": "#151c27",
+                        "inverse-primary": "#b5c4ff",
+                        "background": "#f9f9ff",
+                        "surface-container": "#e7eefe",
+                        "on-secondary-container": "#007230",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-container-highest": "#dce2f3",
+                        "primary-container": "#1a56db",
+                        "surface-dim": "#d3daea",
+                        "on-error": "#ffffff",
+                        "secondary": "#006e2d",
+                        "on-surface-variant": "#434654",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f9f9ff",
+                        "on-surface": "#151c27",
+                        "inverse-surface": "#2a313d",
+                        "secondary-fixed-dim": "#62df7d",
+                        "surface-container-low": "#f0f3ff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#dce2f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full z-40 py-4 bg-blue-50 dark:bg-slate-900 font-['Inter'] font-medium text-sm h-screen w-64 flex flex-col">
+<div class="px-6 mb-8">
+<h1 class="font-['Manrope'] font-extrabold text-blue-900 dark:text-blue-100 text-2xl tracking-tight">Library Admin</h1>
+<p class="text-xs opacity-70 uppercase tracking-widest mt-1">Operational Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center text-slate-600 dark:text-slate-400 px-4 py-2 mx-2 hover:bg-blue-100 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="space_dashboard">space_dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center text-slate-600 dark:text-slate-400 px-4 py-2 mx-2 hover:bg-blue-100 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="auto_stories">auto_stories</span>
+                Catalog
+            </a>
+<a class="flex items-center bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full px-4 py-2 mx-2" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="sync_alt">sync_alt</span>
+                Circulation
+            </a>
+<a class="flex items-center text-slate-600 dark:text-slate-400 px-4 py-2 mx-2 hover:bg-blue-100 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+                Members
+            </a>
+<a class="flex items-center text-slate-600 dark:text-slate-400 px-4 py-2 mx-2 hover:bg-blue-100 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+                Reports
+            </a>
+</nav>
+<div class="px-4 mt-auto space-y-1 border-t border-blue-100/50 pt-4">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl mb-4 font-bold shadow-lg shadow-primary/20 hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                New Transaction
+            </button>
+<a class="flex items-center text-slate-600 dark:text-slate-400 px-4 py-2 hover:bg-blue-100 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center text-slate-600 dark:text-slate-400 px-4 py-2 hover:bg-blue-100 dark:hover:bg-slate-800 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-blue-50 dark:bg-slate-950 sticky top-0 z-30">
+<div class="flex items-center gap-4">
+<span class="font-['Manrope'] tracking-tight text-xl font-bold text-blue-800 dark:text-blue-300">Digital Curator</span>
+<nav class="hidden md:flex items-center gap-6 ml-8">
+<a class="text-slate-600 dark:text-slate-400 font-medium text-sm hover:text-primary transition-colors" href="#">Overview</a>
+<a class="text-blue-700 dark:text-blue-400 font-bold border-b-2 border-blue-700 text-sm" href="#">Return Items</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium text-sm hover:text-primary transition-colors" href="#">Issue Items</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:bg-blue-100/50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-blue-100/50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-blue-200 overflow-hidden ml-2">
+<img alt="Administrator Profile" data-alt="professional portrait of a library administrator in a minimalist office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXzk6JcO72PZE7nf8QMGMYWlzg_pkKAFkY4s1vLM8UzOLp99NzSSXVHEI0Oud-OTiQ3r7vsSlovlVa7g_kQbV6SleQESC76d9gHD6Vc3wrcEbJiuF8RexLlVrKTyupjtcSonT2-YdiZHBzvBrqFDiUFWC20aMT-mZfzkmjMJg6TTrEgC9xvGLJ97jnDq5COc52ZD7kv3x4LcvUWvYa5xDtuOdu1bqqX2QJ7kvjhJtK3Jx3fszBxqL868gmB7bOIB7fBnBZpO2S696W"/>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<section class="p-8 flex-1 max-w-5xl mx-auto w-full">
+<div class="mb-10">
+<h2 class="text-3xl font-extrabold text-on-surface tracking-tight mb-2">Item Return Processing</h2>
+<p class="text-on-surface-variant">Identify and process returned circulation items with real-time status verification.</p>
+</div>
+<!-- Main Interactive Section (Bento Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Search/Scan Section -->
+<div class="lg:col-span-12">
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm ring-1 ring-outline-variant/15 flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-primary-fixed flex items-center justify-center rounded-full mb-6">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="barcode_scanner">barcode_scanner</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Scan Item Barcode</h3>
+<div class="relative w-full max-w-2xl">
+<span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-primary" data-icon="search">search</span>
+<input class="w-full pl-16 pr-6 py-5 bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 rounded-t-xl text-lg font-medium transition-all" placeholder="Scan or enter book barcode (e.g., 9781234567890)" type="text"/>
+</div>
+<p class="mt-4 text-sm text-on-surface-variant italic">Tip: Use the handheld scanner for faster processing.</p>
+</div>
+</div>
+<!-- Active Loan Card -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm ring-1 ring-outline-variant/15 overflow-hidden h-full">
+<div class="p-6 bg-surface-container-low flex justify-between items-center">
+<span class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">Active Loan Details</span>
+<span class="px-4 py-1 bg-error-container text-error text-xs font-bold rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+                                OVERDUE ALERT
+                            </span>
+</div>
+<div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+<!-- Member Info -->
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-xl bg-blue-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
+<img alt="Member Avatar" data-alt="close up headshot of a student member with a friendly smile, clean lighting, academy vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQpxloz9q88Vk3X0Yz9fxI9Wpkl1ypBXXPxd1Pt_INXs2vGBsI4yCA9IylRa_TTUpNlLL72RxrNMOX90ej7YG32-P0GE-vnJe-A-szwhZyDtza9i6X28itxxK0dnQg29nNY2uVxn2y4NzrecjVVL85A7ByZ_T_4-lOEX1xR7qdNzc8wAWz7AGW9U81j27_vby6-JL5DLF6wiu0mHebDR72V7Ai0BezWxH5_3lKsoz8OePfcQfAe8NoNPaR_LgguuN6yitlAW4bCZFO"/>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-bold mb-1">BORROWER</p>
+<h4 class="text-lg font-bold">Jonathan Doe</h4>
+<p class="text-sm text-on-surface-variant">ID: LIB-2023-0042</p>
+<p class="text-sm text-on-surface-variant mt-1">Status: <span class="text-secondary font-medium">Verified Active</span></p>
+</div>
+</div>
+<!-- Book Info -->
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-xl bg-surface-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="book">book</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-bold mb-1">ITEM DETAILS</p>
+<h4 class="text-lg font-bold">The Architecture of Innovation</h4>
+<p class="text-sm text-on-surface-variant">ISBN: 978-3-16-148410-0</p>
+<p class="text-sm text-error font-bold mt-1">Due: Oct 12, 2023 (14 Days Late)</p>
+</div>
+</div>
+</div>
+<div class="px-8 pb-8">
+<div class="p-4 bg-surface-container-low rounded-lg flex items-center gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="info">info</span>
+<p class="text-sm text-on-surface-variant">Outstanding fine accrued: <span class="font-bold text-on-surface">$14.00</span>. Member restricted until balance is cleared.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm ring-1 ring-outline-variant/15 flex flex-col h-full">
+<h3 class="text-lg font-bold mb-6">Finalize Transaction</h3>
+<div class="mb-8">
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase">Item Condition</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 rounded-t-lg py-4 px-4 appearance-none focus:ring-0 focus:border-primary font-medium">
+<option value="good">Good Condition</option>
+<option value="slightly_damaged">Slightly Damaged</option>
+<option value="damaged">Damaged / Needs Repair</option>
+<option value="lost">Mark as Lost</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="mt-auto space-y-4">
+<button class="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:opacity-80 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                                Process Return
+                            </button>
+<button class="w-full border-2 border-outline-variant/20 py-4 rounded-xl font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                                Cancel Operation
+                            </button>
+</div>
+</div>
+</div>
+<!-- Quick Statistics/History Grid -->
+<div class="lg:col-span-12 mt-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm ring-1 ring-outline-variant/15 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</div>
+<div>
+<p class="text-sm text-on-surface-variant">Returns Today</p>
+<p class="text-2xl font-bold">42 Items</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm ring-1 ring-outline-variant/15 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="text-sm text-on-surface-variant">Fines Collected</p>
+<p class="text-2xl font-bold">$124.50</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm ring-1 ring-outline-variant/15 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</div>
+<div>
+<p class="text-sm text-on-surface-variant">Peak Return Hour</p>
+<p class="text-2xl font-bold">14:00 - 15:00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Branding -->
+<footer class="p-8 text-center text-on-surface-variant opacity-60 text-sm">
+<p>© 2023 Perpusqu Digital Library Management. All rights reserved.</p>
+</footer>
+</main>
+</body></html>

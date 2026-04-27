@@ -1,0 +1,13 @@
+<div class="row g-3">
+    <div class="col-md-4">
+        <label class="form-label fw-medium">Kode Bahasa <span class="text-danger">*</span></label>
+        <input type="text" class="form-control @error('code') is-invalid @enderror" name="code" value="{{ old('code', $item->code ?? '') }}" required>
+        @error('code')<div class="invalid-feedback">{{ $message }}</div>@enderror
+    </div>
+    <div class="col-md-8">
+        <label class="form-label fw-medium">Nama Bahasa <span class="text-danger">*</span></label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $item->name ?? '') }}" required>
+        @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+    </div>
+    <div class="col-md-4"><div class="form-check form-switch mt-2"><input class="form-check-input" type="checkbox" name="is_active" value="1" id="isActive" {{ old('is_active', $item->is_active ?? true) ? 'checked' : '' }}><label class="form-check-label" for="isActive">Aktif</label></div></div>
+</div>

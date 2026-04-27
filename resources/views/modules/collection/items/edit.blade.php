@@ -1,0 +1,25 @@
+@extends('layouts.admin')
+@section('title', 'Edit Item Fisik')
+@section('page-title', 'Edit Item Fisik')
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.index') }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.collections.items.index') }}">Item Fisik</a></li>
+    <li class="breadcrumb-item active">Edit</li>
+@endsection
+@section('content')
+<div class="card shadow-sm border-0"><div class="card-body">
+    <div class="alert alert-info py-2 mb-3">
+        <i class="bi bi-info-circle me-1"></i>Katalog: <strong>{{ $item->bibliographicRecord->title ?? '-' }}</strong>
+        · Status saat ini: <span class="badge bg-{{ \App\Modules\Collection\Support\PhysicalItemStateGuard::statusBadgeClass($item->item_status) }}">{{ \App\Modules\Collection\Support\PhysicalItemStateGuard::statusLabel($item->item_status) }}</span>
+        <small class="d-block text-muted mt-1">Untuk mengubah status, gunakan fitur "Ubah Status" di halaman detail.</small>
+    </div>
+    <form method="POST" action="{{ route('admin.collections.items.update', $item) }}">
+        @csrf @method('PUT')
+        @include('modules.collection.items._form')
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i>Simpan</button>
+            <a href="{{ route('admin.collections.items.index') }}" class="btn btn-outline-secondary">Batal</a>
+        </div>
+    </form>
+</div></div>
+@endsection

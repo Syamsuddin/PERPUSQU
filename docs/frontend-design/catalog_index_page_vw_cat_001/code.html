@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Curator - Catalog Index</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#dce2f3",
+                        "on-tertiary-container": "#ffd4c5",
+                        "on-secondary": "#ffffff",
+                        "outline": "#737686",
+                        "on-tertiary-fixed-variant": "#802a00",
+                        "on-background": "#151c27",
+                        "inverse-surface": "#2a313d",
+                        "surface-variant": "#dce2f3",
+                        "secondary": "#006e2d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e2e8f8",
+                        "outline-variant": "#c3c5d7",
+                        "on-secondary-fixed": "#002109",
+                        "background": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b5c4ff",
+                        "on-surface-variant": "#434654",
+                        "tertiary-fixed": "#ffdbcf",
+                        "tertiary-container": "#ad3b00",
+                        "primary-container": "#1a56db",
+                        "on-secondary-container": "#007230",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f9f9ff",
+                        "surface-dim": "#d3daea",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#62df7d",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-fixed-variant": "#003dab",
+                        "primary": "#003fb1",
+                        "on-primary-fixed": "#00174d",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-surface": "#151c27",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-fixed": "#380d00",
+                        "secondary-fixed": "#7ffc97",
+                        "secondary-container": "#7cf994",
+                        "on-primary-container": "#d4dcff",
+                        "surface-container": "#e7eefe",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#1353d8",
+                        "on-secondary-fixed-variant": "#005320",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#852b00",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb59a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-border { border: none !important; }
+        .no-border-tonal-transition { border: none !important; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- NavigationDrawer Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 bg-[#f0f3ff] dark:bg-slate-900 h-screen w-72 z-50">
+<div class="px-8 mb-12">
+<h2 class="text-xl font-bold text-[#151c27] dark:text-slate-100">Digital Curator</h2>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 text-[#151c27] dark:text-slate-300 hover:bg-[#e2e8f8] dark:hover:bg-slate-800 rounded-full mx-4 px-6 py-3 transition-colors font-['Manrope'] font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active State for Catalog -->
+<a class="flex items-center gap-4 bg-[#003fb1] text-white rounded-full mx-4 px-6 py-3 transition-all duration-300 font-['Manrope'] font-semibold tracking-wide shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Catalog</span>
+</a>
+<a class="flex items-center gap-4 text-[#151c27] dark:text-slate-300 hover:bg-[#e2e8f8] dark:hover:bg-slate-800 rounded-full mx-4 px-6 py-3 transition-colors font-['Manrope'] font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+<span>Circulation</span>
+</a>
+<a class="flex items-center gap-4 text-[#151c27] dark:text-slate-300 hover:bg-[#e2e8f8] dark:hover:bg-slate-800 rounded-full mx-4 px-6 py-3 transition-colors font-['Manrope'] font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Members</span>
+</a>
+<a class="flex items-center gap-4 text-[#151c27] dark:text-slate-300 hover:bg-[#e2e8f8] dark:hover:bg-slate-800 rounded-full mx-4 px-6 py-3 transition-colors font-['Manrope'] font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Reports</span>
+</a>
+</nav>
+<div class="px-8 mt-auto">
+<div class="flex items-center gap-3 p-3 bg-surface-container-high rounded-xl">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">A</div>
+<div>
+<p class="text-xs font-bold">Admin Panel</p>
+<p class="text-[10px] opacity-70">v1.0.42-stable</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 right-0 left-0 flex items-center justify-between px-12 py-6 ml-72 bg-[#f9f9ff]/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(21,28,39,0.04)] z-40 no-border-tonal-transition">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#003fb1] cursor-pointer hover:bg-[#e2e8f8] rounded-full p-2" data-icon="menu">menu</span>
+<h1 class="font-['Manrope'] text-2xl font-extrabold tracking-tight text-on-surface">Indeks Katalog</h1>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 bg-primary hover:opacity-90 text-on-primary px-6 py-2.5 rounded-xl font-headline font-bold transition-all active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Tambah Katalog</span>
+</button>
+<div class="w-px h-8 bg-outline-variant/30"></div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-[#e2e8f8] rounded-full p-2" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-[#e2e8f8] rounded-full p-2" data-icon="settings">settings</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-72 mt-28 p-12">
+<!-- Filter Bar -->
+<section class="mb-8 flex flex-col md:flex-row gap-4 items-center bg-surface-container-low p-6 rounded-xl">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest rounded-xl border-none ring-1 ring-outline-variant/15 focus:ring-2 focus:ring-primary outline-none transition-all font-body text-sm" placeholder="Cari judul, penulis, atau ISBN..." type="text"/>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<div class="relative w-full md:w-48">
+<select class="w-full pl-4 pr-10 py-3 bg-surface-container-lowest rounded-xl border-none ring-1 ring-outline-variant/15 focus:ring-2 focus:ring-primary outline-none appearance-none font-body text-sm cursor-pointer">
+<option>Semua Tipe</option>
+<option>Buku</option>
+<option>Digital</option>
+<option>Jurnal</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline" data-icon="expand_more">expand_more</span>
+</div>
+<div class="relative w-full md:w-32">
+<select class="w-full pl-4 pr-10 py-3 bg-surface-container-lowest rounded-xl border-none ring-1 ring-outline-variant/15 focus:ring-2 focus:ring-primary outline-none appearance-none font-body text-sm cursor-pointer">
+<option>Tahun</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+</section>
+<!-- Data Table Section -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(21,28,39,0.02)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-8 py-5 text-xs font-bold uppercase tracking-wider text-on-surface-variant font-headline">Judul Item</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-wider text-on-surface-variant font-headline">Penulis</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-wider text-on-surface-variant font-headline">ISBN</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-wider text-on-surface-variant font-headline">Tipe</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-wider text-on-surface-variant font-headline">Status</th>
+<th class="px-8 py-5 text-xs font-bold uppercase tracking-wider text-on-surface-variant font-headline text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-16 bg-surface-container rounded-lg flex-shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="front cover of a clean modern fiction book with elegant typography and minimalist blue design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiErLYSPT6jjbZTrG37WE-wsJS0g1miSrIHLw4XnzsfD7UBCyxOXQSnIefBAuTjgD0OVJnBIHoaAywvZTv08R37DKUjh13soYkr3oRv1iBA8u9gsFMDCYq-YvyIQtLIBipY7oS8BLibJ-G_XHLr_ds1r58XFxBMPgc-TXhSafjjZqx2ftp4rnWaxNpfetFimtMHtPWhWEfdqxyLmm6zj01z_lloDfcaoHDzhRzymIMwOz1tn1mTCUxV917Rj4nDzfQ7llhAFL0Q7oj"/>
+</div>
+<span class="font-headline font-bold text-on-surface">The Silent Archive</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Eleanor Vance</td>
+<td class="px-6 py-5 text-sm font-mono text-outline">978-3-16-148410-0</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-surface-container text-primary rounded-md text-[10px] font-bold uppercase tracking-widest">Buku</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Published
+                                </span>
+</td>
+<td class="px-8 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-lg text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-16 bg-surface-container rounded-lg flex-shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="close up of a professional academic journal cover with scientific diagram and serif headings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTxK7ivf9K7sh0lcJObbyTVlzLiyh4WiuIJsUbIydRm0_gJp8x4YFte6s99mIY52aleCgUXnVAQDy46W-p1fsbZ35pjnCHe2RaUlXQ82lz1J99hVEJKstYo6NabFcXhJ3s1LouKY68GOry-iP0wW1t1tuJ8CWgSuz5GDE3_zFrePAH1fA6xVsYq7R3vcYFSfpzBlDdWRU3iV72MT70k7iln_rDwVv6_Owq5Z6SNLi0dC1OF5Ca__k27PHXNkOSEqIuibsaRAX-hJFa"/>
+</div>
+<span class="font-headline font-bold text-on-surface">Modern Quantum Theories</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Dr. Julian Thorne</td>
+<td class="px-6 py-5 text-sm font-mono text-outline">978-0-26-251087-5</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-surface-container text-primary rounded-md text-[10px] font-bold uppercase tracking-widest">Jurnal</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-outline-variant/30 text-on-surface-variant rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                    Draft
+                                </span>
+</td>
+<td class="px-8 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-lg text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-16 bg-surface-container rounded-lg flex-shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="digital book icon illustration on a high-tech sleek tablet screen in a bright library setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDq4DASO6LJuq9UHq2Jl8GGseXZaW4Cgj-XZb3HYaeotYz-V0UseZxXca4FNZClJ0YfGh25l6cvaOaAMoOIL2HFEcD2UzuocWbEsaqte1km59QPomKbVzUCsjHseWknOxUGrg36mGNI11xZT5U6bh_n42iIWA8jpE6UanhQZZ6zJ9dOd8zjkrhwgeT07MDui9_p6Rdg12eQpOAKibocwHH9oaZFNygcWstUQ3d3CwG3dr8lqLTdn7LMe9U_zUpxP6RWEFWr6oQirFe"/>
+</div>
+<span class="font-headline font-bold text-on-surface">Economics of the Future</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Sarah Jenkins</td>
+<td class="px-6 py-5 text-sm font-mono text-outline">N/A (eBook)</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-surface-container text-primary rounded-md text-[10px] font-bold uppercase tracking-widest">Digital</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Published
+                                </span>
+</td>
+<td class="px-8 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-lg text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Block -->
+<div class="px-8 py-6 bg-surface-container-low/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+<span class="text-xs font-medium text-on-surface-variant">Menampilkan 1-10 dari 248 entri</span>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg hover:bg-surface-container-high text-outline transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary text-xs font-bold">1</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container-high text-on-surface-variant text-xs font-bold transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container-high text-on-surface-variant text-xs font-bold transition-colors">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container-high text-on-surface-variant text-xs font-bold transition-colors">25</button>
+<button class="p-2 rounded-lg hover:bg-surface-container-high text-outline transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Stats Overview (Bonus Bento Element for Depth) -->
+<section class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-primary-container/10 p-6 rounded-xl ring-1 ring-primary/10">
+<p class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Total Koleksi</p>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-extrabold text-on-primary-fixed">12,402</h3>
+<span class="text-[10px] text-secondary font-bold mb-1.5">+12% bln ini</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Buku Terbit</p>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-extrabold text-on-surface">8,920</h3>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Menunggu Review</p>
+<div class="flex items-end gap-2">
+<h3 class="text-3xl font-extrabold text-on-surface">43</h3>
+<span class="material-symbols-outlined text-error mb-1" data-icon="pending">pending</span>
+</div>
+</div>
+</section>
+</main>
+</body></html>

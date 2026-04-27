@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OPAC Record Detail - The Digital Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-bright": "#f9f9ff",
+                "on-secondary-fixed": "#002109",
+                "on-primary-fixed": "#00174d",
+                "on-tertiary": "#ffffff",
+                "primary-fixed": "#dbe1ff",
+                "on-error": "#ffffff",
+                "tertiary-fixed": "#ffdbcf",
+                "secondary": "#006e2d",
+                "on-primary": "#ffffff",
+                "primary": "#003fb1",
+                "primary-fixed-dim": "#b5c4ff",
+                "surface": "#f9f9ff",
+                "on-surface": "#151c27",
+                "surface-variant": "#dce2f3",
+                "secondary-container": "#7cf994",
+                "tertiary-container": "#ad3b00",
+                "on-secondary-container": "#007230",
+                "outline": "#737686",
+                "inverse-on-surface": "#ebf1ff",
+                "secondary-fixed": "#7ffc97",
+                "on-error-container": "#93000a",
+                "on-surface-variant": "#434654",
+                "on-secondary": "#ffffff",
+                "tertiary-fixed-dim": "#ffb59a",
+                "tertiary": "#852b00",
+                "surface-container-lowest": "#ffffff",
+                "on-background": "#151c27",
+                "secondary-fixed-dim": "#62df7d",
+                "primary-container": "#1a56db",
+                "on-tertiary-fixed": "#380d00",
+                "on-tertiary-container": "#ffd4c5",
+                "inverse-surface": "#2a313d",
+                "surface-tint": "#1353d8",
+                "surface-container-high": "#e2e8f8",
+                "on-primary-container": "#d4dcff",
+                "background": "#f9f9ff",
+                "surface-container": "#e7eefe",
+                "error": "#ba1a1a",
+                "on-primary-fixed-variant": "#003dab",
+                "surface-dim": "#d3daea",
+                "on-secondary-fixed-variant": "#005320",
+                "surface-container-highest": "#dce2f3",
+                "inverse-primary": "#b5c4ff",
+                "on-tertiary-fixed-variant": "#802a00",
+                "outline-variant": "#c3c5d7",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#f0f3ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "1rem",
+                "xl": "1.5rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#f9f9ff]/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_24px_24px_0px_rgba(21,28,39,0.04)] flex justify-between items-center px-8 py-6 w-full">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="University seal with intricate gold crest on a deep blue circular background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo2Hg0NmDOK-xKOh9p83uu3m8b82bhvgY3CfYDybsfH5ZGhQ83CVZQ1mtAygkzR5nyEZo7u-_ET11-crb69L5dv2sSbnl9V1_VkauIGzx7I7XCy_SfdrE7VbTAu9PvTjLsvX4R9mOl6GuoSlNOu6k6MGhdsgDBAAwEYJ7VI3xZk4UvufbPrAmXN-fJA0MJAuV6roa3C9wTRcTppcstqyP7UtMkNMZWFVm0jd1FpCJjJ1q38OeSMZN8Gjn0kEtkDjq-hiN9S6Z68pMz"/>
+</div>
+<span class="font-['Manrope'] font-black text-2xl tracking-tighter uppercase text-[#151c27] dark:text-slate-100">The Digital Curator</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#003fb1] dark:text-blue-400 font-bold border-b-2 border-[#003fb1] font-['Manrope'] text-sm py-1" href="#">Catalog</a>
+<a class="text-[#151c27]/60 dark:text-slate-400 font-['Manrope'] text-sm hover:text-[#003fb1] transition-colors" href="#">Digital Archive</a>
+<a class="text-[#151c27]/60 dark:text-slate-400 font-['Manrope'] text-sm hover:text-[#003fb1] transition-colors" href="#">Resources</a>
+<div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full cursor-pointer hover:bg-[#e2e8f8]/50 transition-colors active:scale-[0.98] duration-200">
+<span class="material-symbols-outlined text-[#003fb1]" data-icon="search">search</span>
+<span class="text-sm font-medium">Search Catalog...</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-16 px-6 md:px-12 lg:px-24 max-w-screen-2xl mx-auto">
+<!-- Breadcrumbs & Navigation -->
+<div class="flex items-center gap-2 mb-8 text-on-surface-variant font-medium text-sm">
+<a class="hover:text-primary transition-colors" href="#">Catalog</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Books &amp; Media</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary">Record Detail</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+<!-- Left Column: Book Identity -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Bento Header: Book Cover and Title -->
+<div class="bg-surface-container-lowest rounded-xl p-8 flex flex-col md:flex-row gap-10 items-start shadow-[0px_24px_24px_0px_rgba(21,28,39,0.04)]">
+<div class="w-full md:w-64 flex-shrink-0 group relative">
+<div class="absolute -inset-1 bg-gradient-to-tr from-primary to-secondary opacity-10 blur rounded-xl group-hover:opacity-20 transition-opacity"></div>
+<img class="w-full h-auto rounded-lg shadow-xl relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500" data-alt="Modern architectural book cover showing minimalist white building against deep blue sky with elegant serif typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7ayKI15ldh_Aj6dzWH1avpSMaksDS-z86IUSk1L6r-4RSyqPhLynh-Fks94LZXBTMYKzuEEaTX2Nm4jMb6HSB4QGV8SrKR0WGU0CAhZN-rMUpKDhliI-_OCqwKfIwkHnrJ18lRGGt2Bnwkt2BKICePwfrGOJwK0qvTgARM5RbtcuHrC_qU8MMSs7CKarRIg_DVDFNaLeVZjIgaFlb9Lk-dAA9F-tkZPc_YLN1vZZmM6XARspx_IMRNYxmj58oNuLSRrq0hyVOUGKa"/>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                                Tersedia Fisik
+                            </span>
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="cloud_download">cloud_download</span>
+                                Tersedia Digital
+                            </span>
+</div>
+<div class="space-y-3">
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface leading-tight">Architecture of Light: Principles of Modern Luminescence</h1>
+<p class="text-xl text-on-surface-variant font-medium">By Prof. Elena Vance &amp; Dr. Marcus Aris</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-4">
+<div>
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest mb-1">Edition</p>
+<p class="font-semibold text-on-surface">3rd Edition, 2023</p>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest mb-1">Call Number</p>
+<p class="font-semibold text-on-surface">NA2794 .V36 2023</p>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest mb-1">Language</p>
+<p class="font-semibold text-on-surface">English</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Abstract & Metadata Tonal Section -->
+<div class="bg-surface-container-low rounded-xl p-8 flex flex-col gap-8">
+<div class="space-y-4">
+<h2 class="text-2xl font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                            Abstract
+                        </h2>
+<p class="text-on-surface-variant leading-relaxed text-lg">
+                            "Architecture of Light" explores the intersection of spatial design and photons. This comprehensive record details the psychological impact of natural illumination within public institutional spaces, providing a blueprint for the next generation of sustainable campus infrastructure. Professor Vance presents over 200 case studies from the last decade of global architectural evolution.
+                        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 pt-6 border-t border-outline-variant/20">
+<div class="flex flex-col gap-4">
+<h3 class="font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="info">info</span>
+                                Publication Details
+                            </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+<span class="text-sm font-medium text-on-surface-variant">ISBN-13</span>
+<span class="text-sm font-bold">978-3-16-148410-0</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+<span class="text-sm font-medium text-on-surface-variant">Publisher</span>
+<span class="text-sm font-bold">Academic Press London</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-sm font-medium text-on-surface-variant">Format</span>
+<span class="text-sm font-bold">Hardcover, 422 Pages</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h3 class="font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="label">label</span>
+                                Subject Headings
+                            </h3>
+<div class="flex flex-wrap gap-2">
+<span class="bg-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm text-on-surface-variant">Sustainable Design</span>
+<span class="bg-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm text-on-surface-variant">Optics in Architecture</span>
+<span class="bg-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm text-on-surface-variant">Urban Lighting</span>
+<span class="bg-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm text-on-surface-variant">Human Psychology</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Access & Availability -->
+<div class="lg:col-span-4 flex flex-col gap-8 sticky top-32">
+<!-- Digital Access Card -->
+<div class="bg-primary bg-gradient-to-br from-primary to-primary-container text-white rounded-xl p-8 shadow-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 transform translate-x-4 -translate-y-4 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-500">
+<span class="material-symbols-outlined text-8xl" data-icon="auto_stories">auto_stories</span>
+</div>
+<h3 class="text-xl font-bold mb-2 relative z-10">Digital Access</h3>
+<p class="text-primary-fixed/80 text-sm mb-8 relative z-10">Instant institutional access via OpenAthens or Library ID.</p>
+<button class="w-full bg-white text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-primary-fixed transition-colors active:scale-[0.98] duration-150 relative z-10 shadow-lg">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                        Read Online
+                    </button>
+<button class="w-full mt-3 bg-white/10 hover:bg-white/20 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+                        Download PDF (64MB)
+                    </button>
+</div>
+<!-- Physical Availability Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0px_24px_24px_0px_rgba(21,28,39,0.04)]">
+<h3 class="text-xl font-bold mb-6 text-on-surface">Physical Availability</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Central Library</p>
+<p class="text-sm font-semibold text-on-surface">Floor 4, Wing B</p>
+<p class="text-xs text-on-surface-variant">Shelf Code: 720.47 VANC</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="inventory_2">inventory_2</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Stock Status</p>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-secondary">Available</span>
+<span class="text-xs text-on-surface-variant">(4 Copies)</span>
+</div>
+</div>
+</div>
+<button class="w-full border-2 border-primary text-primary font-bold py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-primary/5 transition-colors active:scale-[0.98] duration-150">
+<span class="material-symbols-outlined" data-icon="bookmark_add">bookmark_add</span>
+                            Reserve for Pickup
+                        </button>
+</div>
+</div>
+<!-- Catalog Interaction -->
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-surface-container-high hover:bg-surface-variant p-4 rounded-xl flex flex-col items-center justify-center gap-2 transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="text-xs font-bold text-on-surface-variant">Share</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-variant p-4 rounded-xl flex flex-col items-center justify-center gap-2 transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="format_quote">format_quote</span>
+<span class="text-xs font-bold text-on-surface-variant">Cite</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recommendations: Asymmetric Section -->
+<section class="mt-24 pt-12 border-t border-outline-variant/20">
+<h2 class="text-3xl font-black tracking-tight mb-10 text-on-surface">Related Discoveries</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+<!-- Rec Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden mb-4 bg-surface-container-low shadow-sm group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+<img class="w-full h-full object-cover" data-alt="Abstract book cover with geometric urban patterns in muted greys and vibrant orange accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj2UodVD-S5P4Qf20iaKrkQYFAOw_94sNBeuBFshVyVtCL7JswWUwsdY-fBlFqbgnCkZ52SJiANGqphsS7CI-oU39QacT_1nlHk5FpbmK_3t_IImJXIcuKuRIjfOMFhRyY7mOTZlwSWTBMHK003JSCaKvdPmbAuiEeZl77UROiJxlHspwS2nCzJzg8KMME9RacY6SVj9x4Jf5ztQhYlNnO3pPMtOdwci2YrYs1yv2aRcgi_4NXKb-h2ejeCM-xkDQpjTBAdMq-TCcv"/>
+</div>
+<p class="text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">Urban Visions</p>
+<p class="text-xs text-on-surface-variant">Marcus Aris</p>
+</div>
+<!-- Rec Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden mb-4 bg-surface-container-low shadow-sm group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+<img class="w-full h-full object-cover" data-alt="Minimalist book design featuring a large stylized yellow sun and clean typography on a crisp white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Fhq5LvOm9ifF1-4STcfmsX_DZ709Hwt7gEh0axlCkC4fpDtaO3L-xIlM3OwDXroDLTw_XF8tVuYNOJ1_Xf4fa4ycY5J20mijm4H_h0tVoo1yRxE4NSaeYMLLSYpI5jB6XKv752ksaKl8l4AHAQ3UrBFJh5WLXE7ZtLIttjxG9MQkAISNufjTf_61a6ng9ZxuJy4sH1J5cyWEPulM3cejdn3vP5JpPHTLr0z4Drapyl_QoBWajlAjE3VjOxHBcdMdfCBwdACRYvK0"/>
+</div>
+<p class="text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">Solar Forms</p>
+<p class="text-xs text-on-surface-variant">Elena Vance</p>
+</div>
+<!-- Rec Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden mb-4 bg-surface-container-low shadow-sm group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+<img class="w-full h-full object-cover" data-alt="Scientific textbook cover showing microscopic crystal structures in deep purples and blues with metallic text" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaaftJhQNSnRcKtNuYvnMhtGLxIEMFL5jRN7zhVllD4pBevnbX7ElRIiK9jdOrPaNjdLqWS1-z1OQ1-7OWpgJPKCdlbHYAy_fpfp4IYU7POFJE9hNjCTD2F5NudT68FM0Sj8-weuG6qYQaKLeq6l4vTpEADoHPGvn9brecxFdNcl3ZuxJnFBI4UdGCI6sISicLZulcThrZuz__4G2lRBvY4uWn9QI5p__pQZNRbSlrIwnYKbovwkuICb9o4QzQLIxhBnQcVMM6RTaO"/>
+</div>
+<p class="text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">Material Science</p>
+<p class="text-xs text-on-surface-variant">J. K. Thompson</p>
+</div>
+<!-- Rec Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-xl overflow-hidden mb-4 bg-surface-container-low shadow-sm group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+<img class="w-full h-full object-cover" data-alt="Modern photography book cover with high-contrast monochrome image of building shadows on concrete" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkZD_lL46Eh5DIq-sPfpSGqxGiPtMgUiLdcYQJHxueCtgyv_5oLJXeopnhHDpiLTEpTQEi0-uIKZhNmu6cYmt_ViRRp01M3Epg20Z_OE65OXzk6p5pvZ5Q2evOtRp6H8wX0Zr0a1B4fJb6dItzQBkIEdV5hf17pNxTetLWNUXEog1AX3w9_Tf300ArOy_O8c8-0UEmvs4HjStP24rWpJD8rMv1RGY1t8U09Zp2KC93kslih2Bd4EFxSoZPB7IuhdO_YHK7WPFq7jM-"/>
+</div>
+<p class="text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">Shadow Play</p>
+<p class="text-xs text-on-surface-variant">Dante Alighieri II</p>
+</div>
+<!-- Rec Card 5 -->
+<div class="group cursor-pointer hidden lg:block">
+<div class="aspect-[2/3] rounded-xl overflow-hidden mb-4 bg-surface-container-low shadow-sm group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+<img class="w-full h-full object-cover" data-alt="Futuristic digital illustration of a green city with flying transport and sleek glass towers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_eKnPWCGhtjwPxD7US7zCcKaGCZ7uaT57oZIgB02YPNBe1AywCNs3IVFjhd7vFKyAb-MoCavUqqS-k767iZ4D7yQha5g5eJ2RwUlatEjzl1QH6dZhb6efvqSXaGfT_by97vvtIElYtftu0HhVdvLKBuLupFj0QdaPh3a_zHg4dqfLEqzucgMmUVKJhuF9sLsQ4CKQyMqNq74jpkQKKgaYKMaenD4AJgMvwpy0k0N0_djSOB2UFa4Nbm5vZ0DqzGvSGGrJqwBqPcjw"/>
+</div>
+<p class="text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">Future Cities</p>
+<p class="text-xs text-on-surface-variant">Global Dev Lab</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f9f9ff] dark:bg-slate-950 w-full border-t border-[#c3c5d7]/15 tonal-shift-high px-12 py-16">
+<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col gap-2">
+<span class="font-['Manrope'] font-black text-lg text-[#003fb1]">The Digital Curator</span>
+<p class="font-['Inter'] text-xs text-[#151c27]/60">© 2024 University Digital Archive. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-[#151c27]/60 hover:text-[#1a56db] transition-colors text-xs font-medium" href="#">Privacy Policy</a>
+<a class="text-[#151c27]/60 hover:text-[#1a56db] transition-colors text-xs font-medium" href="#">Accessibility</a>
+<a class="text-[#151c27]/60 hover:text-[#1a56db] transition-colors text-xs font-medium" href="#">Library Contact</a>
+<a class="text-[#151c27]/60 hover:text-[#1a56db] transition-colors text-xs font-medium" href="#">Catalog Help</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-white/90 dark:bg-slate-950/90 backdrop-blur-2xl border-t border-[#c3c5d7]/15 shadow-[0_-8px_24px_rgba(21,28,39,0.06)] flex justify-around items-center px-4 pt-3 pb-8 z-50 rounded-t-[1.5rem]">
+<div class="flex flex-col items-center gap-1 text-[#151c27]/50 dark:text-slate-500 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-semibold tracking-wide">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 bg-[#1a56db]/10 text-[#003fb1] dark:text-blue-400 rounded-2xl px-5 py-2 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-['Inter'] text-[11px] font-semibold tracking-wide">Search</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[#151c27]/50 dark:text-slate-500 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Inter'] text-[11px] font-semibold tracking-wide">My Shelf</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[#151c27]/50 dark:text-slate-500 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold tracking-wide">Profile</span>
+</div>
+</nav>
+</body></html>

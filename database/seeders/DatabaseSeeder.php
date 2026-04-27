@@ -1,0 +1,26 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * Order matters: Permissions → Roles → Role-Permissions → SuperAdmin → Profile → Settings → Master Data
+     */
+    public function run(): void
+    {
+        $this->call([
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            RolePermissionSeeder::class,
+            SuperAdminSeeder::class,
+            InstitutionProfileSeeder::class,
+            SystemSettingSeeder::class,
+            MasterDataSeeder::class,
+        ]);
+    }
+}
