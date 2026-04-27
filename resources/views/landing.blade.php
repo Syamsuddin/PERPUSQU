@@ -183,8 +183,8 @@
                 <h1>Perpustakaan Digital Terpadu untuk Kampus Modern</h1>
                 <p>Kelola koleksi fisik, repositori digital, sirkulasi, dan layanan anggota dalam satu platform terintegrasi yang dirancang untuk kebutuhan perpustakaan pendidikan tinggi.</p>
                 <div class="hero-actions">
-                    <a href="{{ route('auth.login') }}" class="btn-login"><i class="bi bi-rocket-takeoff"></i> Mulai Sekarang</a>
-                    <a href="#fitur" class="btn-outline"><i class="bi bi-arrow-down-circle"></i> Jelajahi Fitur</a>
+                    <a href="{{ route('opac.home') }}" class="btn-login"><i class="bi bi-search"></i> Cari Koleksi</a>
+                    <a href="{{ route('auth.login') }}" class="btn-outline"><i class="bi bi-box-arrow-in-right"></i> Login Petugas</a>
                 </div>
                 <div class="stats-bar">
                     <div class="stat-item"><div class="stat-num">11<span>+</span></div><div class="stat-desc">Modul Terintegrasi</div></div>
@@ -292,7 +292,11 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; {{ date('Y') }} <a href="/">PERPUSQU</a> — Sistem Informasi Perpustakaan Hibrid Kampus. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} <a href="/">PERPUSQU</a> — Hak Cipta <strong>Syamsuddin</strong>
+                <a href="https://wa.me/6281349694696" target="_blank" rel="noopener" title="Hubungi via WhatsApp" style="color: #25D366; margin-left: 0.5rem; font-size: 1.1rem; vertical-align: middle;">
+                    <i class="bi bi-whatsapp"></i>
+                </a>
+            </p>
         </footer>
     </div>
 

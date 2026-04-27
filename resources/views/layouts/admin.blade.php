@@ -301,25 +301,33 @@
 
     {{-- ── Header ── --}}
     <header class="pq-header">
-        <button class="btn btn-sm d-lg-none me-3" onclick="document.getElementById('pqSidebar').classList.toggle('show')">
-            <i class="bi bi-list fs-4"></i>
+        <button class="btn d-lg-none me-3" onclick="document.querySelector('.pq-sidebar').classList.toggle('show')">
+            <i class="bi bi-list"></i>
         </button>
-        <span class="pq-header-title">@yield('page-title', 'Dashboard')</span>
+        <div class="pq-header-title d-none d-sm-block">
+            @yield('page-title', 'Dashboard')
+        </div>
         <div class="pq-header-actions">
-            <div class="text-end">
-                <div class="pq-header-user">{{ auth()->user()->name }}</div>
-                <div class="pq-header-role">{{ auth()->user()->roles->pluck('name')->implode(', ') }}</div>
-            </div>
+            <a href="{{ url('/') }}" class="btn btn-sm btn-outline-secondary me-2 d-none d-md-inline-flex align-items-center">
+                <i class="bi bi-globe me-1"></i> Lihat Situs
+            </a>
             <div class="dropdown">
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                    <i class="bi bi-person-circle"></i>
+                <button class="btn btn-link text-decoration-none dropdown-toggle d-flex align-items-center p-0" data-bs-toggle="dropdown">
+                    <div class="text-end me-2 d-none d-sm-block">
+                        <div class="pq-header-user" style="line-height: 1.2;">{{ auth()->user()->name }}</div>
+                        <div class="pq-header-role" style="font-size: 0.7rem; color: #a0aec0;">{{ auth()->user()->roles->pluck('name')->first() }}</div>
+                    </div>
+                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; color: #fff;">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="{{ route('admin.profile.show') }}"><i class="bi bi-person me-2"></i>Profil Saya</a></li>
-                    <li><a class="dropdown-item" href="{{ route('admin.profile.password.edit') }}"><i class="bi bi-lock me-2"></i>Ubah Password</a></li>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                    <li><h6 class="dropdown-header">Manajemen Akun</h6></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.profile.show') }}"><i class="bi bi-person me-2"></i> Profil Saya</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.profile.password.edit') }}"><i class="bi bi-lock me-2"></i> Ubah Password</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
-                        <form action="{{ route('auth.logout') }}" method="POST">
+                        <form method="POST" action="{{ route('auth.logout') }}">
                             @csrf
                             <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
                         </form>
@@ -365,7 +373,10 @@
 
     {{-- ── Footer ── --}}
     <footer class="pq-footer">
-        &copy; {{ date('Y') }} PERPUSQU — Sistem Informasi Perpustakaan Hibrid Kampus
+        &copy; {{ date('Y') }} PERPUSQU — Hak Cipta <strong>Syamsuddin</strong>
+        <a href="https://wa.me/6281349694696" target="_blank" rel="noopener" title="Hubungi via WhatsApp" style="color: #25D366; margin-left: 0.5rem; font-size: 1.1rem; vertical-align: middle;">
+            <i class="bi bi-whatsapp"></i>
+        </a>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
