@@ -70,6 +70,12 @@ class PermissionSeeder extends Seeder
             // Audit
             'audit_logs.view', 'audit_logs.view_detail', 'audit_logs.export',
             'queue_monitor.view', 'queue_monitor.manage_retry',
+
+            // OPAC & Member Self-Service
+            'opac.search', 'opac.view_detail',
+            'own_loans.view', 'own_loans.view_history',
+            'own_fines.view',
+            'own_reservations.view', 'own_reservations.create', 'own_reservations.cancel',
         ];
 
         foreach ($permissions as $permission) {

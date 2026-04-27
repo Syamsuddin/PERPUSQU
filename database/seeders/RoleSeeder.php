@@ -19,6 +19,7 @@ class RoleSeeder extends Seeder
             'Petugas Sirkulasi',
             'Operator Repositori Digital',
             'Pimpinan Perpustakaan',
+            'Anggota Perpustakaan',
         ];
 
         foreach ($roles as $role) {

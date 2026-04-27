@@ -90,5 +90,15 @@ class RolePermissionSeeder extends Seeder
             'reports.view_digital_access', 'reports.export',
             'audit_logs.view', 'audit_logs.view_detail',
         ]);
+
+        // Anggota Perpustakaan — self-service only
+        $anggota = Role::findByName('Anggota Perpustakaan', 'web');
+        $anggota->syncPermissions([
+            'own_profile.view', 'own_profile.update', 'own_password.change',
+            'opac.search', 'opac.view_detail',
+            'own_loans.view', 'own_loans.view_history',
+            'own_fines.view',
+            'own_reservations.view', 'own_reservations.create', 'own_reservations.cancel',
+        ]);
     }
 }
