@@ -52,10 +52,18 @@
         .pq-nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
         .pq-nav-item.active { color: #fff; background: rgba(56,178,172,0.15); border-left-color: var(--pq-accent); }
         .pq-nav-item i { width: 20px; margin-right: 0.75rem; font-size: 1rem; }
-        .pq-submenu { padding-left: 2rem; }
-        .pq-submenu .pq-nav-item { font-size: 0.8125rem; padding: 0.4rem 1.25rem; }
-        .pq-collapse-btn { margin-left: auto; font-size: 0.75rem; transition: transform 0.3s; }
-        .pq-collapse-btn.collapsed { transform: rotate(-90deg); }
+        .pq-submenu { padding-left: 0.5rem; }
+        .pq-submenu .pq-nav-item { font-size: 0.8125rem; padding: 0.4rem 1.25rem 0.4rem 2.75rem; }
+        .pq-nav-toggle {
+            cursor: pointer; user-select: none; position: relative;
+        }
+        .pq-nav-toggle:not(.collapsed) { color: #fff; background: rgba(255,255,255,0.04); }
+        .pq-collapse-chevron {
+            margin-left: auto; font-size: 0.65rem; transition: transform 0.3s ease; width: auto !important; margin-right: 0;
+        }
+        .pq-nav-toggle.collapsed .pq-collapse-chevron { transform: rotate(-90deg); }
+        .pq-nav-toggle:not(.collapsed) .pq-collapse-chevron { transform: rotate(0deg); }
+        .collapse { transition: height 0.25s ease; }
 
         /* ── Header ─────────────────────────────────────── */
         .pq-header {
@@ -140,7 +148,7 @@
             <i class="bi bi-book-half me-2"></i> PERPUSQU
         </a>
         <nav class="pq-sidebar-nav">
-            {{-- Dashboard --}}
+            {{-- Dashboard (standalone) --}}
             @can('core.view_dashboard')
             <a href="{{ route('admin.dashboard.index') }}" class="pq-nav-item {{ request()->routeIs('admin.dashboard.*') ? 'active' : '' }}">
                 <i class="bi bi-speedometer2"></i> Dashboard
@@ -149,130 +157,144 @@
 
             {{-- Master Data --}}
             @canany(['authors.view','publishers.view','languages.view','classifications.view','subjects.view','collection_types.view','rack_locations.view','faculties.view','study_programs.view','item_conditions.view'])
-            <div class="pq-nav-label">Master Data</div>
-            @can('authors.view')
-            <a href="{{ route('admin.master-data.authors.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.authors.*') ? 'active' : '' }}"><i class="bi bi-person-badge"></i> Pengarang</a>
-            @endcan
-            @can('publishers.view')
-            <a href="{{ route('admin.master-data.publishers.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.publishers.*') ? 'active' : '' }}"><i class="bi bi-building"></i> Penerbit</a>
-            @endcan
-            @can('languages.view')
-            <a href="{{ route('admin.master-data.languages.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.languages.*') ? 'active' : '' }}"><i class="bi bi-translate"></i> Bahasa</a>
-            @endcan
-            @can('classifications.view')
-            <a href="{{ route('admin.master-data.classifications.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.classifications.*') ? 'active' : '' }}"><i class="bi bi-diagram-3"></i> Klasifikasi</a>
-            @endcan
-            @can('subjects.view')
-            <a href="{{ route('admin.master-data.subjects.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.subjects.*') ? 'active' : '' }}"><i class="bi bi-tags"></i> Subjek</a>
-            @endcan
-            @can('collection_types.view')
-            <a href="{{ route('admin.master-data.collection-types.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.collection-types.*') ? 'active' : '' }}"><i class="bi bi-collection"></i> Jenis Koleksi</a>
-            @endcan
-            @can('rack_locations.view')
-            <a href="{{ route('admin.master-data.rack-locations.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.rack-locations.*') ? 'active' : '' }}"><i class="bi bi-bookshelf"></i> Lokasi Rak</a>
-            @endcan
-            @can('faculties.view')
-            <a href="{{ route('admin.master-data.faculties.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.faculties.*') ? 'active' : '' }}"><i class="bi bi-mortarboard"></i> Fakultas</a>
-            @endcan
-            @can('study_programs.view')
-            <a href="{{ route('admin.master-data.study-programs.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.study-programs.*') ? 'active' : '' }}"><i class="bi bi-journal-text"></i> Program Studi</a>
-            @endcan
-            @can('item_conditions.view')
-            <a href="{{ route('admin.master-data.item-conditions.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.item-conditions.*') ? 'active' : '' }}"><i class="bi bi-shield-check"></i> Kondisi Item</a>
-            @endcan
+            <a class="pq-nav-item pq-nav-toggle {{ request()->routeIs('admin.master-data.*') ? '' : 'collapsed' }}" data-bs-toggle="collapse" href="#menuMasterData" role="button" aria-expanded="{{ request()->routeIs('admin.master-data.*') ? 'true' : 'false' }}">
+                <i class="bi bi-database"></i> Master Data
+                <i class="bi bi-chevron-down pq-collapse-chevron"></i>
+            </a>
+            <div class="collapse {{ request()->routeIs('admin.master-data.*') ? 'show' : '' }}" id="menuMasterData">
+                <div class="pq-submenu">
+                    @can('authors.view')
+                    <a href="{{ route('admin.master-data.authors.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.authors.*') ? 'active' : '' }}"><i class="bi bi-person-badge"></i> Pengarang</a>
+                    @endcan
+                    @can('publishers.view')
+                    <a href="{{ route('admin.master-data.publishers.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.publishers.*') ? 'active' : '' }}"><i class="bi bi-building"></i> Penerbit</a>
+                    @endcan
+                    @can('languages.view')
+                    <a href="{{ route('admin.master-data.languages.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.languages.*') ? 'active' : '' }}"><i class="bi bi-translate"></i> Bahasa</a>
+                    @endcan
+                    @can('classifications.view')
+                    <a href="{{ route('admin.master-data.classifications.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.classifications.*') ? 'active' : '' }}"><i class="bi bi-diagram-3"></i> Klasifikasi</a>
+                    @endcan
+                    @can('subjects.view')
+                    <a href="{{ route('admin.master-data.subjects.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.subjects.*') ? 'active' : '' }}"><i class="bi bi-tags"></i> Subjek</a>
+                    @endcan
+                    @can('collection_types.view')
+                    <a href="{{ route('admin.master-data.collection-types.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.collection-types.*') ? 'active' : '' }}"><i class="bi bi-collection"></i> Jenis Koleksi</a>
+                    @endcan
+                    @can('rack_locations.view')
+                    <a href="{{ route('admin.master-data.rack-locations.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.rack-locations.*') ? 'active' : '' }}"><i class="bi bi-bookshelf"></i> Lokasi Rak</a>
+                    @endcan
+                    @can('faculties.view')
+                    <a href="{{ route('admin.master-data.faculties.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.faculties.*') ? 'active' : '' }}"><i class="bi bi-mortarboard"></i> Fakultas</a>
+                    @endcan
+                    @can('study_programs.view')
+                    <a href="{{ route('admin.master-data.study-programs.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.study-programs.*') ? 'active' : '' }}"><i class="bi bi-journal-text"></i> Program Studi</a>
+                    @endcan
+                    @can('item_conditions.view')
+                    <a href="{{ route('admin.master-data.item-conditions.index') }}" class="pq-nav-item {{ request()->routeIs('admin.master-data.item-conditions.*') ? 'active' : '' }}"><i class="bi bi-shield-check"></i> Kondisi Item</a>
+                    @endcan
+                </div>
+            </div>
             @endcanany
 
-            {{-- Katalog --}}
-            @can('catalog.view')
-            <div class="pq-nav-label">Katalog</div>
-            <a href="{{ route('admin.catalog.records.index') }}" class="pq-nav-item {{ request()->routeIs('admin.catalog.records.*') ? 'active' : '' }}"><i class="bi bi-journal-bookmark"></i> Daftar Katalog</a>
-            @endcan
-
-            {{-- Koleksi Fisik --}}
-            @can('collections.view')
-            <div class="pq-nav-label">Koleksi Fisik</div>
-            <a href="{{ route('admin.collections.items.index') }}" class="pq-nav-item {{ request()->routeIs('admin.collections.items.*') ? 'active' : '' }}"><i class="bi bi-box-seam"></i> Daftar Item</a>
-            @endcan
+            {{-- Katalog & Koleksi --}}
+            @canany(['catalog.view','collections.view'])
+            <a class="pq-nav-item pq-nav-toggle {{ request()->routeIs('admin.catalog.*') || request()->routeIs('admin.collections.*') ? '' : 'collapsed' }}" data-bs-toggle="collapse" href="#menuKatalog" role="button" aria-expanded="{{ request()->routeIs('admin.catalog.*') || request()->routeIs('admin.collections.*') ? 'true' : 'false' }}">
+                <i class="bi bi-journal-bookmark"></i> Katalog & Koleksi
+                <i class="bi bi-chevron-down pq-collapse-chevron"></i>
+            </a>
+            <div class="collapse {{ request()->routeIs('admin.catalog.*') || request()->routeIs('admin.collections.*') ? 'show' : '' }}" id="menuKatalog">
+                <div class="pq-submenu">
+                    @can('catalog.view')
+                    <a href="{{ route('admin.catalog.records.index') }}" class="pq-nav-item {{ request()->routeIs('admin.catalog.records.*') ? 'active' : '' }}"><i class="bi bi-journal-bookmark"></i> Daftar Katalog</a>
+                    @endcan
+                    @can('collections.view')
+                    <a href="{{ route('admin.collections.items.index') }}" class="pq-nav-item {{ request()->routeIs('admin.collections.items.*') ? 'active' : '' }}"><i class="bi bi-box-seam"></i> Daftar Item</a>
+                    @endcan
+                </div>
+            </div>
+            @endcanany
 
             {{-- Anggota --}}
             @can('members.view')
-            <div class="pq-nav-label">Anggota</div>
-            <a href="{{ route('admin.members.index') }}" class="pq-nav-item {{ request()->routeIs('admin.members.*') ? 'active' : '' }}"><i class="bi bi-people"></i> Daftar Anggota</a>
+            <a href="{{ route('admin.members.index') }}" class="pq-nav-item {{ request()->routeIs('admin.members.*') ? 'active' : '' }}">
+                <i class="bi bi-people"></i> Anggota
+            </a>
             @endcan
 
             {{-- Sirkulasi --}}
             @canany(['circulation.process_loan','circulation.process_return','circulation.process_renewal','circulation.view_active_loans','circulation.view_history','circulation.view_fines'])
-            <div class="pq-nav-label">Sirkulasi</div>
-            @can('circulation.process_loan')
-            <a href="{{ route('admin.circulation.loans.create') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.loans.create') ? 'active' : '' }}"><i class="bi bi-box-arrow-right"></i> Peminjaman</a>
-            @endcan
-            @can('circulation.process_return')
-            <a href="{{ route('admin.circulation.returns.create') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.returns.*') ? 'active' : '' }}"><i class="bi bi-box-arrow-in-left"></i> Pengembalian</a>
-            @endcan
-            @can('circulation.view_active_loans')
-            <a href="{{ route('admin.circulation.loans.active') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.loans.active') || request()->routeIs('admin.circulation.loans.show') ? 'active' : '' }}"><i class="bi bi-clock-history"></i> Pinjaman Aktif</a>
-            @endcan
-            @can('circulation.view_history')
-            <a href="{{ route('admin.circulation.loans.history') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.loans.history') ? 'active' : '' }}"><i class="bi bi-journal-text"></i> Histori</a>
-            @endcan
-            @can('circulation.view_fines')
-            <a href="{{ route('admin.circulation.fines.index') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.fines.*') ? 'active' : '' }}"><i class="bi bi-cash-stack"></i> Denda</a>
-            @endcan
+            <a class="pq-nav-item pq-nav-toggle {{ request()->routeIs('admin.circulation.*') ? '' : 'collapsed' }}" data-bs-toggle="collapse" href="#menuSirkulasi" role="button" aria-expanded="{{ request()->routeIs('admin.circulation.*') ? 'true' : 'false' }}">
+                <i class="bi bi-arrow-left-right"></i> Sirkulasi
+                <i class="bi bi-chevron-down pq-collapse-chevron"></i>
+            </a>
+            <div class="collapse {{ request()->routeIs('admin.circulation.*') ? 'show' : '' }}" id="menuSirkulasi">
+                <div class="pq-submenu">
+                    @can('circulation.process_loan')
+                    <a href="{{ route('admin.circulation.loans.create') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.loans.create') ? 'active' : '' }}"><i class="bi bi-box-arrow-right"></i> Peminjaman</a>
+                    @endcan
+                    @can('circulation.process_return')
+                    <a href="{{ route('admin.circulation.returns.create') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.returns.*') ? 'active' : '' }}"><i class="bi bi-box-arrow-in-left"></i> Pengembalian</a>
+                    @endcan
+                    @can('circulation.view_active_loans')
+                    <a href="{{ route('admin.circulation.loans.active') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.loans.active') || request()->routeIs('admin.circulation.loans.show') ? 'active' : '' }}"><i class="bi bi-clock-history"></i> Pinjaman Aktif</a>
+                    @endcan
+                    @can('circulation.view_history')
+                    <a href="{{ route('admin.circulation.loans.history') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.loans.history') ? 'active' : '' }}"><i class="bi bi-journal-text"></i> Histori</a>
+                    @endcan
+                    @can('circulation.view_fines')
+                    <a href="{{ route('admin.circulation.fines.index') }}" class="pq-nav-item {{ request()->routeIs('admin.circulation.fines.*') ? 'active' : '' }}"><i class="bi bi-cash-stack"></i> Denda</a>
+                    @endcan
+                </div>
+            </div>
             @endcanany
 
             {{-- Repositori Digital --}}
             @can('digital_assets.view')
-            <div class="pq-nav-label">Repositori Digital</div>
-            <a href="{{ route('admin.digital-assets.index') }}" class="pq-nav-item {{ request()->routeIs('admin.digital-assets.*') ? 'active' : '' }}"><i class="bi bi-cloud-arrow-up"></i> Aset Digital</a>
+            <a href="{{ route('admin.digital-assets.index') }}" class="pq-nav-item {{ request()->routeIs('admin.digital-assets.*') ? 'active' : '' }}">
+                <i class="bi bi-cloud-arrow-up"></i> Repositori Digital
+            </a>
             @endcan
 
             {{-- Laporan --}}
             @canany(['reports.view_dashboard','reports.view_collections','reports.view_members','reports.view_circulation','reports.view_fines'])
-            <div class="pq-nav-label">Laporan</div>
-            @can('reports.view_dashboard')
-            <a href="#" class="pq-nav-item"><i class="bi bi-bar-chart-line"></i> Dashboard Statistik</a>
-            @endcan
+            <a href="#" class="pq-nav-item">
+                <i class="bi bi-bar-chart-line"></i> Laporan
+            </a>
             @endcanany
 
             {{-- Audit --}}
             @can('audit_logs.view')
-            <div class="pq-nav-label">Audit & Monitoring</div>
-            <a href="#" class="pq-nav-item"><i class="bi bi-file-earmark-text"></i> Audit Log</a>
+            <a href="#" class="pq-nav-item">
+                <i class="bi bi-file-earmark-text"></i> Audit Log
+            </a>
             @endcan
 
             {{-- Pengaturan --}}
-            @canany(['core.view_institution_profile','core.view_operational_rules'])
-            <div class="pq-nav-label">Pengaturan</div>
-            @can('core.view_institution_profile')
-            <a href="{{ route('admin.settings.institution_profile.edit') }}" class="pq-nav-item {{ request()->routeIs('admin.settings.institution_profile.*') ? 'active' : '' }}">
-                <i class="bi bi-gear"></i> Profil Institusi
+            @canany(['core.view_institution_profile','core.view_operational_rules','users.view','roles.view','permissions.view'])
+            <a class="pq-nav-item pq-nav-toggle {{ request()->routeIs('admin.settings.*') || request()->routeIs('admin.access.*') ? '' : 'collapsed' }}" data-bs-toggle="collapse" href="#menuPengaturan" role="button" aria-expanded="{{ request()->routeIs('admin.settings.*') || request()->routeIs('admin.access.*') ? 'true' : 'false' }}">
+                <i class="bi bi-gear"></i> Pengaturan
+                <i class="bi bi-chevron-down pq-collapse-chevron"></i>
             </a>
-            @endcan
-            @can('core.view_operational_rules')
-            <a href="{{ route('admin.settings.operational_rules.edit') }}" class="pq-nav-item {{ request()->routeIs('admin.settings.operational_rules.*') ? 'active' : '' }}">
-                <i class="bi bi-sliders"></i> Aturan Operasional
-            </a>
-            @endcan
-            @endcanany
-
-            {{-- Manajemen Akses --}}
-            @canany(['users.view','roles.view','permissions.view'])
-            <div class="pq-nav-label">Manajemen Akses</div>
-            @can('users.view')
-            <a href="{{ route('admin.access.users.index') }}" class="pq-nav-item {{ request()->routeIs('admin.access.users.*') ? 'active' : '' }}">
-                <i class="bi bi-person-gear"></i> Pengguna
-            </a>
-            @endcan
-            @can('roles.view')
-            <a href="{{ route('admin.access.roles.index') }}" class="pq-nav-item {{ request()->routeIs('admin.access.roles.*') ? 'active' : '' }}">
-                <i class="bi bi-shield-lock"></i> Role
-            </a>
-            @endcan
-            @can('permissions.view')
-            <a href="{{ route('admin.access.permissions.index') }}" class="pq-nav-item {{ request()->routeIs('admin.access.permissions.*') ? 'active' : '' }}">
-                <i class="bi bi-key"></i> Permission
-            </a>
-            @endcan
+            <div class="collapse {{ request()->routeIs('admin.settings.*') || request()->routeIs('admin.access.*') ? 'show' : '' }}" id="menuPengaturan">
+                <div class="pq-submenu">
+                    @can('core.view_institution_profile')
+                    <a href="{{ route('admin.settings.institution_profile.edit') }}" class="pq-nav-item {{ request()->routeIs('admin.settings.institution_profile.*') ? 'active' : '' }}"><i class="bi bi-building-gear"></i> Profil Institusi</a>
+                    @endcan
+                    @can('core.view_operational_rules')
+                    <a href="{{ route('admin.settings.operational_rules.edit') }}" class="pq-nav-item {{ request()->routeIs('admin.settings.operational_rules.*') ? 'active' : '' }}"><i class="bi bi-sliders"></i> Aturan Operasional</a>
+                    @endcan
+                    @can('users.view')
+                    <a href="{{ route('admin.access.users.index') }}" class="pq-nav-item {{ request()->routeIs('admin.access.users.*') ? 'active' : '' }}"><i class="bi bi-person-gear"></i> Pengguna</a>
+                    @endcan
+                    @can('roles.view')
+                    <a href="{{ route('admin.access.roles.index') }}" class="pq-nav-item {{ request()->routeIs('admin.access.roles.*') ? 'active' : '' }}"><i class="bi bi-shield-lock"></i> Role</a>
+                    @endcan
+                    @can('permissions.view')
+                    <a href="{{ route('admin.access.permissions.index') }}" class="pq-nav-item {{ request()->routeIs('admin.access.permissions.*') ? 'active' : '' }}"><i class="bi bi-key"></i> Permission</a>
+                    @endcan
+                </div>
+            </div>
             @endcanany
         </nav>
     </aside>
