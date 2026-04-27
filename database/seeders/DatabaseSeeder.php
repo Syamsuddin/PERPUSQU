@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             RolePermissionSeeder::class,
             SuperAdminSeeder::class,
+            AdminUserSeeder::class,
             InstitutionProfileSeeder::class,
             SystemSettingSeeder::class,
             MasterDataSeeder::class,
