@@ -57,10 +57,19 @@
         @forelse($results as $record)
         <div class="record-card p-3 mb-3">
             <div class="d-flex gap-3">
-                <div class="flex-shrink-0 d-flex align-items-start">
-                    <div class="rounded bg-light d-flex align-items-center justify-content-center" style="width:60px;height:80px">
-                        <i class="bi bi-book fs-3 text-muted"></i>
-                    </div>
+                <div class="flex-shrink-0">
+                    <a href="{{ route('opac.record.show', $record->id) }}">
+                        @if($record->cover_path)
+                            <img src="{{ asset('storage/' . $record->cover_path) }}" 
+                                 class="rounded shadow-sm" 
+                                 style="width:80px; height:110px; object-fit:cover;" 
+                                 alt="{{ $record->title }}">
+                        @else
+                            <div class="rounded bg-light d-flex align-items-center justify-content-center" style="width:80px; height:110px; border: 1px solid #e2e8f0;">
+                                <i class="bi bi-book fs-2 text-muted"></i>
+                            </div>
+                        @endif
+                    </a>
                 </div>
                 <div class="flex-grow-1">
                     <h6 class="fw-bold mb-1">

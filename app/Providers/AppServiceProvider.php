@@ -21,10 +21,11 @@ class AppServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        BibliographicRecord::class => BibliographicRecordPolicy::class,
-        DigitalAsset::class => DigitalAssetPolicy::class,
-        Loan::class => LoanPolicy::class,
-        Member::class => MemberPolicy::class,
+        \App\Modules\Catalog\Models\BibliographicRecord::class => \App\Modules\Catalog\Policies\BibliographicRecordPolicy::class,
+        \App\Modules\Collection\Models\PhysicalItem::class => \App\Modules\Collection\Policies\PhysicalItemPolicy::class,
+        \App\Modules\DigitalRepository\Models\DigitalAsset::class => \App\Modules\DigitalRepository\Policies\DigitalAssetPolicy::class,
+        \App\Modules\Circulation\Models\Loan::class => \App\Modules\Circulation\Policies\LoanPolicy::class,
+        \App\Modules\Member\Models\Member::class => \App\Modules\Member\Policies\MemberPolicy::class,
     ];
 
     /**
@@ -40,9 +41,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Implicitly grant "Super Admin" role all permissions
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('Super Admin') ? true : null;
+        });
+
         // Register policies
         foreach ($this->policies as $model => $policy) {
             Gate::policy($model, $policy);
         }
     }
+
 }

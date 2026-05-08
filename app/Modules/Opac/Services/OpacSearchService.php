@@ -40,7 +40,7 @@ class OpacSearchService
     {
         return BibliographicRecord::with([
                 'authors', 'subjects', 'publisher', 'language', 'classification', 'collectionType',
-                'physicalItems' => fn ($q) => $q->select('id', 'bibliographic_record_id', 'item_status', 'condition_id'),
+                'physicalItems' => fn ($q) => $q->select('id', 'bibliographic_record_id', 'item_status', 'item_condition_id', 'rack_location_id'),
                 'digitalAssets' => fn ($q) => $q->where('publication_status', 'published')->where('is_public', true)
                     ->select('id', 'bibliographic_record_id', 'asset_type', 'title', 'original_file_name', 'file_size', 'mime_type'),
             ])

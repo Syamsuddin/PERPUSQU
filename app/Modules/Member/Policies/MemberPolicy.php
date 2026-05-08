@@ -73,7 +73,7 @@ class MemberPolicy
      */
     public function block(User $user, Member $member): bool
     {
-        return $user->can('members.block') || $user->hasRole('super-admin');
+        return $user->can('members.block') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -81,7 +81,7 @@ class MemberPolicy
      */
     public function unblock(User $user, Member $member): bool
     {
-        return $user->can('members.block') || $user->hasRole('super-admin');
+        return $user->can('members.block') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -105,6 +105,6 @@ class MemberPolicy
      */
     public function export(User $user): bool
     {
-        return $user->can('members.export') || $user->hasRole('super-admin');
+        return $user->can('members.export') || $user->hasRole('Super Admin');
     }
 }

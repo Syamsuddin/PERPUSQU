@@ -70,7 +70,10 @@
     <nav class="opac-navbar">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="{{ route('opac.home') }}" class="brand-text"><i class="bi bi-book-half me-2"></i>PERPUSQU OPAC</a>
-            <div class="d-flex gap-3">
+            <div class="d-flex gap-3 align-items-center">
+                <a href="{{ url('/') }}" class="nav-link d-flex align-items-center">
+                    <i class="bi bi-house-door me-1"></i> PerpusQU
+                </a>
                 <a href="{{ route('opac.home') }}" class="nav-link {{ request()->routeIs('opac.home') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('opac.search') }}" class="nav-link {{ request()->routeIs('opac.search') ? 'active' : '' }}">Pencarian</a>
                 <a href="{{ route('opac.about') }}" class="nav-link {{ request()->routeIs('opac.about') ? 'active' : '' }}">Tentang</a>

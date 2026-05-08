@@ -19,8 +19,14 @@
             --pq-header-height: 60px;
             --pq-body-bg: #f0f4f8;
         }
-        * { font-family: 'Inter', sans-serif; }
-        body { background: var(--pq-body-bg); overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { 
+            background: var(--pq-body-bg); 
+            overflow-x: hidden; 
+            margin: 0; 
+            padding-top: var(--pq-header-height); 
+            padding-left: var(--pq-sidebar-width); 
+        }
 
         /* ── Sidebar ────────────────────────────────────── */
         .pq-sidebar {
@@ -82,11 +88,14 @@
 
         /* ── Content ────────────────────────────────────── */
         .pq-content {
-            margin-left: var(--pq-sidebar-width);
-            margin-top: var(--pq-header-height);
-            padding: 1.5rem;
+            padding: 2.5rem 2rem 3rem;
             min-height: calc(100vh - var(--pq-header-height));
+            width: 100%;
         }
+
+        /* ── Quick-action card hover ─────────────────────── */
+        .pq-quick-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+        .pq-quick-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.10) !important; }
 
         /* ── Breadcrumb ─────────────────────────────────── */
         .pq-breadcrumb { background: transparent; padding: 0; margin-bottom: 1rem; }
@@ -125,18 +134,29 @@
 
         /* ── Footer ─────────────────────────────────────── */
         .pq-footer {
-            margin-left: var(--pq-sidebar-width);
+            width: 100%;
             padding: 1rem 1.5rem;
             text-align: center; font-size: 0.75rem; color: #a0aec0;
             border-top: 1px solid #e2e8f0;
         }
 
+        /* ── Sidebar overlay (mobile) ────────────────────── */
+        .pq-sidebar-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 1035;
+        }
+        .pq-sidebar-overlay.show { display: block; }
+
         /* ── Responsive ─────────────────────────────────── */
         @media (max-width: 991.98px) {
-            .pq-sidebar { transform: translateX(-100%); }
+            body { padding-left: 0; }
+            .pq-sidebar { transform: translateX(-100%); z-index: 1050; }
             .pq-sidebar.show { transform: translateX(0); }
-            .pq-header, .pq-content, .pq-footer { margin-left: 0; }
-            .pq-header { left: 0; }
+            .pq-header { left: 0; margin-left: 0; }
+            .pq-content { width: 100%; }
+            .pq-footer { width: 100%; }
         }
     </style>
     @stack('styles')
@@ -198,13 +218,23 @@
             @endcanany
 
             {{-- Katalog & Koleksi --}}
-            @canany(['catalog.view','collections.view'])
+            @canany(['catalog.view','collections.view','catalog.create'])
             <a class="pq-nav-item pq-nav-toggle {{ request()->routeIs('admin.catalog.*') || request()->routeIs('admin.collections.*') ? '' : 'collapsed' }}" data-bs-toggle="collapse" href="#menuKatalog" role="button" aria-expanded="{{ request()->routeIs('admin.catalog.*') || request()->routeIs('admin.collections.*') ? 'true' : 'false' }}">
                 <i class="bi bi-journal-bookmark"></i> Katalog & Koleksi
                 <i class="bi bi-chevron-down pq-collapse-chevron"></i>
             </a>
             <div class="collapse {{ request()->routeIs('admin.catalog.*') || request()->routeIs('admin.collections.*') ? 'show' : '' }}" id="menuKatalog">
                 <div class="pq-submenu">
+                    @can('catalog.create')
+                    <a href="{{ route('admin.catalog.quick-entry.index') }}" class="pq-nav-item {{ request()->routeIs('admin.catalog.quick-entry.*') ? 'active' : '' }}" style="{{ request()->routeIs('admin.catalog.quick-entry.*') ? '' : 'color: #4fd1c5;' }}">
+                        <i class="bi bi-plus-circle-fill"></i> Tambah Koleksi
+                    </a>
+                    @endcan
+                    @can('catalog.create')
+                    <a href="{{ route('admin.catalog.bulk-import.index') }}" class="pq-nav-item {{ request()->routeIs('admin.catalog.bulk-import.*') ? 'active' : '' }}" style="{{ request()->routeIs('admin.catalog.bulk-import.*') ? '' : 'color: #38b2ac;' }}">
+                        <i class="bi bi-file-earmark-excel-fill"></i> Import Excel
+                    </a>
+                    @endcan
                     @can('catalog.view')
                     <a href="{{ route('admin.catalog.records.index') }}" class="pq-nav-item {{ request()->routeIs('admin.catalog.records.*') ? 'active' : '' }}"><i class="bi bi-journal-bookmark"></i> Daftar Katalog</a>
                     @endcan
@@ -214,6 +244,7 @@
                 </div>
             </div>
             @endcanany
+
 
             {{-- Anggota --}}
             @can('members.view')
@@ -299,9 +330,12 @@
         </nav>
     </aside>
 
+    {{-- ── Sidebar Overlay (mobile) ── --}}
+    <div class="pq-sidebar-overlay" id="pqSidebarOverlay"></div>
+
     {{-- ── Header ── --}}
     <header class="pq-header">
-        <button class="btn d-lg-none me-3" onclick="document.querySelector('.pq-sidebar').classList.toggle('show')">
+        <button class="btn d-lg-none me-3" id="pqSidebarToggle">
             <i class="bi bi-list"></i>
         </button>
         <div class="pq-header-title d-none d-sm-block">
@@ -380,6 +414,24 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobile sidebar toggle with overlay
+        const sidebar  = document.getElementById('pqSidebar');
+        const overlay  = document.getElementById('pqSidebarOverlay');
+        const toggleBtn = document.getElementById('pqSidebarToggle');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+            });
+        }
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+            });
+        }
+    </script>
     @stack('scripts')
 </body>
 </html>

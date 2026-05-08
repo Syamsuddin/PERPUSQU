@@ -26,7 +26,7 @@ class DigitalAssetPolicy
         }
 
         // Super admin can view everything
-        if ($user->hasRole('super-admin')) {
+        if ($user->hasRole('Super Admin')) {
             return true;
         }
 
@@ -57,7 +57,7 @@ class DigitalAssetPolicy
     public function update(User $user, DigitalAsset $asset): bool
     {
         // Super admin can update anything
-        if ($user->hasRole('super-admin')) {
+        if ($user->hasRole('Super Admin')) {
             return true;
         }
 
@@ -80,7 +80,7 @@ class DigitalAssetPolicy
     public function delete(User $user, DigitalAsset $asset): bool
     {
         // Only super admin can delete published assets
-        if ($asset->publication_status === 'published' && ! $user->hasRole('super-admin')) {
+        if ($asset->publication_status === 'published' && ! $user->hasRole('Super Admin')) {
             return false;
         }
 
@@ -90,7 +90,7 @@ class DigitalAssetPolicy
         }
 
         // Super admin can delete anything
-        return $user->hasRole('super-admin');
+        return $user->hasRole('Super Admin');
     }
 
     /**

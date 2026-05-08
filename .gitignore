@@ -23,3 +23,13 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Project Specific
+/docs/
+/*.md
+!/README.md
+/PERPUSQU.code-workspace
+/tests/
+/test/
+/.claude/
+/.editorconfig

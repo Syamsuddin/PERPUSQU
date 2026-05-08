@@ -65,6 +65,18 @@
     </div>
 
     <div class="col-md-4">
+        {{-- Cover Image --}}
+        <div class="card border-0 shadow-sm p-4 mb-3 text-center">
+            @if($record->cover_path)
+                <img src="{{ asset('storage/' . $record->cover_path) }}" class="img-fluid rounded shadow-sm" alt="Cover {{ $record->title }}" style="max-height:400px; object-fit:contain;">
+            @else
+                <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height:250px">
+                    <i class="bi bi-image text-muted" style="font-size:4rem"></i>
+                </div>
+                <p class="text-muted small mt-3 mb-0">Belum ada cover</p>
+            @endif
+        </div>
+
         {{-- Availability --}}
         <div class="card border-0 shadow-sm p-4 mb-3">
             <h6 class="fw-bold mb-3"><i class="bi bi-building me-1"></i>Ketersediaan Fisik</h6>

@@ -40,7 +40,7 @@ class BibliographicRecordPolicy
     public function update(User $user, BibliographicRecord $record): bool
     {
         // Super admin can update anything
-        if ($user->hasRole('super-admin')) {
+        if ($user->hasRole('Super Admin')) {
             return true;
         }
 
@@ -63,7 +63,7 @@ class BibliographicRecordPolicy
     public function delete(User $user, BibliographicRecord $record): bool
     {
         // Only super admin can delete published records
-        if ($record->publication_status === 'published' && ! $user->hasRole('super-admin')) {
+        if ($record->publication_status === 'published' && ! $user->hasRole('Super Admin')) {
             return false;
         }
 

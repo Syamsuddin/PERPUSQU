@@ -25,6 +25,17 @@ class DashboardWidgetService
         $widgets['total_users'] = User::count();
         $widgets['available_items'] = PhysicalItem::available()->count();
 
+        // Recent data
+        $widgets['recent_catalogs'] = BibliographicRecord::with('authors')
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        $widgets['recent_loans'] = Loan::with(['member', 'physicalItem.bibliographicRecord'])
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
         return $widgets;
     }
 }

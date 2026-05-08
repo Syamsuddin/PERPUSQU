@@ -48,7 +48,7 @@ class AuthController extends Controller
     {
         $this->authService->logoutCurrentUser();
 
-        return redirect()->route('auth.login')
+        return redirect('/')
             ->with('success', 'Anda berhasil logout.');
     }
 }
