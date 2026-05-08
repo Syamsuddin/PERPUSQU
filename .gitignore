@@ -28,6 +28,7 @@ Thumbs.db
 /docs/
 /*.md
 !/README.md
+!/DEPLOYMENT_GUIDE.md
 /PERPUSQU.code-workspace
 /tests/
 /test/
