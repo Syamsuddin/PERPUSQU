@@ -174,6 +174,62 @@
                 </a>
             </div>
             @endcan
+
+            @can('circulation.view_active_loans')
+            <div class="col-md-3 col-sm-6">
+                <a href="{{ route('admin.circulation.loans.active') }}" class="text-decoration-none">
+                    <div class="pq-card p-4 text-center pq-action-card">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width:52px;height:52px;background:#fef3c7;color:#b45309;">
+                            <i class="bi bi-list-check fs-4"></i>
+                        </div>
+                        <div class="fw-semibold text-dark">Pinjaman Aktif</div>
+                        <small class="text-muted">Monitor Peminjaman</small>
+                    </div>
+                </a>
+            </div>
+            @endcan
+
+            @can('digital_assets.create')
+            <div class="col-md-3 col-sm-6">
+                <a href="{{ route('admin.digital-assets.create') }}" class="text-decoration-none">
+                    <div class="pq-card p-4 text-center pq-action-card">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width:52px;height:52px;background:#ede9fe;color:#6d28d9;">
+                            <i class="bi bi-cloud-upload fs-4"></i>
+                        </div>
+                        <div class="fw-semibold text-dark">Upload Aset Digital</div>
+                        <small class="text-muted">E-Book & Dokumen</small>
+                    </div>
+                </a>
+            </div>
+            @endcan
+
+            @canany(['reports.view_collections','reports.view_circulation','reports.view_fines','reports.view_members'])
+            <div class="col-md-3 col-sm-6">
+                <a href="{{ route('admin.reports.index') }}" class="text-decoration-none">
+                    <div class="pq-card p-4 text-center pq-action-card">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width:52px;height:52px;background:#dbeafe;color:#1d4ed8;">
+                            <i class="bi bi-bar-chart-line fs-4"></i>
+                        </div>
+                        <div class="fw-semibold text-dark">Laporan</div>
+                        <small class="text-muted">Statistik & Analitik</small>
+                    </div>
+                </a>
+            </div>
+            @endcanany
+
+            @can('circulation.view_fines')
+            <div class="col-md-3 col-sm-6">
+                <a href="{{ route('admin.circulation.fines.index') }}" class="text-decoration-none">
+                    <div class="pq-card p-4 text-center pq-action-card">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width:52px;height:52px;background:#fee2e2;color:#b91c1c;">
+                            <i class="bi bi-cash-stack fs-4"></i>
+                        </div>
+                        <div class="fw-semibold text-dark">Kelola Denda</div>
+                        <small class="text-muted">Lunasi & Hapuskan</small>
+                    </div>
+                </a>
+            </div>
+            @endcan
         </div>
     </div>
 
