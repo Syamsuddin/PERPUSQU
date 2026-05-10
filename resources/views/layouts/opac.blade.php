@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'OPAC') — PERPUSQU</title>
-    <meta name="description" content="@yield('meta-description', 'Online Public Access Catalog — Perpustakaan PERPUSQU')">
+    <title>@yield('title', 'OPAC') — GIBTHA LIBRARY</title>
+    <meta name="description" content="@yield('meta-description', 'Online Public Access Catalog — Perpustakaan GIBTHA LIBRARY')">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -69,10 +69,10 @@
     {{-- Navbar --}}
     <nav class="opac-navbar">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ route('opac.home') }}" class="brand-text"><i class="bi bi-book-half me-2"></i>PERPUSQU OPAC</a>
+            <a href="{{ route('opac.home') }}" class="brand-text"><i class="bi bi-book-half me-2"></i>GIBTHA LIBRARY OPAC</a>
             <div class="d-flex gap-3 align-items-center">
                 <a href="{{ url('/') }}" class="nav-link d-flex align-items-center">
-                    <i class="bi bi-house-door me-1"></i> PerpusQU
+                    <i class="bi bi-house-door me-1"></i> GIBTHA LIBRARY
                 </a>
                 <a href="{{ route('opac.home') }}" class="nav-link {{ request()->routeIs('opac.home') ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('opac.search') }}" class="nav-link {{ request()->routeIs('opac.search') ? 'active' : '' }}">Pencarian</a>
@@ -96,8 +96,8 @@
     {{-- Footer --}}
     <footer class="opac-footer">
         <div class="container text-center">
-            <p class="mb-1"><i class="bi bi-book-half me-1"></i><strong>PERPUSQU</strong> — Online Public Access Catalog</p>
-            <p class="mb-0">&copy; {{ date('Y') }} Perpustakaan PERPUSQU. Hak cipta dilindungi.</p>
+            <p class="mb-1"><i class="bi bi-book-half me-1"></i><strong>GIBTHA LIBRARY</strong> — Online Public Access Catalog</p>
+            <p class="mb-0">&copy; {{ date('Y') }} Perpustakaan GIBTHA LIBRARY. Hak cipta dilindungi.</p>
         </div>
     </footer>
 

@@ -20,7 +20,7 @@ class SystemSettingSeeder extends Seeder
             ['key' => 'asset_max_upload_size_mb', 'value' => '50', 'type' => 'integer', 'group_name' => 'digital', 'is_public' => false],
             ['key' => 'ocr_enabled', 'value' => 'false', 'type' => 'boolean', 'group_name' => 'digital', 'is_public' => false],
             ['key' => 'public_preview_enabled', 'value' => 'true', 'type' => 'boolean', 'group_name' => 'digital', 'is_public' => true],
-            ['key' => 'app_name', 'value' => 'PERPUSQU', 'type' => 'string', 'group_name' => 'general', 'is_public' => true],
+            ['key' => 'app_name', 'value' => 'GIBTHA LIBRARY', 'type' => 'string', 'group_name' => 'general', 'is_public' => true],
             ['key' => 'app_version', 'value' => '1.0.0', 'type' => 'string', 'group_name' => 'general', 'is_public' => true],
             ['key' => 'maintenance_mode', 'value' => 'false', 'type' => 'boolean', 'group_name' => 'general', 'is_public' => false],
         ];

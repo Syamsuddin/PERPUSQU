@@ -1,6 +1,6 @@
-# PERPUSQU — Integrated Digital Library System
+# GIBTHA LIBRARY — Integrated Digital Library System
 
-**PERPUSQU** is a professional, modular, and enterprise-grade library management system built with the latest Laravel framework. It provides a comprehensive suite of tools for managing physical collections, digital repositories, member services, and public discovery.
+**GIBTHA LIBRARY** is a professional, modular, and enterprise-grade library management system built with the latest Laravel framework. It provides a comprehensive suite of tools for managing physical collections, digital repositories, member services, and public discovery.
 
 ---
 

@@ -7,5 +7,11 @@ Route::get('/', function () {
     if (auth()->check()) {
         return redirect()->route('admin.dashboard.index');
     }
-    return view('landing');
+    
+    $profile = \App\Modules\Core\Models\InstitutionProfile::first();
+    $totalCollections = \App\Modules\Collection\Models\PhysicalItem::count();
+    $totalDigital = \App\Modules\DigitalRepository\Models\DigitalAsset::count();
+    $activeLoans = \App\Modules\Circulation\Models\Loan::whereNull('returned_at')->count();
+    
+    return view('landing', compact('profile', 'totalCollections', 'totalDigital', 'activeLoans'));
 });

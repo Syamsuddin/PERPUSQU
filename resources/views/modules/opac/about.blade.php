@@ -5,10 +5,10 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card border-0 shadow-sm p-5">
-            <h2 class="fw-bold mb-4" style="color:var(--opac-primary)"><i class="bi bi-info-circle me-2"></i>Tentang PERPUSQU</h2>
+            <h2 class="fw-bold mb-4" style="color:var(--opac-primary)"><i class="bi bi-info-circle me-2"></i>Tentang GIBTHA LIBRARY</h2>
 
             <h5 class="fw-bold mb-2">Selamat Datang</h5>
-            <p class="text-muted">PERPUSQU adalah sistem manajemen perpustakaan terintegrasi yang melayani civitas akademika. Kami menyediakan akses ke koleksi buku, jurnal, majalah, dan aset digital untuk mendukung kegiatan pendidikan, penelitian, dan pengabdian masyarakat.</p>
+            <p class="text-muted">GIBTHA LIBRARY adalah sistem manajemen perpustakaan terintegrasi yang melayani civitas akademika. Kami menyediakan akses ke koleksi buku, jurnal, majalah, dan aset digital untuk mendukung kegiatan pendidikan, penelitian, dan pengabdian masyarakat.</p>
 
             <h5 class="fw-bold mb-2 mt-4">Layanan Kami</h5>
             <ul class="text-muted">
@@ -28,7 +28,7 @@
 
             <h5 class="fw-bold mb-2 mt-4">Kontak</h5>
             <p class="text-muted mb-0">
-                <i class="bi bi-envelope me-1"></i>perpustakaan@perpusqu.ac.id<br>
+                <i class="bi bi-envelope me-1"></i>perpustakaan@gibthalibrary.ac.id<br>
                 <i class="bi bi-telephone me-1"></i>(021) 123-4567
             </p>
         </div>

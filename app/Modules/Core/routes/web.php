@@ -27,4 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/settings/operational-rules', [SystemSettingController::class, 'update'])
         ->name('admin.settings.operational_rules.update')
         ->middleware('permission:core.update_operational_rules');
+
+    // Guides
+    Route::get('/admin/guides/superadmin', function () {
+        return view('modules.core.guides.superadmin');
+    })->name('admin.guides.superadmin');
 });

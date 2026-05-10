@@ -1,6 +1,6 @@
 @extends('layouts.opac')
 @section('title', 'Beranda')
-@section('meta-description', 'Cari koleksi perpustakaan PERPUSQU — buku, jurnal, e-book, dan aset digital.')
+@section('meta-description', 'Cari koleksi perpustakaan GIBTHA LIBRARY — buku, jurnal, e-book, dan aset digital.')
 
 @section('hero')
 <div class="opac-hero">

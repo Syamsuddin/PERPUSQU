@@ -14,7 +14,7 @@ class SuperAdminSeeder extends Seeder
             ['username' => 'superadmin'],
             [
                 'name' => 'Super Administrator',
-                'email' => 'superadmin@perpusqu.local',
+                'email' => 'superadmin@gibthalibrary.local',
                 'password' => Hash::make('Admin@123'),
                 'is_active' => true,
             ]

@@ -1,6 +1,6 @@
-# Panduan Deploy PERPUSQU di Shared Hosting cPanel
+# Panduan Deploy GIBTHA LIBRARY di Shared Hosting cPanel
 
-Panduan ini menjelaskan langkah-langkah untuk mendeploy aplikasi **PERPUSQU** (Laravel 13) ke shared hosting menggunakan domain **perpus.gawiqu.com**.
+Panduan ini menjelaskan langkah-langkah untuk mendeploy aplikasi **GIBTHA LIBRARY** (Laravel 13) ke shared hosting menggunakan domain **perpus.gawiqu.com**.
 
 ## 📋 Persyaratan Sistem
 *   **PHP Version**: 8.3 atau lebih tinggi (Wajib untuk Laravel 13).
@@ -72,7 +72,7 @@ Dengan Document Root yang diarahkan langsung ke folder `/public`, Anda dapat mel
 1.  Cari file `.env.example` di folder `~/perpusqu_app`, rename menjadi `.env`.
 2.  Edit file `.env` dan sesuaikan nilainya:
     ```env
-    APP_NAME=PERPUSQU
+    APP_NAME=GIBTHA LIBRARY
     APP_ENV=production
     APP_KEY=base64:xxx... (Gunakan php artisan key:generate jika via SSH)
     APP_DEBUG=false
@@ -123,4 +123,4 @@ Dengan Document Root yang diarahkan langsung ke folder `/public`, Anda dapat mel
 *   **Symlink Storage**: Pastikan folder `storage` di document root mengarah ke `storage/app/public` aplikasi agar gambar/file muncul.
 
 ---
-**PERPUSQU** sekarang seharusnya sudah online di [https://perpus.gawiqu.com](https://perpus.gawiqu.com).
+**GIBTHA LIBRARY** sekarang seharusnya sudah online di [https://perpus.gawiqu.com](https://perpus.gawiqu.com).

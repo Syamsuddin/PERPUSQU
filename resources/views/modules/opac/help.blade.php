@@ -33,7 +33,7 @@
             </div>
 
             <h5 class="fw-bold mb-2 mt-4">Butuh Bantuan Lebih?</h5>
-            <p class="text-muted mb-0">Hubungi pustakawan kami di <a href="mailto:perpustakaan@perpusqu.ac.id">perpustakaan@perpusqu.ac.id</a> atau kunjungi meja layanan di lantai 1.</p>
+            <p class="text-muted mb-0">Hubungi pustakawan kami di <a href="mailto:perpustakaan@gibthalibrary.ac.id">perpustakaan@gibthalibrary.ac.id</a> atau kunjungi meja layanan di lantai 1.</p>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="auth-logo">
-        <h1><i class="bi bi-book-half"></i> PERPUSQU</h1>
+        <h1><i class="bi bi-book-half"></i> GIBTHA LIBRARY</h1>
         <p>Sistem Informasi Perpustakaan Hibrid Kampus</p>
     </div>
 
@@ -49,7 +49,7 @@
     </form>
 
     <div class="mt-4 pt-3 border-top text-center" style="font-size: 0.75rem; color: #718096;">
-        &copy; {{ date('Y') }} PERPUSQU — Hak Cipta <strong>Syamsuddin</strong>
+        &copy; {{ date('Y') }} GIBTHA LIBRARY — Hak Cipta <strong>Syamsuddin</strong>
         <a href="https://wa.me/6281349694696" target="_blank" rel="noopener" title="Hubungi via WhatsApp" style="color: #25D366; margin-left: 0.5rem; font-size: 1.1rem; vertical-align: middle;">
             <i class="bi bi-whatsapp"></i>
         </a>

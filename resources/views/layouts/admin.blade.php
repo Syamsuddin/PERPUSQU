@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Dashboard') — PERPUSQU Admin</title>
+    <title>@yield('title', 'Dashboard') — GIBTHA LIBRARY Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@
             background: #fff;
             border-bottom: 1px solid #e2e8f0;
             display: flex; align-items: center;
-            padding: 0 1.5rem;
+            padding: 0 4rem;
             z-index: 1030;
         }
         .pq-header-title { font-weight: 600; color: var(--pq-primary); font-size: 1rem; }
@@ -88,9 +88,10 @@
 
         /* ── Content ────────────────────────────────────── */
         .pq-content {
-            padding: 2.5rem 2rem 3rem;
+            padding: 3rem 4rem;
             min-height: calc(100vh - var(--pq-header-height));
             width: 100%;
+            box-sizing: border-box;
         }
 
         /* ── Quick-action card hover ─────────────────────── */
@@ -98,7 +99,7 @@
         .pq-quick-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.10) !important; }
 
         /* ── Breadcrumb ─────────────────────────────────── */
-        .pq-breadcrumb { background: transparent; padding: 0; margin-bottom: 1rem; }
+        .pq-breadcrumb { background: transparent; padding: 0; margin-bottom: 2rem; margin-top: 0.5rem; }
         .pq-breadcrumb .breadcrumb-item a { color: var(--pq-accent); text-decoration: none; }
         .pq-breadcrumb .breadcrumb-item.active { color: #718096; }
 
@@ -155,7 +156,7 @@
             .pq-sidebar { transform: translateX(-100%); z-index: 1050; }
             .pq-sidebar.show { transform: translateX(0); }
             .pq-header { left: 0; margin-left: 0; }
-            .pq-content { width: 100%; }
+            .pq-content { padding: 1.25rem 1rem 3rem; }
             .pq-footer { width: 100%; }
         }
     </style>
@@ -165,7 +166,7 @@
     {{-- ── Sidebar ── --}}
     <aside class="pq-sidebar" id="pqSidebar">
         <a href="{{ route('admin.dashboard.index') }}" class="pq-sidebar-brand">
-            <i class="bi bi-book-half me-2"></i> PERPUSQU
+            <i class="bi bi-book-half me-2"></i> GIBTHA LIBRARY
         </a>
         <nav class="pq-sidebar-nav">
             {{-- Dashboard (standalone) --}}
@@ -289,14 +290,14 @@
 
             {{-- Laporan --}}
             @canany(['reports.view_dashboard','reports.view_collections','reports.view_members','reports.view_circulation','reports.view_fines'])
-            <a href="#" class="pq-nav-item">
+            <a href="{{ route('admin.reports.index') }}" class="pq-nav-item {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
                 <i class="bi bi-bar-chart-line"></i> Laporan
             </a>
             @endcanany
 
             {{-- Audit --}}
             @can('audit_logs.view')
-            <a href="#" class="pq-nav-item">
+            <a href="{{ route('admin.audit.index') }}" class="pq-nav-item {{ request()->routeIs('admin.audit.*') ? 'active' : '' }}">
                 <i class="bi bi-file-earmark-text"></i> Audit Log
             </a>
             @endcan
@@ -327,6 +328,15 @@
                 </div>
             </div>
             @endcanany
+
+            {{-- Bantuan & Panduan --}}
+            <div class="pq-nav-label">Bantuan</div>
+            <a href="{{ route('admin.guides.superadmin') }}" class="pq-nav-item {{ request()->routeIs('admin.guides.superadmin') ? 'active' : '' }}">
+                <i class="bi bi-journal-text"></i> Panduan Admin
+            </a>
+            <a href="https://wa.me/6281349694696" target="_blank" class="pq-nav-item">
+                <i class="bi bi-whatsapp"></i> Hubungi Dev
+            </a>
         </nav>
     </aside>
 
@@ -407,7 +417,7 @@
 
     {{-- ── Footer ── --}}
     <footer class="pq-footer">
-        &copy; {{ date('Y') }} PERPUSQU — Hak Cipta <strong>Syamsuddin</strong>
+        &copy; {{ date('Y') }} GIBTHA LIBRARY — Hak Cipta <strong>Syamsuddin</strong>
         <a href="https://wa.me/6281349694696" target="_blank" rel="noopener" title="Hubungi via WhatsApp" style="color: #25D366; margin-left: 0.5rem; font-size: 1.1rem; vertical-align: middle;">
             <i class="bi bi-whatsapp"></i>
         </a>

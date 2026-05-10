@@ -18,7 +18,7 @@ class MemberUserSeeder extends Seeder
             [
                 'name' => 'Ahmad Fauzi',
                 'username' => 'ahmad.fauzi',
-                'email' => 'ahmad.fauzi@perpusqu.local',
+                'email' => 'ahmad.fauzi@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0001',
                 'member_type' => 'mahasiswa',
                 'identity_number' => '2026010001',
@@ -26,7 +26,7 @@ class MemberUserSeeder extends Seeder
             [
                 'name' => 'Siti Nurhaliza',
                 'username' => 'siti.nurhaliza',
-                'email' => 'siti.nurhaliza@perpusqu.local',
+                'email' => 'siti.nurhaliza@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0002',
                 'member_type' => 'mahasiswa',
                 'identity_number' => '2026010002',
@@ -34,7 +34,7 @@ class MemberUserSeeder extends Seeder
             [
                 'name' => 'Dr. Budi Santoso',
                 'username' => 'budi.santoso',
-                'email' => 'budi.santoso@perpusqu.local',
+                'email' => 'budi.santoso@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0003',
                 'member_type' => 'dosen',
                 'identity_number' => '198501152010011001',
@@ -42,7 +42,7 @@ class MemberUserSeeder extends Seeder
             [
                 'name' => 'Rina Wulandari',
                 'username' => 'rina.wulandari',
-                'email' => 'rina.wulandari@perpusqu.local',
+                'email' => 'rina.wulandari@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0004',
                 'member_type' => 'mahasiswa',
                 'identity_number' => '2026010003',
@@ -50,7 +50,7 @@ class MemberUserSeeder extends Seeder
             [
                 'name' => 'Hendra Pratama',
                 'username' => 'hendra.pratama',
-                'email' => 'hendra.pratama@perpusqu.local',
+                'email' => 'hendra.pratama@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0005',
                 'member_type' => 'umum',
                 'identity_number' => '6301010101900001',

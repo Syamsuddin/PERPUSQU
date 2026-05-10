@@ -17,31 +17,31 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'Admin Perpustakaan',
                 'username' => 'admin_perpus',
-                'email' => 'admin_perpus@perpusqu.local',
+                'email' => 'admin_perpus@gibthalibrary.local',
                 'role' => 'Admin Perpustakaan',
             ],
             [
                 'name' => 'Pustakawan',
                 'username' => 'pustakawan',
-                'email' => 'pustakawan@perpusqu.local',
+                'email' => 'pustakawan@gibthalibrary.local',
                 'role' => 'Pustakawan',
             ],
             [
                 'name' => 'Petugas Sirkulasi',
                 'username' => 'petugas_sirkulasi',
-                'email' => 'petugas_sirkulasi@perpusqu.local',
+                'email' => 'petugas_sirkulasi@gibthalibrary.local',
                 'role' => 'Petugas Sirkulasi',
             ],
             [
                 'name' => 'Operator Repositori Digital',
                 'username' => 'operator_digital',
-                'email' => 'operator_digital@perpusqu.local',
+                'email' => 'operator_digital@gibthalibrary.local',
                 'role' => 'Operator Repositori Digital',
             ],
             [
                 'name' => 'Pimpinan Perpustakaan',
                 'username' => 'pimpinan',
-                'email' => 'pimpinan@perpusqu.local',
+                'email' => 'pimpinan@gibthalibrary.local',
                 'role' => 'Pimpinan Perpustakaan',
             ],
         ];
