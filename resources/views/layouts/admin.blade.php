@@ -111,13 +111,22 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.06);
         }
         .pq-stat-card {
-            border-radius: 0.75rem; padding: 1.25rem; color: #fff;
-            transition: transform 0.2s;
+            border-radius: 0.75rem; padding: 1.5rem; color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .pq-stat-card:hover { transform: translateY(-2px); }
-        .pq-stat-card .stat-icon { font-size: 2rem; opacity: 0.7; }
-        .pq-stat-card .stat-value { font-size: 1.75rem; font-weight: 700; }
-        .pq-stat-card .stat-label { font-size: 0.8rem; opacity: 0.85; }
+        .pq-stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.18); }
+        .pq-stat-card .stat-icon { font-size: 2.2rem; opacity: 0.65; }
+        .pq-stat-card .stat-value { font-size: 2rem; font-weight: 700; line-height: 1.1; }
+        .pq-stat-card .stat-label { font-size: 0.82rem; opacity: 0.88; }
+        .pq-action-card {
+            transition: transform 0.18s, box-shadow 0.18s;
+            cursor: pointer;
+        }
+        .pq-action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
 
         /* ── Table ──────────────────────────────────────── */
         .pq-table { border-collapse: separate; border-spacing: 0; }
