@@ -343,6 +343,9 @@
             <a href="{{ route('admin.guides.superadmin') }}" class="pq-nav-item {{ request()->routeIs('admin.guides.superadmin') ? 'active' : '' }}">
                 <i class="bi bi-journal-text"></i> Panduan Admin
             </a>
+            <a href="{{ route('admin.guides.pustakawan') }}" class="pq-nav-item {{ request()->routeIs('admin.guides.pustakawan') ? 'active' : '' }}">
+                <i class="bi bi-journal-bookmark"></i> Panduan Pustakawan
+            </a>
             <a href="https://wa.me/6281349694696" target="_blank" class="pq-nav-item">
                 <i class="bi bi-whatsapp"></i> Hubungi Dev
             </a>

@@ -32,4 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/guides/superadmin', function () {
         return view('modules.core.guides.superadmin');
     })->name('admin.guides.superadmin');
+
+    Route::get('/admin/guides/pustakawan', function () {
+        return view('modules.core.guides.pustakawan');
+    })->name('admin.guides.pustakawan');
 });
