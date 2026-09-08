@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "laravel/framework": "^13.0",
         "laravel/horizon": "^5.45",
         "laravel/tinker": "^3.0",
@@ -19,6 +19,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.11",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6",
@@ -82,6 +83,9 @@
             "Composer\\Config::disableProcessTimeout",
             "@php artisan config:clear --ansi",
             "@php vendor/bin/phpunit -c phpunit.mysql.xml"
+        ],
+        "analyse": [
+            "@php vendor/bin/phpstan analyse --memory-limit=1G"
         ]
     },
     "extra": {
@@ -93,6 +97,9 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "platform": {
+            "php": "8.4.0"
+        },
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true

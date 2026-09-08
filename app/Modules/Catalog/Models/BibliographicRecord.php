@@ -11,6 +11,7 @@ use App\Modules\MasterData\Models\Language;
 use App\Modules\MasterData\Models\Publisher;
 use App\Modules\MasterData\Models\Subject;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +19,36 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property int|null $publisher_id
+ * @property int|null $language_id
+ * @property int|null $classification_id
+ * @property int $collection_type_id
+ * @property int|null $publication_year
+ * @property string|null $isbn
+ * @property string|null $keywords
+ * @property string|null $abstract
+ * @property string|null $cover_path
+ * @property string $publication_status
+ * @property bool $is_public
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property-read Collection<int, Author> $authors
+ * @property-read Collection<int, Subject> $subjects
+ * @property-read Collection<int, PhysicalItem> $physicalItems
+ * @property-read Collection<int, DigitalAsset> $digitalAssets
+ * @property-read Publisher|null $publisher
+ * @property-read Language|null $language
+ * @property-read Classification|null $classification
+ * @property-read CollectionType $collectionType
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static> published()
+ * @method static \Illuminate\Database\Eloquent\Builder<static> public()
+ * @method static \Illuminate\Database\Eloquent\Builder<static> keyword(?string $keyword)
+ */
 class BibliographicRecord extends Model
 {
     use HasFactory, SoftDeletes;

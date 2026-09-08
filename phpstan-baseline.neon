@@ -1,0 +1,259 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \#1 \$string of function str_pad expects string, int\<1, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Modules/Catalog/Http/Controllers/QuickEntryController.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Modules/Circulation/Notifications/LoanDueReminder.php
+
+		-
+			message: '#^Parameter \#1 \$loan of method App\\Modules\\Circulation\\Services\\LoanReminderService\:\:send\(\) expects App\\Modules\\Circulation\\Models\\Loan, Illuminate\\Database\\Eloquent\\Model given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Modules/Circulation/Services/LoanReminderService.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Modules\\Member\\Models\\Member\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Modules/Circulation/Services/LoanReminderService.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:keyword\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: app/Modules/Circulation/Services/LoanTransactionService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/Collection/Http/Requests/UpdatePhysicalItemRequest.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Auth\\AuthManager\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Modules/Core/Services/InstitutionProfileService.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Modules/Identity/Services/PermissionMatrixService.php
+
+		-
+			message: '#^Method App\\Modules\\Identity\\Services\\RoleManagementService\:\:createRole\(\) should return App\\Modules\\Identity\\Models\\Role but returns Spatie\\Permission\\Contracts\\Role\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Modules/Identity/Services/RoleManagementService.php
+
+		-
+			message: '#^Parameter \#1 \$model of method Spatie\\Activitylog\\Support\\ActivityLogger\:\:performedOn\(\) expects Illuminate\\Database\\Eloquent\\Model, Spatie\\Permission\\Contracts\\Role given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Modules/Identity/Services/RoleManagementService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/MasterData/Http/Requests/UpdateCollectionTypeRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/MasterData/Http/Requests/UpdateItemConditionRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/MasterData/Http/Requests/UpdateRackLocationRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/MasterData/Http/Requests/UpdateStudyProgramRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/Member/Http/Requests/UpdateMemberRequest.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: app/Modules/Member/Support/MemberEligibilityResolver.php
+
+		-
+			message: '#^Access to an undefined property App\\Modules\\Catalog\\Models\\BibliographicRecord\:\:\$total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Access to an undefined property App\\Modules\\Circulation\\Models\\Fine\:\:\$count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Access to an undefined property App\\Modules\\Circulation\\Models\\Fine\:\:\$total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Access to an undefined property App\\Modules\\Member\\Models\\Member\:\:\$total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Modules\\Catalog\\Models\\BibliographicRecord\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Modules\\Member\\Models\\Member\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<int,App\\Modules\\Circulation\\Models\\Loan\>\:\:filter\(\) expects \(callable\(App\\Modules\\Circulation\\Models\\Loan, int\)\: bool\)\|null, Closure\(mixed\)\: App\\Modules\\Catalog\\Models\\BibliographicRecord given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<int,int\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>count" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>total" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Modules\\Collection\\Models\\PhysicalItem\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Modules/Reporting/Http/Controllers/ReportController.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertNotNull\(\) with int will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Feature/Circulation/CirculationEndpointTest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$physical_item_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/Collection/PhysicalItemCrudTest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Modules\\Collection\\Models\\PhysicalItem\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: tests/Feature/Collection/PhysicalItemCrudTest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$new_status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/Collection/PhysicalItemStatusServiceTest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$old_status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/Collection/PhysicalItemStatusServiceTest.php
+
+		-
+			message: '#^Cannot call method toDateTimeString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Feature/Core/StrictModeTest.php
+
+		-
+			message: '#^Cannot call method toDateTimeString\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Feature/Identity/AuthenticationTest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/Member/MemberManagementTest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/Member/MemberManagementTest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Modules\\Member\\Models\\Member\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: tests/Feature/Member/MemberManagementTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertNotNull\(\) with int will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Feature/Opac/OpacVisibilityTest.php
+
+		-
+			message: '#^Argument of an invalid type Illuminate\\Routing\\RouteCollectionInterface supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: tests/Feature/Security/PermissionNamesAreConsistentTest.php
+
+		-
+			message: '#^Argument of an invalid type Illuminate\\Routing\\RouteCollectionInterface supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: tests/Feature/Security/RouteAccessControlTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true and ''transisi sah tidak…'' will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/Collection/PhysicalItemStateGuardTest.php

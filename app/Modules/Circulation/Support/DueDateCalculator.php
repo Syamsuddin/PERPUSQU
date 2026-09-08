@@ -2,6 +2,8 @@
 
 namespace App\Modules\Circulation\Support;
 
+use Illuminate\Support\Carbon;
+
 /**
  * Aritmetika tanggal jatuh tempo — dan hanya itu.
  *
@@ -12,15 +14,20 @@ namespace App\Modules\Circulation\Support;
  */
 class DueDateCalculator
 {
-    public static function calculate(int $loanPeriodDays, ?\DateTime $loanDate = null): \DateTime
+    /**
+     * Tipe Carbon disebut eksplisit, bukan \DateTime: `addDays()` adalah metode
+     * Carbon. Dengan type hint \DateTime, memanggilnya memakai objek DateTime
+     * biasa akan lolos pemeriksaan tetapi fatal saat berjalan.
+     */
+    public static function calculate(int $loanPeriodDays, ?Carbon $loanDate = null): Carbon
     {
         $base = $loanDate ?? now();
 
-        return (clone $base)->addDays(max(0, $loanPeriodDays));
+        return $base->copy()->addDays(max(0, $loanPeriodDays));
     }
 
-    public static function calculateRenewal(\DateTime $currentDueDate, int $renewalPeriodDays): \DateTime
+    public static function calculateRenewal(Carbon $currentDueDate, int $renewalPeriodDays): Carbon
     {
-        return (clone $currentDueDate)->addDays(max(0, $renewalPeriodDays));
+        return $currentDueDate->copy()->addDays(max(0, $renewalPeriodDays));
     }
 }

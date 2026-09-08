@@ -10,7 +10,33 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property int $bibliographic_record_id
+ * @property string $asset_type
+ * @property string $file_name
+ * @property string $original_file_name
+ * @property string $file_path
+ * @property string $mime_type
+ * @property string $file_extension
+ * @property int $file_size
+ * @property string|null $checksum
+ * @property string|null $title
+ * @property string|null $description
+ * @property string $publication_status
+ * @property bool $is_public
+ * @property bool $is_embargoed
+ * @property Carbon|null $embargo_until
+ * @property string $ocr_status
+ * @property string $index_status
+ * @property Carbon|null $uploaded_at
+ * @property int|null $uploaded_by
+ * @property-read string $file_size_formatted
+ * @property-read BibliographicRecord $bibliographicRecord
+ * @property-read User|null $uploadedBy
+ */
 class DigitalAsset extends Model
 {
     use HasFactory, SoftDeletes;

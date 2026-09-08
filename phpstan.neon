@@ -1,0 +1,36 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    # Sisa temuan yang belum diperbaiki, dicatat agar gate hijau sejak hari
+    # pertama. Prinsipnya sama dengan gate Pint: daftar ini hanya boleh
+    # MENYUSUT. Temuan baru tidak masuk baseline dan akan menggagalkan CI.
+    #
+    # Isinya sebagian besar gesekan tipe Eloquent yang tidak dapat disimpulkan
+    # analisis statis — alias hasil DB::raw, scope kueri, dan sejenisnya —
+    # bukan cacat. Cara menguranginya adalah menambah anotasi @property dan
+    # @method pada model, seperti yang sudah dilakukan pada Loan, Member,
+    # PhysicalItem, BibliographicRecord, DigitalAsset, dan DailyStatistic.
+    - phpstan-baseline.neon
+
+parameters:
+    paths:
+        - app
+        - database
+        - routes
+        - tests
+
+    # Level 5 memeriksa tipe argumen dan nilai kembali — cukup untuk menangkap
+    # kelas kesalahan yang sudah terjadi di proyek ini (metode yang dihapus
+    # tetapi masih dipanggil, argumen dengan tipe salah), tanpa menuntut
+    # anotasi generik di setiap tempat sekaligus. Naikkan bertahap.
+    level: 5
+
+    # Bootstrap Laravel agar Larastan mengenal facade, container, dan model.
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    excludePaths:
+        analyseAndScan:
+            # Migrasi berisi kelas anonim tanpa nama yang sulit dianalisis dan
+            # jarang menjadi sumber cacat tipe; skemanya sendiri sudah dijaga
+            # job `migrations` di CI.
+            - database/migrations/*

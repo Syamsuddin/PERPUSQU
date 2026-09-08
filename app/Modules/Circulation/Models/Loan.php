@@ -5,12 +5,34 @@ namespace App\Modules\Circulation\Models;
 use App\Modules\Collection\Models\PhysicalItem;
 use App\Modules\Identity\Models\User;
 use App\Modules\Member\Models\Member;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property int $member_id
+ * @property int $physical_item_id
+ * @property Carbon $loan_date
+ * @property Carbon $due_date
+ * @property Carbon|null $returned_at
+ * @property string $loan_status
+ * @property int|null $loaned_by
+ * @property int|null $closed_by
+ * @property string|null $notes
+ * @property-read Member $member
+ * @property-read PhysicalItem $physicalItem
+ * @property-read User|null $loanedBy
+ * @property-read User|null $closedBy
+ * @property-read Collection<int, LoanRenewal> $renewals
+ * @property-read Collection<int, LoanReminder> $reminders
+ * @property-read ReturnTransaction|null $returnTransaction
+ * @property-read Fine|null $fine
+ */
 class Loan extends Model
 {
     use HasFactory;

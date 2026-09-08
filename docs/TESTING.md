@@ -10,8 +10,9 @@ seperti ini, dan cara menjalankannya.
 
 | Job | Yang dijaga |
 |---|---|
-| `test-sqlite` | seluruh suite pada PHP 8.3 dan 8.4 |
+| `test-sqlite` | seluruh suite pada PHP 8.4 |
 | `test-mysql` | suite yang sama pada driver produksi |
+| `analyse` | analisis statis Larastan (level 5) |
 | `lint` | gaya kode Pint, **hanya pada berkas yang diubah PR** |
 | `migrations` | `migrate` → `db:seed` → `migrate:rollback` di MySQL |
 
@@ -23,6 +24,13 @@ repositori akan merah sejak hari pertama, dan gate yang selalu merah cepat
 diabaikan orang. Dengan `pint --diff`, repositori merapat sendiri setiap kali
 sebuah berkas disentuh. Bila kelak ingin gate penuh, jalankan `vendor/bin/pint`
 sekali pada seluruh repositori lalu ganti perintahnya menjadi `pint --test`.
+
+**Hanya PHP 8.4.** Jendela versi yang sesungguhnya sempit: paket terkunci
+menuntut PHP ≥ 8.4 (Symfony 8 / Laravel 13), sementara `phpspreadsheet` — lewat
+`maatwebsite/excel` — membatasi < 8.5. `composer.json` sempat menyatakan `^8.3`,
+yang keliru: `composer install` pada 8.3 gagal sebelum satu test pun berjalan.
+`config.platform.php` disematkan ke `8.4.0` supaya resolusi di mesin pengembang
+sama dengan CI dan produksi.
 
 **Job `migrations` menguji jalur `down()`.** Test suite membangun skema dari nol
 setiap kali, jadi jalur `up` sudah terjamin. Yang tidak pernah tersentuh adalah
@@ -141,6 +149,35 @@ sana kegagalan keras lebih merugikan daripada tombol yang tidak muncul.
 
 Keduanya dikunci `StrictModeTest` dan `UnknownPermissionGuardTest` — jaring
 seperti ini mudah sekali hilang saat seseorang merapikan AppServiceProvider.
+
+## Analisis statis
+
+`composer analyse` menjalankan Larastan pada level 5 atas `app`, `database`,
+`routes`, dan `tests`. Level itu memeriksa tipe argumen dan nilai kembali —
+cukup untuk menangkap kelas kesalahan yang sudah beberapa kali terjadi di
+proyek ini, tanpa menuntut anotasi generik di seluruh berkas sekaligus.
+
+Menyalakannya menemukan tiga cacat nyata:
+
+- `BulkImportController` mengimpor `App\Modules\Catalog\Models\Author` dan
+  `...\Subject` yang **tidak pernah ada** — kelasnya berada di modul
+  `MasterData`. Setiap baris impor massal yang membuat pengarang atau subjek
+  baru akan fatal.
+- `DueDateCalculator` memberi type hint `\DateTime` pada parameter yang
+  memanggil `addDays()` — metode milik Carbon. Memanggilnya dengan objek
+  `DateTime` biasa lolos pemeriksaan tetapi fatal saat berjalan.
+- `config/permission.php` menunjuk model bawaan Spatie, bukan model
+  `App\Modules\Identity\Models\Role` dan `Permission` milik aplikasi —
+  sehingga scope `keyword()` yang didefinisikan di sana tidak pernah tersedia.
+
+Sisa 48 temuan dicatat di `phpstan-baseline.neon`. Isinya sebagian besar
+gesekan tipe Eloquent yang memang tidak dapat disimpulkan analisis statis —
+alias hasil `DB::raw`, scope kueri, dan sejenisnya. Seperti gate Pint, daftar
+itu **hanya boleh menyusut**; temuan baru tidak masuk baseline dan menggagalkan
+CI. Cara menguranginya adalah menambah anotasi `@property` dan `@method` pada
+model, yang sudah dilakukan untuk Loan, Member, PhysicalItem,
+BibliographicRecord, DigitalAsset, dan DailyStatistic — dan itu sendiri
+menurunkan temuan dari 111 menjadi 48.
 
 ## Pekerjaan terjadwal
 

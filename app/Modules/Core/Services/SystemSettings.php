@@ -118,9 +118,7 @@ class SystemSettings
     {
         $this->load();
 
-        return array_key_exists($key, $this->values)
-            && $this->values[$key] !== null
-            && $this->values[$key] !== '';
+        return array_key_exists($key, $this->values) && $this->values[$key] !== '';
     }
 
     public function raw(string $key): ?string

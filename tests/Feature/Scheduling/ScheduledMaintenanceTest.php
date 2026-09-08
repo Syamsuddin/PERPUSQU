@@ -99,7 +99,7 @@ class ScheduledMaintenanceTest extends TestCase
     // ── Pendaftaran jadwal ─────────────────────────────────────────────
 
     /**
-     * @return list<array{string, string}>
+     * @return array<string, array{string, string}>
      */
     public static function scheduledCommands(): array
     {

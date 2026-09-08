@@ -6,12 +6,32 @@ use App\Modules\Catalog\Models\BibliographicRecord;
 use App\Modules\Circulation\Models\Loan;
 use App\Modules\MasterData\Models\ItemCondition;
 use App\Modules\MasterData\Models\RackLocation;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property int $bibliographic_record_id
+ * @property int|null $rack_location_id
+ * @property int|null $item_condition_id
+ * @property string $barcode
+ * @property string|null $inventory_code
+ * @property Carbon|null $acquisition_date
+ * @property string $item_status
+ * @property string|null $notes
+ * @property-read BibliographicRecord $bibliographicRecord
+ * @property-read RackLocation|null $rackLocation
+ * @property-read ItemCondition|null $itemCondition
+ * @property-read Collection<int, PhysicalItemStatusHistory> $statusHistories
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static> keyword(?string $keyword)
+ * @method static \Illuminate\Database\Eloquent\Builder<static> available()
+ */
 class PhysicalItem extends Model
 {
     use HasFactory, SoftDeletes;

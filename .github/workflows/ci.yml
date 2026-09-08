@@ -20,7 +20,11 @@ jobs:
       # mengetahui apakah kegagalannya khas satu versi PHP atau bukan.
       fail-fast: false
       matrix:
-        php: ['8.3', '8.4']
+        # Jendela PHP yang sesungguhnya hanya 8.4.x: paket terkunci menuntut
+        # >= 8.4 (Symfony 8 / Laravel 13) sementara phpspreadsheet — lewat
+        # maatwebsite/excel — membatasi < 8.5. `composer install` pada 8.3
+        # gagal sebelum satu test pun berjalan.
+        php: ['8.4']
 
     steps:
       - uses: actions/checkout@v4
@@ -74,7 +78,7 @@ jobs:
       - name: Siapkan PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           extensions: mbstring, pdo_mysql, fileinfo, intl, bcmath, zip, gd
           coverage: none
 
@@ -82,8 +86,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: vendor
-          key: composer-8.3-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-8.3-
+          key: composer-8.4-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-8.4-
 
       - name: Pasang dependensi
         run: composer install --prefer-dist --no-interaction --no-progress
@@ -105,6 +109,39 @@ jobs:
           DB_PASSWORD: rahasia
         run: vendor/bin/phpunit -c phpunit.mysql.xml
 
+  analyse:
+    name: Analisis statis (Larastan)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Siapkan PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Cache dependensi Composer
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-8.4-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-8.4-
+
+      - name: Pasang dependensi
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Siapkan environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # Temuan lama dicatat di phpstan-baseline.neon supaya gate hijau sejak
+      # hari pertama; hanya temuan BARU yang menggagalkan build.
+      - name: Jalankan Larastan
+        run: vendor/bin/phpstan analyse --memory-limit=1G --no-progress
+
   lint:
     name: Gaya kode (Pint)
     runs-on: ubuntu-latest
@@ -118,7 +155,7 @@ jobs:
       - name: Siapkan PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           coverage: none
 
       - name: Pasang dependensi
@@ -162,7 +199,7 @@ jobs:
       - name: Siapkan PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           extensions: mbstring, pdo_mysql, fileinfo, intl, bcmath, zip, gd
           coverage: none
 

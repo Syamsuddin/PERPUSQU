@@ -4,7 +4,30 @@ namespace App\Modules\Reporting\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property Carbon $snapshot_date
+ * @property int $titles_total
+ * @property int $titles_public
+ * @property int $items_total
+ * @property int $items_available
+ * @property int $items_loaned
+ * @property int $members_total
+ * @property int $members_active
+ * @property int $members_blocked
+ * @property int $loans_active
+ * @property int $loans_overdue
+ * @property int $digital_assets_total
+ * @property int $digital_assets_public
+ * @property int $loans_created
+ * @property int $loans_returned
+ * @property int $fines_raised_amount
+ * @property int $fines_outstanding_amount
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static> since(\DateTimeInterface $from)
+ */
 class DailyStatistic extends Model
 {
     use HasFactory;

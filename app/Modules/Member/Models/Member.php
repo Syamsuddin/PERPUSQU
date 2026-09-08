@@ -7,13 +7,41 @@ use App\Modules\Circulation\Models\Loan;
 use App\Modules\Identity\Models\User;
 use App\Modules\MasterData\Models\Faculty;
 use App\Modules\MasterData\Models\StudyProgram;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property int|null $user_id
+ * @property string $member_number
+ * @property string $member_type
+ * @property string|null $identity_number
+ * @property string $name
+ * @property string|null $email
+ * @property string|null $phone
+ * @property int|null $faculty_id
+ * @property int|null $study_program_id
+ * @property bool $is_active
+ * @property bool $is_blocked
+ * @property string|null $blocked_reason
+ * @property Carbon|null $blocked_at
+ * @property string|null $notes
+ * @property-read User|null $user
+ * @property-read Faculty|null $faculty
+ * @property-read StudyProgram|null $studyProgram
+ * @property-read Collection<int, Loan> $loans
+ * @property-read Collection<int, Fine> $fines
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static> keyword(?string $keyword)
+ * @method static \Illuminate\Database\Eloquent\Builder<static> active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static> blocked()
+ */
 class Member extends Model
 {
     use HasFactory, Notifiable, SoftDeletes;

@@ -71,7 +71,9 @@ class MemberPortalController extends Controller
      */
     protected function currentMember(): ?Member
     {
-        return auth()->user()?->member;
+        $member = auth()->user()?->member;
+
+        return $member instanceof Member ? $member : null;
     }
 
     /**
