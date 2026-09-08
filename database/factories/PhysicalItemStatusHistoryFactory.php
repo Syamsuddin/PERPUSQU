@@ -21,7 +21,8 @@ class PhysicalItemStatusHistoryFactory extends Factory
             'new_status' => 'loaned',
             'reason' => fake()->sentence(),
             'changed_by' => null,
-            'created_at' => now(),
+            // created_at tidak disetel di sini: model memakai timestamps
+            // dengan UPDATED_AT null, jadi Eloquent yang mengisinya.
         ];
     }
 }

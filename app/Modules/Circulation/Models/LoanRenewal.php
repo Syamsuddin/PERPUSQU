@@ -15,7 +15,11 @@ class LoanRenewal extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['loan_id', 'old_due_date', 'new_due_date', 'renewed_by', 'notes'];
+    // `created_at` ikut fillable karena $timestamps dimatikan: Eloquent tidak
+    // akan mengisinya sendiri, dan LoanRenewalService memang menyetelnya.
+    // Tanpa baris ini nilainya dibuang diam-diam dan yang tersimpan adalah
+    // jam server basis data (default useCurrent), bukan jam aplikasi.
+    protected $fillable = ['loan_id', 'old_due_date', 'new_due_date', 'renewed_by', 'notes', 'created_at'];
 
     protected function casts(): array
     {

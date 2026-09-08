@@ -30,7 +30,10 @@ class SystemSetting extends Model
 
     public function scopeGroup($query, ?string $group)
     {
-        if (!$group) return $query;
+        if (! $group) {
+            return $query;
+        }
+
         return $query->where('group_name', $group);
     }
 
@@ -49,6 +52,7 @@ class SystemSetting extends Model
     public static function getValue(string $key, mixed $default = null): mixed
     {
         $setting = static::byKey($key)->first();
+
         return $setting ? $setting->value : $default;
     }
 }

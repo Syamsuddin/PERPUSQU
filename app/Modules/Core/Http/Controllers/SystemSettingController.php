@@ -13,6 +13,7 @@ class SystemSettingController extends Controller
     public function edit()
     {
         $settings = $this->ruleService->getOperationalRules();
+
         return view('modules.core.system_settings.edit', compact('settings'));
     }
 

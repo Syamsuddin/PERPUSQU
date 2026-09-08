@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -36,16 +37,16 @@ return new class extends Migration
         // mendukung partial index, jadi dipakai generated column + unique key.
         // SQLite (dipakai test suite) mendukung partial unique index langsung.
         if (Schema::getConnection()->getDriverName() === 'mysql') {
-            \Illuminate\Support\Facades\DB::statement("
+            DB::statement("
                 ALTER TABLE `loans` ADD COLUMN `active_physical_item_id` BIGINT UNSIGNED
                 GENERATED ALWAYS AS (CASE WHEN `loan_status` = 'active' THEN `physical_item_id` ELSE NULL END) VIRTUAL
             ");
             // Note: MySQL requires a BTREE index on virtual columns for unique constraint
-            \Illuminate\Support\Facades\DB::statement("
+            DB::statement('
                 ALTER TABLE `loans` ADD UNIQUE KEY `uq_loans_active_physical_item_id` (`active_physical_item_id`)
-            ");
+            ');
         } elseif (Schema::getConnection()->getDriverName() === 'sqlite') {
-            \Illuminate\Support\Facades\DB::statement("
+            DB::statement("
                 CREATE UNIQUE INDEX uq_loans_active_physical_item_id
                 ON loans (physical_item_id) WHERE loan_status = 'active'
             ");

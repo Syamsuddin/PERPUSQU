@@ -24,7 +24,7 @@ class PublicAssetPreviewService
         }
 
         // Must be published + public
-        if ($asset->publication_status !== 'published' || !$asset->is_public) {
+        if ($asset->publication_status !== 'published' || ! $asset->is_public) {
             return false;
         }
 
@@ -39,6 +39,7 @@ class PublicAssetPreviewService
     public function getStreamPath(DigitalAsset $asset): ?string
     {
         $path = Storage::disk('local')->path($asset->file_path);
+
         return file_exists($path) ? $path : null;
     }
 }

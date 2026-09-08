@@ -2,9 +2,9 @@
 
 namespace App\Modules\DigitalRepository\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Modules\Catalog\Models\BibliographicRecord;
 use App\Modules\Identity\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

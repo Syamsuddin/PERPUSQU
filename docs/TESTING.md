@@ -3,6 +3,32 @@
 Dokumen ini menjelaskan bentuk test suite: apa yang diuji, mengapa dibagi
 seperti ini, dan cara menjalankannya.
 
+## Integrasi berkelanjutan
+
+`.github/workflows/ci.yml` menjalankan empat pekerjaan pada setiap push ke
+`main` dan setiap pull request:
+
+| Job | Yang dijaga |
+|---|---|
+| `test-sqlite` | seluruh suite pada PHP 8.3 dan 8.4 |
+| `test-mysql` | suite yang sama pada driver produksi |
+| `lint` | gaya kode Pint, **hanya pada berkas yang diubah PR** |
+| `migrations` | `migrate` → `db:seed` → `migrate:rollback` di MySQL |
+
+Dua pilihan yang perlu diketahui:
+
+**Lint hanya menuntut berkas yang berubah.** Kode ini belum pernah diformat
+Pint sepenuhnya; 94 berkas lama masih menyimpang. Gate yang menuntut seluruh
+repositori akan merah sejak hari pertama, dan gate yang selalu merah cepat
+diabaikan orang. Dengan `pint --diff`, repositori merapat sendiri setiap kali
+sebuah berkas disentuh. Bila kelak ingin gate penuh, jalankan `vendor/bin/pint`
+sekali pada seluruh repositori lalu ganti perintahnya menjadi `pint --test`.
+
+**Job `migrations` menguji jalur `down()`.** Test suite membangun skema dari nol
+setiap kali, jadi jalur `up` sudah terjamin. Yang tidak pernah tersentuh adalah
+rollback — dan migrasi yang tidak dapat dibatalkan baru ketahuan saat rilis
+gagal dan seseorang perlu mundur.
+
 ## Menjalankan
 
 ```bash
@@ -87,6 +113,34 @@ yang lolos lebih dulu lewat `Gate::before`.
 Konsekuensinya: **route baru yang lupa dipasangi penjaga, dan nama izin baru
 yang salah tulis, akan menggagalkan test tanpa ada yang perlu menambah test
 baru.**
+
+## Mode ketat: mengubah kegagalan senyap menjadi berisik
+
+Ketujuh cacat yang ditemukan suite ini punya bentuk yang sama: **sistem gagal
+tanpa bersuara.** Mass assignment membuang atribut, Gate menjawab `false` untuk
+izin yang tidak ada, `update()` pada baris yang belum ada tidak melakukan apa pun.
+Menambah test satu per satu hanya menangkap instansnya; dua penjaga di bawah
+menyerang kelasnya.
+
+**`Model::shouldBeStrict()` di luar produksi** (`AppServiceProvider::boot()`).
+Atribut yang tidak fillable, relasi yang lazy-load pada koleksi, dan atribut
+yang tidak ada kini melempar exception. Menyalakannya langsung menemukan satu
+cacat yang belum diketahui: `LoanRenewal` mematikan `$timestamps` sehingga
+`created_at` harus datang dari aplikasi, tetapi kolomnya tidak fillable — yang
+tersimpan selama ini adalah jam server basis data, bukan jam aplikasi.
+
+Catatan: Eloquent hanya menegakkan larangan lazy-load ketika sebuah kueri
+menghidrasi lebih dari satu baris. N+1 memang baru bermakna pada koleksi.
+
+**Penjaga nama izin** (`guardAgainstUnknownPermission`). Memeriksa izin bergaya
+`modul.aksi` yang tidak pernah didaftarkan akan melempar exception di
+lingkungan `local`. Pembagian tugasnya disengaja: di CI, pemindaian statis
+`PermissionNamesAreConsistentTest` yang bekerja; di mesin pengembang, penjaga
+ini berteriak saat tombol baru diklik. Di produksi keduanya diam, karena di
+sana kegagalan keras lebih merugikan daripada tombol yang tidak muncul.
+
+Keduanya dikunci `StrictModeTest` dan `UnknownPermissionGuardTest` — jaring
+seperti ini mudah sekali hilang saat seseorang merapikan AppServiceProvider.
 
 ## Perkakas
 

@@ -7,9 +7,6 @@ use App\Modules\Catalog\Models\BibliographicRecord;
 use App\Modules\Circulation\Models\Fine;
 use App\Modules\Circulation\Models\Loan;
 use App\Modules\Collection\Models\PhysicalItem;
-use App\Modules\DigitalRepository\Models\DigitalAsset;
-use App\Modules\MasterData\Models\CollectionType;
-use App\Modules\MasterData\Models\Faculty;
 use App\Modules\Member\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,10 +20,10 @@ class ReportController extends Controller
         $month = $request->get('month');
 
         $data = match ($tab) {
-            'members'     => $this->membersData(),
+            'members' => $this->membersData(),
             'circulation' => $this->circulationData($year, $month),
-            'fines'       => $this->finesData($year),
-            default       => $this->collectionsData(),
+            'fines' => $this->finesData($year),
+            default => $this->collectionsData(),
         };
 
         $years = range(now()->year, max(now()->year - 4, 2020));
@@ -82,10 +79,10 @@ class ReportController extends Controller
             ->values();
 
         $statusSummary = [
-            'total'    => Member::count(),
-            'active'   => Member::where('is_active', true)->count(),
+            'total' => Member::count(),
+            'active' => Member::where('is_active', true)->count(),
             'inactive' => Member::where('is_active', false)->count(),
-            'blocked'  => Member::where('is_blocked', true)->count(),
+            'blocked' => Member::where('is_blocked', true)->count(),
         ];
 
         $topBorrowers = Member::withCount(['loans' => fn ($q) => $q->whereYear('loan_date', now()->year)])
@@ -112,10 +109,10 @@ class ReportController extends Controller
         $months = collect(range(1, 12))->mapWithKeys(fn ($m) => [$m => $monthlyLoans->get($m, 0)]);
 
         $summary = [
-            'total_loans'   => Loan::whereYear('loan_date', $year)->count(),
-            'active'        => Loan::where('loan_status', 'active')->count(),
-            'overdue'       => Loan::overdue()->count(),
-            'returned'      => Loan::where('loan_status', 'returned')->whereYear('returned_at', $year)->count(),
+            'total_loans' => Loan::whereYear('loan_date', $year)->count(),
+            'active' => Loan::where('loan_status', 'active')->count(),
+            'overdue' => Loan::overdue()->count(),
+            'returned' => Loan::where('loan_status', 'returned')->whereYear('returned_at', $year)->count(),
         ];
 
         $overdueList = Loan::with(['member', 'physicalItem.bibliographicRecord'])
@@ -138,11 +135,11 @@ class ReportController extends Controller
     {
         $summary = [
             'outstanding' => Fine::where('status', 'outstanding')->sum('amount'),
-            'settled'     => Fine::where('status', 'settled')->whereYear('updated_at', $year)->sum('amount'),
-            'waived'      => Fine::where('status', 'waived')->whereYear('updated_at', $year)->sum('amount'),
+            'settled' => Fine::where('status', 'settled')->whereYear('updated_at', $year)->sum('amount'),
+            'waived' => Fine::where('status', 'waived')->whereYear('updated_at', $year)->sum('amount'),
             'count_outstanding' => Fine::where('status', 'outstanding')->count(),
-            'count_settled'     => Fine::where('status', 'settled')->count(),
-            'count_waived'      => Fine::where('status', 'waived')->count(),
+            'count_settled' => Fine::where('status', 'settled')->count(),
+            'count_waived' => Fine::where('status', 'waived')->count(),
         ];
 
         $monthExpression = $this->monthExpression('created_at');

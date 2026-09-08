@@ -2,6 +2,10 @@
 
 namespace App\Modules\Collection\Models;
 
+use App\Modules\Catalog\Models\BibliographicRecord;
+use App\Modules\Circulation\Models\Loan;
+use App\Modules\MasterData\Models\ItemCondition;
+use App\Modules\MasterData\Models\RackLocation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,16 +28,42 @@ class PhysicalItem extends Model
         return ['acquisition_date' => 'date'];
     }
 
-    public function bibliographicRecord(): BelongsTo { return $this->belongsTo(\App\Modules\Catalog\Models\BibliographicRecord::class)->withTrashed(); }
-    public function rackLocation(): BelongsTo { return $this->belongsTo(\App\Modules\MasterData\Models\RackLocation::class); }
-    public function itemCondition(): BelongsTo { return $this->belongsTo(\App\Modules\MasterData\Models\ItemCondition::class); }
-    public function statusHistories(): HasMany { return $this->hasMany(PhysicalItemStatusHistory::class); }
-    public function loans(): HasMany { return $this->hasMany(\App\Modules\Circulation\Models\Loan::class); }
+    public function bibliographicRecord(): BelongsTo
+    {
+        return $this->belongsTo(BibliographicRecord::class)->withTrashed();
+    }
 
-    public function scopeAvailable($query) { return $query->where('item_status', 'available'); }
+    public function rackLocation(): BelongsTo
+    {
+        return $this->belongsTo(RackLocation::class);
+    }
+
+    public function itemCondition(): BelongsTo
+    {
+        return $this->belongsTo(ItemCondition::class);
+    }
+
+    public function statusHistories(): HasMany
+    {
+        return $this->hasMany(PhysicalItemStatusHistory::class);
+    }
+
+    public function loans(): HasMany
+    {
+        return $this->hasMany(Loan::class);
+    }
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('item_status', 'available');
+    }
+
     public function scopeKeyword($query, ?string $keyword)
     {
-        if (!$keyword) return $query;
+        if (! $keyword) {
+            return $query;
+        }
+
         return $query->where(fn ($q) => $q->where('barcode', 'like', "%{$keyword}%")->orWhere('inventory_code', 'like', "%{$keyword}%"));
     }
 }

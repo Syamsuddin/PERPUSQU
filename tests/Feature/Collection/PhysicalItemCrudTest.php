@@ -174,7 +174,7 @@ class PhysicalItemCrudTest extends TestCase
     {
         $this->actingAsUserWith(['collections.delete', 'collections.view']);
         $item = PhysicalItem::factory()->available()->create();
-        $item->statusHistories()->create(['old_status' => null, 'new_status' => 'available', 'created_at' => now()]);
+        $item->statusHistories()->create(['old_status' => null, 'new_status' => 'available']);
 
         $this->delete(route('admin.collections.items.destroy', $item));
 
@@ -187,7 +187,7 @@ class PhysicalItemCrudTest extends TestCase
     {
         $this->actingAsUserWith(['collections.delete', 'collections.view']);
         $item = PhysicalItem::factory()->available()->create();
-        $item->statusHistories()->create(['old_status' => null, 'new_status' => 'available', 'created_at' => now()]);
+        $item->statusHistories()->create(['old_status' => null, 'new_status' => 'available']);
         $this->delete(route('admin.collections.items.destroy', $item));
 
         PhysicalItem::withTrashed()->find($item->id)->restore();

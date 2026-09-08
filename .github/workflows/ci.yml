@@ -1,0 +1,192 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  # Push beruntun pada branch yang sama membatalkan run sebelumnya; hanya
+  # keadaan terakhir yang perlu dinilai.
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-sqlite:
+    name: Test — PHP ${{ matrix.php }} / SQLite
+    runs-on: ubuntu-latest
+    strategy:
+      # Jangan hentikan matriks saat satu versi gagal: yang menarik justru
+      # mengetahui apakah kegagalannya khas satu versi PHP atau bukan.
+      fail-fast: false
+      matrix:
+        php: ['8.3', '8.4']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Siapkan PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo_sqlite, sqlite3, fileinfo, intl, bcmath, zip, gd
+          coverage: none
+
+      - name: Cache dependensi Composer
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ matrix.php }}-
+
+      - name: Pasang dependensi
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Siapkan environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Jalankan test suite
+        run: vendor/bin/phpunit
+
+  test-mysql:
+    name: Test — MySQL 8 (driver produksi)
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rahasia
+          MYSQL_DATABASE: perpusqu_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Siapkan PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_mysql, fileinfo, intl, bcmath, zip, gd
+          coverage: none
+
+      - name: Cache dependensi Composer
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-8.3-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-8.3-
+
+      - name: Pasang dependensi
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Siapkan environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # Menjalankan suite yang sama di atas MySQL membuktikan bahwa bagian
+      # skema dan kueri yang khas MySQL — indeks FULLTEXT, generated column
+      # pinjaman aktif, MONTH(), HAVING tanpa GROUP BY — berperilaku sama
+      # seperti pada SQLite yang dipakai suite harian.
+      - name: Jalankan test suite di MySQL
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USERNAME: root
+          DB_PASSWORD: rahasia
+        run: vendor/bin/phpunit -c phpunit.mysql.xml
+
+  lint:
+    name: Gaya kode (Pint)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Pint --diff membutuhkan riwayat untuk menemukan titik cabang.
+          fetch-depth: 0
+
+      - name: Siapkan PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Pasang dependensi
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      # Kode ini belum pernah diformat Pint sepenuhnya: 94 berkas lama masih
+      # menyimpang. Gate yang menuntut seluruh repositori akan merah sejak hari
+      # pertama, dan gate yang selalu merah cepat diabaikan orang. Karena itu
+      # yang dituntut hanya berkas yang DIUBAH oleh PR ini — hijau hari ini,
+      # dan repositori merapat sendiri setiap kali sebuah berkas disentuh.
+      #
+      # --test hanya melaporkan: CI tidak boleh diam-diam menulis ulang kode.
+      - name: Periksa gaya kode pada berkas yang berubah
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
+        run: |
+          git fetch --no-tags --depth=0 origin "$BASE_REF"
+          vendor/bin/pint --test --diff="origin/$BASE_REF"
+
+  migrations:
+    name: Migrasi dapat dijalankan dan dibatalkan
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rahasia
+          MYSQL_DATABASE: perpusqu_migrate
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Siapkan PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_mysql, fileinfo, intl, bcmath, zip, gd
+          coverage: none
+
+      - name: Pasang dependensi
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Siapkan environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # Test suite membangun skema dari nol setiap kali, jadi jalur `up`
+      # sudah terjamin. Yang tidak pernah tersentuh adalah `down` — dan
+      # migrasi yang tidak dapat dibatalkan baru ketahuan saat rilis gagal
+      # dan seseorang perlu mundur.
+      - name: Jalankan seluruh migrasi lalu batalkan
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: perpusqu_migrate
+          DB_USERNAME: root
+          DB_PASSWORD: rahasia
+        run: |
+          php artisan migrate --force
+          php artisan db:seed --force
+          php artisan migrate:rollback --force

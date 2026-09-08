@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Modules\Opac\Http\Controllers\OpacHomeController;
-use App\Modules\Opac\Http\Controllers\OpacSearchController;
 use App\Modules\Opac\Http\Controllers\OpacRecordController;
+use App\Modules\Opac\Http\Controllers\OpacSearchController;
 use App\Modules\Opac\Http\Controllers\PublicAssetPreviewController;
+use Illuminate\Support\Facades\Route;
 
 // OPAC Public Routes — NO auth required
 Route::middleware('catalogue.open')->prefix('opac')->name('opac.')->group(function () {
