@@ -30,7 +30,11 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->fullText(['title', 'keywords', 'abstract'], 'ft_bibliographic_records_search');
+            // Indeks FULLTEXT hanya didukung MySQL/MariaDB. Pada SQLite (dipakai
+            // test suite) indeks ini dilewati; pencarian aplikasi memakai LIKE.
+            if (Schema::getConnection()->getDriverName() === 'mysql') {
+                $table->fullText(['title', 'keywords', 'abstract'], 'ft_bibliographic_records_search');
+            }
 
             $table->foreign('publisher_id', 'fk_bibliographic_records_publisher')
                 ->references('id')->on('publishers')->cascadeOnUpdate()->nullOnDelete();
