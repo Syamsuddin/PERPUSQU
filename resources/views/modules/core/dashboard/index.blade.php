@@ -110,6 +110,7 @@
                 <i class="bi bi-journal-bookmark stat-icon-bg"></i>
                 <div class="stat-label fw-medium text-white-50">Total Katalog</div>
                 <div class="stat-value text-white mt-1">{{ number_format($widgets['total_catalog']) }}</div>
+                @include('modules.core.dashboard.partials.change', ['change' => $widgets['changes']['total_catalog'] ?? null])
                 <div class="mt-3 small text-white-50">
                     <i class="bi bi-plus-circle me-1"></i> Koleksi Terdaftar
                 </div>
@@ -130,6 +131,7 @@
                 <i class="bi bi-people stat-icon-bg"></i>
                 <div class="stat-label fw-medium text-white-50">Total Anggota</div>
                 <div class="stat-value text-white mt-1">{{ number_format($widgets['total_members']) }}</div>
+                @include('modules.core.dashboard.partials.change', ['change' => $widgets['changes']['total_members'] ?? null])
                 <div class="mt-3 small text-white-50">
                     <i class="bi bi-person-badge me-1"></i> Patron Terdaftar
                 </div>
@@ -140,6 +142,7 @@
                 <i class="bi bi-arrow-left-right stat-icon-bg"></i>
                 <div class="stat-label fw-medium text-white-50">Pinjaman Aktif</div>
                 <div class="stat-value text-white mt-1">{{ number_format($widgets['active_loans']) }}</div>
+                @include('modules.core.dashboard.partials.change', ['change' => $widgets['changes']['active_loans'] ?? null])
                 <div class="mt-3 small text-white-50">
                     <i class="bi bi-clock-history me-1"></i> Dalam Peminjaman
                 </div>
@@ -157,6 +160,7 @@
                     </div>
                     <div>
                         <div class="fw-bold fs-5 text-dark">{{ number_format($widgets['overdue_loans']) }}</div>
+                        @include('modules.core.dashboard.partials.change', ['change' => $widgets['changes']['overdue_loans'] ?? null, 'goodWhenDown' => true])
                         <div class="text-muted small">Terlambat</div>
                     </div>
                 </div>

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Modules\Core\Http\Controllers\DashboardController;
 use App\Modules\Core\Http\Controllers\InstitutionProfileController;
 use App\Modules\Core\Http\Controllers\SystemSettingController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 

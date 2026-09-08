@@ -8,11 +8,16 @@ use App\Modules\Circulation\Models\Fine;
 use App\Modules\Circulation\Models\Loan;
 use App\Modules\Collection\Models\PhysicalItem;
 use App\Modules\Member\Models\Member;
+use App\Modules\Reporting\Services\DailyStatisticsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
+    public function __construct(
+        protected DailyStatisticsService $statistics,
+    ) {}
+
     public function index(Request $request)
     {
         $tab = $request->get('tab', 'collections');
@@ -108,6 +113,14 @@ class ReportController extends Controller
 
         $months = collect(range(1, 12))->mapWithKeys(fn ($m) => [$m => $monthlyLoans->get($m, 0)]);
 
+        // Tren harian dari potret statistik. Berbeda dengan agregat bulanan di
+        // atas yang dihitung ulang dari tabel loans, deret ini menampilkan
+        // keadaan yang tercatat pada tiap akhir hari — termasuk jumlah pinjaman
+        // aktif dan keterlambatan, yang tidak dapat direkonstruksi dari data
+        // transaksi setelah harinya lewat.
+        $dailyLoans = $this->statistics->series('loans_created', 30);
+        $dailyOverdue = $this->statistics->series('loans_overdue', 30);
+
         $summary = [
             'total_loans' => Loan::whereYear('loan_date', $year)->count(),
             'active' => Loan::where('loan_status', 'active')->count(),
@@ -128,7 +141,7 @@ class ReportController extends Controller
             ->limit(20)
             ->get();
 
-        return compact('months', 'summary', 'overdueList', 'recentLoans', 'year');
+        return compact('months', 'summary', 'overdueList', 'recentLoans', 'year', 'dailyLoans', 'dailyOverdue');
     }
 
     private function finesData(int $year): array

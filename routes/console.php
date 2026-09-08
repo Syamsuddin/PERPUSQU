@@ -2,6 +2,7 @@
 
 use App\Modules\Circulation\Console\SendLoanRemindersCommand;
 use App\Modules\DigitalRepository\Console\ReleaseExpiredEmbargoesCommand;
+use App\Modules\Reporting\Console\CaptureDailyStatisticsCommand;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
@@ -35,6 +36,13 @@ Schedule::command(SendLoanRemindersCommand::class)
 
 Schedule::command(ReleaseExpiredEmbargoesCommand::class)
     ->dailyAt('01:00')
+    ->withoutOverlapping()
+    ->onOneServer();
+
+// Sesaat setelah tengah malam: angka stok yang terbaca adalah keadaan awal
+// hari ini, yang merupakan pendekatan terbaik untuk keadaan akhir kemarin.
+Schedule::command(CaptureDailyStatisticsCommand::class)
+    ->dailyAt('00:05')
     ->withoutOverlapping()
     ->onOneServer();
 

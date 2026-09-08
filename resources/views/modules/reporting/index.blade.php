@@ -238,6 +238,39 @@
 {{-- TAB: SIRKULASI --}}
 {{-- ============================================================ --}}
 @if($tab === 'circulation')
+
+{{-- Tren harian dari potret statistik --}}
+<div class="pq-card p-4 mb-4">
+    <h6 class="fw-semibold mb-1"><i class="bi bi-graph-up me-2"></i>Tren 30 Hari Terakhir</h6>
+    @if($dailyLoans->isEmpty())
+        <p class="text-muted small mb-0">
+            Belum ada potret statistik harian. Deret ini terisi sendiri setelah
+            <code>library:capture-daily-statistics</code> berjalan lewat penjadwal;
+            keadaan hari-hari yang sudah lewat tidak dapat dihitung ulang.
+        </p>
+    @else
+        @php
+            $puncakPinjam = max(1, $dailyLoans->max('value'));
+            $puncakTerlambat = max(1, $dailyOverdue->max('value'));
+        @endphp
+        <p class="text-muted small mb-3">Peminjaman per hari (biru) dan pinjaman terlambat pada akhir hari (merah).</p>
+        <div class="d-flex align-items-end gap-1" style="height:120px;">
+            @foreach($dailyLoans as $i => $titik)
+                @php $terlambat = $dailyOverdue[$i]['value'] ?? 0; @endphp
+                <div class="flex-fill d-flex flex-column justify-content-end align-items-center"
+                     title="{{ $titik['date'] }} — {{ $titik['value'] }} pinjaman, {{ $terlambat }} terlambat">
+                    <div style="width:100%; background:#dc3545; height:{{ round($terlambat / $puncakTerlambat * 40) }}px;"></div>
+                    <div style="width:100%; background:#0d6efd; height:{{ round($titik['value'] / $puncakPinjam * 70) }}px;"></div>
+                </div>
+            @endforeach
+        </div>
+        <div class="d-flex justify-content-between small text-muted mt-2">
+            <span>{{ $dailyLoans->first()['date'] }}</span>
+            <span>{{ $dailyLoans->last()['date'] }}</span>
+        </div>
+    @endif
+</div>
+
 <div class="row g-3 mb-4">
     <div class="col-6 col-md-3">
         <div class="pq-card p-4 text-center">
