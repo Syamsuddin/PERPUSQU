@@ -29,31 +29,18 @@ class PermissionNamesAreConsistentTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Rujukan yang masih belum sejalan dan menunggu keputusan.
+    /*
+     * Tidak ada daftar pengecualian di sini, dan itu disengaja.
      *
-     * Semuanya berada di metode policy yang TIDAK dipanggil controller mana pun
-     * (LoanPolicy dan MemberPolicy tidak pernah lewat `authorize()`), sehingga
-     * belum berdampak pada pengguna. Memperbaikinya berarti memutuskan siapa
-     * yang berhak — misalnya siapa yang boleh menghapus denda atau memaksa
-     * pengembalian — dan itu keputusan kebijakan, bukan salah tulis.
+     * Sebelumnya ada sebelas nama yang ditoleransi: tujuh milik LoanPolicy dan
+     * MemberPolicy — dua policy yang tidak pernah dipanggil siapa pun dan kini
+     * dihapus — serta tiga milik DigitalAssetPolicy yang akhirnya didaftarkan
+     * PermissionSeeder. Setelah keduanya beres, tidak tersisa satu pun.
      *
-     * Daftar ini hanya boleh menyusut. Nama baru yang tidak terdaftar akan
-     * menggagalkan test, bukan diam-diam ikut diterima.
+     * Nama izin yang tidak terdaftar harus diperbaiki atau didaftarkan, bukan
+     * ditoleransi: yang ditoleransi berarti cabang policy atau tombol yang mati
+     * diam-diam tanpa ada yang menyadarinya.
      */
-    private const KNOWN_UNRESOLVED = [
-        'circulation.checkout',
-        'circulation.force_return',
-        'circulation.manage_fines',
-        'circulation.renew',
-        'circulation.return',
-        'circulation.view',
-        'circulation.waive_fines',
-        'digital_assets.access_embargoed',
-        'digital_assets.update_any',
-        'digital_assets.view_all',
-        'members.export',
-    ];
 
     /**
      * @return list<string>
@@ -100,7 +87,7 @@ class PermissionNamesAreConsistentTest extends TestCase
 
         $unresolved = [];
         foreach ($references as $permission => $files) {
-            if (! in_array($permission, $registered, true) && ! in_array($permission, self::KNOWN_UNRESOLVED, true)) {
+            if (! in_array($permission, $registered, true)) {
                 $unresolved[] = "{$permission} (".implode(', ', array_unique($files)).')';
             }
         }

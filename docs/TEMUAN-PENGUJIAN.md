@@ -352,3 +352,40 @@ Antarmuka ini juga melahirkan kontrak `Core\Contracts\Restorable`, yang membuat
 "model ini dapat dipulihkan" menjadi pernyataan yang dapat diperiksa analisis
 statis — bukan asumsi bahwa metode `restore()` kebetulan ada.
 
+---
+
+### 10. Dua sistem otorisasi yang saling menduplikasi
+
+Route dijaga middleware `permission:`, sementara lima policy juga terdaftar —
+tetapi hanya dua yang pernah dipanggil. `LoanPolicy`, `MemberPolicy`, dan
+`PhysicalItemPolicy` tidak pernah lewat `authorize()` sama sekali, sambil
+menyimpan **tujuh nama izin yang tidak pernah didaftarkan** (`circulation.view`,
+`.checkout`, `.return`, `.renew`, `.manage_fines`, `.waive_fines`,
+`.force_return`) dan satu nama peran yang salah tulis.
+
+Policy mati adalah dokumentasi yang berbohong: ia tampak menjaga sesuatu padahal
+tidak. Yang lebih berbahaya, seseorang yang membacanya bisa menyimpulkan aturan
+itu berlaku.
+
+Aturannya kini dinyatakan tegas — route menjaga wewenang tingkat fitur, policy
+menjaga wewenang tingkat record — dan ketiga policy mati dihapus. Aturan
+per-record yang benar-benar mereka bawa tidak hilang: ketiganya memang sudah
+ditegakkan layanan masing-masing, lengkap dengan pesan yang terbaca petugas dan
+test yang menjaganya:
+
+| Aturan | Ditegakkan di | Test |
+|---|---|---|
+| Item yang dipinjam tidak dapat dihapus | `PhysicalItemService::delete()` | `PhysicalItemCrudTest` |
+| Anggota dengan pinjaman aktif tidak dapat dihapus | `MemberService::delete()` | `MemberManagementTest` |
+| Hanya pinjaman aktif yang dapat diperpanjang | `LoanRenewalService::renew()` | `LoanRenewalServiceTest` |
+
+Tiga izin yang tersisa (`digital_assets.update_any`, `.view_all`,
+`.access_embargoed`) akhirnya didaftarkan. Dua yang pertama diberikan kepada
+Operator Repositori Digital — ia pemelihara utama repositori dan harus dapat
+memperbaiki unggahan rekannya. `access_embargoed` sengaja tidak: embargo adalah
+janji kepada penulis, dan menembusnya semestinya keputusan pimpinan.
+
+Dengan itu daftar toleransi di `PermissionNamesAreConsistentTest` **kosong**, dan
+sengaja dibiarkan kosong. `AuthorizationLayersTest` menjaga agar policy mati
+tidak muncul lagi.
+

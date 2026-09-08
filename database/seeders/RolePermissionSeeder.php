@@ -73,6 +73,12 @@ class RolePermissionSeeder extends Seeder
             'digital_assets.update', 'digital_assets.delete', 'digital_assets.preview',
             'digital_assets.publish', 'digital_assets.unpublish', 'digital_assets.manage_access',
             'digital_assets.run_ocr', 'digital_assets.reindex', 'digital_assets.download_private',
+            // Operator adalah pemelihara utama repositori: ia harus dapat
+            // memperbaiki dan melihat aset yang diunggah rekannya, bukan hanya
+            // unggahannya sendiri. `access_embargoed` sengaja TIDAK diberikan —
+            // embargo adalah janji kepada penulis, dan menembusnya semestinya
+            // keputusan pimpinan, bukan pekerjaan harian.
+            'digital_assets.update_any', 'digital_assets.view_all',
             'authors.view', 'publishers.view', 'languages.view', 'classifications.view',
             'subjects.view', 'collection_types.view',
             'reports.view_dashboard', 'reports.view_digital_access',

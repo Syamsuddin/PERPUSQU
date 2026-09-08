@@ -22,14 +22,14 @@ class ProposedSubjectSeeder extends Seeder
             'Sejarah Kebudayaan Islam (SKI)',
             'Bahasa Arab (Umum)',
             'Studi Islam Kontemporer',
-            
+
             // Tarbiyah - PAI
             'Metodologi Pengajaran PAI',
             'Kurikulum Pendidikan Islam',
             'Filsafat Pendidikan Islam',
             'Psikologi Agama',
             'Evaluasi Pembelajaran',
-            
+
             // Tarbiyah - PBA
             'Linguistik Arab',
             'Sastra Arab',
@@ -37,7 +37,7 @@ class ProposedSubjectSeeder extends Seeder
             'Morfologi Arab (Shorof)',
             'Balaghah',
             'Metode Pengajaran Bahasa Asing',
-            
+
             // Tarbiyah - MPI
             'Kepemimpinan Pendidikan Islam',
             'Administrasi Pendidikan',
@@ -45,7 +45,7 @@ class ProposedSubjectSeeder extends Seeder
             'Supervisi Pendidikan',
             'Tata Kelola Madrasah/Pesantren',
             'Sistem Penjaminan Mutu Pendidikan',
-            
+
             // Syariah - Ekonomi Syariah
             'Perbankan Syariah',
             'Akuntansi Syariah',
@@ -55,7 +55,7 @@ class ProposedSubjectSeeder extends Seeder
             'Pasar Modal Syariah',
             'Fiqh Muamalah',
             'Ekonomi Makro & Mikro Islam',
-            
+
             // Metodologi & Pendukung
             'Metodologi Penelitian Pendidikan',
             'Metodologi Penelitian Hukum/Ekonomi Islam',

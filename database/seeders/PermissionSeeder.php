@@ -67,6 +67,10 @@ class PermissionSeeder extends Seeder
             'digital_assets.update', 'digital_assets.delete', 'digital_assets.preview',
             'digital_assets.publish', 'digital_assets.unpublish', 'digital_assets.manage_access',
             'digital_assets.run_ocr', 'digital_assets.reindex', 'digital_assets.download_private',
+            // Dirujuk DigitalAssetPolicy sejak awal tetapi tidak pernah
+            // didaftarkan, sehingga cabang yang memakainya tidak pernah
+            // terpenuhi — kelas cacat yang sama dengan catalog.update_any.
+            'digital_assets.update_any', 'digital_assets.view_all', 'digital_assets.access_embargoed',
 
             // Reporting
             'reports.view_dashboard', 'reports.view_collections', 'reports.view_members',

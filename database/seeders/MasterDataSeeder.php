@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Modules\MasterData\Models\Language;
+use App\Modules\MasterData\Models\Classification;
 use App\Modules\MasterData\Models\CollectionType;
 use App\Modules\MasterData\Models\ItemCondition;
-use App\Modules\MasterData\Models\Classification;
+use App\Modules\MasterData\Models\Language;
+use Illuminate\Database\Seeder;
 
 class MasterDataSeeder extends Seeder
 {

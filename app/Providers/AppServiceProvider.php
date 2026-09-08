@@ -4,16 +4,10 @@ namespace App\Providers;
 
 use App\Modules\Catalog\Models\BibliographicRecord;
 use App\Modules\Catalog\Policies\BibliographicRecordPolicy;
-use App\Modules\Circulation\Models\Loan;
-use App\Modules\Circulation\Policies\LoanPolicy;
-use App\Modules\Collection\Models\PhysicalItem;
-use App\Modules\Collection\Policies\PhysicalItemPolicy;
 use App\Modules\Core\Services\OperationalRules;
 use App\Modules\Core\Services\SystemSettings;
 use App\Modules\DigitalRepository\Models\DigitalAsset;
 use App\Modules\DigitalRepository\Policies\DigitalAssetPolicy;
-use App\Modules\Member\Models\Member;
-use App\Modules\Member\Policies\MemberPolicy;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
@@ -26,16 +20,34 @@ use Spatie\Permission\PermissionRegistrar;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * The policy mappings for the application.
+     * Policy yang berlaku di aplikasi ini.
+     *
+     * PEMBAGIAN WEWENANG — dua lapis, masing-masing satu tugas:
+     *
+     *  1. Middleware `permission:` pada route menjawab "boleh tidak peran ini
+     *     memakai fitur tersebut". Setiap route admin memilikinya, dan
+     *     RouteAccessControlTest memastikan tidak ada yang terlewat.
+     *  2. Policy menjawab "boleh tidak pengguna ini bertindak atas RECORD
+     *     TERTENTU". Hanya aturan yang bergantung pada isi record yang pantas
+     *     berada di sini.
+     *
+     * Policy yang isinya sekadar mengulang izin yang sudah diperiksa route
+     * adalah duplikasi, dan duplikasi itulah yang membuat LoanPolicy,
+     * MemberPolicy, dan PhysicalItemPolicy tidak pernah dipanggil siapa pun
+     * sambil menyimpan nama izin yang tidak pernah didaftarkan. Ketiganya
+     * dihapus; aturan per-record yang benar-benar mereka bawa — pinjaman aktif
+     * tidak dapat diperpanjang, item yang dipinjam tidak dapat dihapus, anggota
+     * dengan pinjaman aktif tidak dapat dihapus — memang sudah ditegakkan
+     * layanan masing-masing dengan pesan yang terbaca petugas.
+     *
+     * Dua yang tersisa punya aturan yang tidak dapat dipindah ke route:
+     * kepemilikan record (`created_by`, `uploaded_by`) dan status publikasinya.
      *
      * @var array<class-string, class-string>
      */
     protected $policies = [
         BibliographicRecord::class => BibliographicRecordPolicy::class,
-        PhysicalItem::class => PhysicalItemPolicy::class,
         DigitalAsset::class => DigitalAssetPolicy::class,
-        Loan::class => LoanPolicy::class,
-        Member::class => MemberPolicy::class,
     ];
 
     /**

@@ -179,6 +179,29 @@ model, yang sudah dilakukan untuk Loan, Member, PhysicalItem,
 BibliographicRecord, DigitalAsset, dan DailyStatistic — dan itu sendiri
 menurunkan temuan dari 111 menjadi 48.
 
+## Dua lapis wewenang
+
+Otorisasi di aplikasi ini punya dua lapis, masing-masing satu tugas:
+
+1. **Middleware `permission:` pada route** menjawab *"boleh tidak peran ini
+   memakai fitur tersebut"*. Setiap route admin memilikinya, dan
+   `RouteAccessControlTest` memastikan tidak ada yang terlewat.
+2. **Policy** menjawab *"boleh tidak pengguna ini bertindak atas record
+   tertentu"*. Hanya aturan yang bergantung pada isi record yang pantas berada
+   di sini — kepemilikan (`created_by`, `uploaded_by`) dan status publikasinya.
+
+Policy yang isinya sekadar mengulang izin yang sudah diperiksa route adalah
+duplikasi. Duplikasi itulah yang membuat `LoanPolicy`, `MemberPolicy`, dan
+`PhysicalItemPolicy` hidup tanpa pernah dipanggil siapa pun, sambil menyimpan
+tujuh nama izin yang tidak pernah didaftarkan. Ketiganya dihapus; aturan
+per-record yang benar-benar mereka bawa memang sudah ditegakkan layanan
+masing-masing — dan di sana pesannya sampai ke petugas alih-alih berubah
+menjadi 403 tanpa penjelasan.
+
+`AuthorizationLayersTest` menjaga aturan itu: setiap policy terdaftar harus
+benar-benar dipanggil controller, dan harus membawa setidaknya satu aturan yang
+menyentuh isi record.
+
 ## Pekerjaan terjadwal
 
 `routes/console.php` mendaftarkan tiga pekerjaan harian/mingguan: pengingat
