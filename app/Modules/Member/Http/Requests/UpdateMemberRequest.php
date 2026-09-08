@@ -2,7 +2,9 @@
 
 namespace App\Modules\Member\Http\Requests;
 
+use App\Modules\Member\Support\MemberEligibilityResolver;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateMemberRequest extends FormRequest
 {
@@ -17,7 +19,7 @@ class UpdateMemberRequest extends FormRequest
 
         return [
             'member_number' => 'required|string|min:3|max:100|unique:members,member_number,'.$memberId,
-            'member_type' => 'required|string|in:student,lecturer,staff,alumni,guest',
+            'member_type' => ['required', 'string', Rule::in(array_keys(MemberEligibilityResolver::TYPES))],
             'identity_number' => 'nullable|string|max:100|unique:members,identity_number,'.$memberId,
             'name' => 'required|string|min:3|max:200',
             'email' => 'nullable|email|max:150',

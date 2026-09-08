@@ -20,7 +20,7 @@ class MemberUserSeeder extends Seeder
                 'username' => 'ahmad.fauzi',
                 'email' => 'ahmad.fauzi@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0001',
-                'member_type' => 'mahasiswa',
+                'member_type' => 'student',
                 'identity_number' => '2026010001',
             ],
             [
@@ -28,7 +28,7 @@ class MemberUserSeeder extends Seeder
                 'username' => 'siti.nurhaliza',
                 'email' => 'siti.nurhaliza@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0002',
-                'member_type' => 'mahasiswa',
+                'member_type' => 'student',
                 'identity_number' => '2026010002',
             ],
             [
@@ -36,7 +36,7 @@ class MemberUserSeeder extends Seeder
                 'username' => 'budi.santoso',
                 'email' => 'budi.santoso@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0003',
-                'member_type' => 'dosen',
+                'member_type' => 'lecturer',
                 'identity_number' => '198501152010011001',
             ],
             [
@@ -44,7 +44,7 @@ class MemberUserSeeder extends Seeder
                 'username' => 'rina.wulandari',
                 'email' => 'rina.wulandari@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0004',
-                'member_type' => 'mahasiswa',
+                'member_type' => 'student',
                 'identity_number' => '2026010003',
             ],
             [
@@ -52,7 +52,7 @@ class MemberUserSeeder extends Seeder
                 'username' => 'hendra.pratama',
                 'email' => 'hendra.pratama@gibthalibrary.local',
                 'member_number' => 'AGT-2026-0005',
-                'member_type' => 'umum',
+                'member_type' => 'guest',
                 'identity_number' => '6301010101900001',
             ],
         ];

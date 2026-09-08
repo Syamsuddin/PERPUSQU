@@ -16,7 +16,7 @@
         <label class="form-label fw-medium">Tipe Anggota <span class="text-danger">*</span></label>
         <select class="form-select @error('member_type') is-invalid @enderror" name="member_type" required>
             <option value="">— Pilih —</option>
-            @foreach(['student'=>'Mahasiswa','lecturer'=>'Dosen','staff'=>'Staf','alumni'=>'Alumni','guest'=>'Tamu'] as $v => $l)
+            @foreach(\App\Modules\Member\Support\MemberEligibilityResolver::TYPES as $v => $l)
             <option value="{{ $v }}" {{ old('member_type', $member->member_type ?? '') === $v ? 'selected' : '' }}>{{ $l }}</option>
             @endforeach
         </select>

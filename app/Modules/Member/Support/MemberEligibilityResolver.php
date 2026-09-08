@@ -7,6 +7,26 @@ use App\Modules\Member\Models\Member;
 class MemberEligibilityResolver
 {
     /**
+     * Jenis anggota yang dikenal sistem, beserta labelnya.
+     *
+     * Daftar ini sebelumnya tersalin di lima tempat — dua form request, dua
+     * view, dan tabel label di bawah — sehingga MemberUserSeeder sempat
+     * menuliskan `mahasiswa`/`dosen`/`umum` tanpa ada yang menolaknya. Akibatnya
+     * seorang dosen mendapat lama pinjam 14 hari, bukan 30, sementara layar
+     * tetap menampilkan "Dosen" karena label jatuh ke ucfirst().
+     *
+     * Kuncinya harus selaras dengan kunci `loan_days_*` di
+     * SystemSettings::DEFAULTS; keselarasan itu dijaga MemberTypeConsistencyTest.
+     */
+    public const TYPES = [
+        'student' => 'Mahasiswa',
+        'lecturer' => 'Dosen',
+        'staff' => 'Staf',
+        'alumni' => 'Alumni',
+        'guest' => 'Tamu',
+    ];
+
+    /**
      * Derived state per 17_WORKFLOW_STATE_MACHINE.md §10.1
      *
      * | is_active | is_blocked | Derived State        |
@@ -72,13 +92,6 @@ class MemberEligibilityResolver
      */
     public static function typeLabel(string $type): string
     {
-        return match ($type) {
-            'student' => 'Mahasiswa',
-            'lecturer' => 'Dosen',
-            'staff' => 'Staf',
-            'alumni' => 'Alumni',
-            'guest' => 'Tamu',
-            default => ucfirst($type),
-        };
+        return self::TYPES[$type] ?? ucfirst($type);
     }
 }

@@ -20,7 +20,7 @@
         <div class="col-md-2">
             <select class="form-select form-select-sm" name="member_type">
                 <option value="">Semua Tipe</option>
-                @foreach(['student'=>'Mahasiswa','lecturer'=>'Dosen','staff'=>'Staf','alumni'=>'Alumni','guest'=>'Tamu'] as $v => $l)
+                @foreach(\App\Modules\Member\Support\MemberEligibilityResolver::TYPES as $v => $l)
                 <option value="{{ $v }}" {{ request('member_type')===$v?'selected':'' }}>{{ $l }}</option>
                 @endforeach
             </select>
