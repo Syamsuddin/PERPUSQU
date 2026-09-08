@@ -3,6 +3,7 @@
 namespace App\Modules\Catalog\Models;
 
 use App\Modules\Collection\Models\PhysicalItem;
+use App\Modules\Core\Contracts\Restorable;
 use App\Modules\DigitalRepository\Models\DigitalAsset;
 use App\Modules\MasterData\Models\Author;
 use App\Modules\MasterData\Models\Classification;
@@ -49,7 +50,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static> public()
  * @method static \Illuminate\Database\Eloquent\Builder<static> keyword(?string $keyword)
  */
-class BibliographicRecord extends Model
+class BibliographicRecord extends Model implements Restorable
 {
     use HasFactory, SoftDeletes;
 

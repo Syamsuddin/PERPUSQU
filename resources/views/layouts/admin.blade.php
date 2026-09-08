@@ -202,6 +202,13 @@
             </a>
             @endcan
 
+            {{-- Kotak sampah --}}
+            @canany(['catalog.delete','collections.delete','members.delete','digital_assets.delete','users.delete'])
+            <a href="{{ route('admin.trash.index') }}" class="pq-nav-item {{ request()->routeIs('admin.trash.*') ? 'active' : '' }}">
+                <i class="bi bi-trash3"></i> Kotak Sampah
+            </a>
+            @endcanany
+
             {{-- Master Data --}}
             @canany(['authors.view','publishers.view','languages.view','classifications.view','subjects.view','collection_types.view','rack_locations.view','faculties.view','study_programs.view','item_conditions.view'])
             <a class="pq-nav-item pq-nav-toggle {{ request()->routeIs('admin.master-data.*') ? '' : 'collapsed' }}" data-bs-toggle="collapse" href="#menuMasterData" role="button" aria-expanded="{{ request()->routeIs('admin.master-data.*') ? 'true' : 'false' }}">

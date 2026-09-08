@@ -324,3 +324,31 @@ konstanta `MemberEligibilityResolver::TYPES`, dan `MemberTypeConsistencyTest`
 menjaga keselarasan dua arah antara daftar jenis anggota dan kunci
 `loan_days_*` di Aturan Operasional.
 
+---
+
+## Tindak lanjut yang sudah ditutup
+
+**Antarmuka pemulihan data terhapus** (butir 5) kini tersedia: halaman
+**Kotak Sampah** (`admin/trash`) menampilkan lima jenis data yang dihapus lunak
+dan memulihkannya.
+
+Wewenangnya sengaja tidak memakai izin baru — siapa yang boleh menghapus, boleh
+pula membatalkannya, sehingga izin `*.delete` yang sudah ada dipakai apa adanya.
+Setiap tab dijaga izinnya masing-masing di controller; gerbang route-nya longgar
+(cukup salah satu izin hapus) hanya untuk membuka halamannya.
+
+Dua pembatasan yang ditegakkan:
+
+- Eksemplar atau aset digital yang **induknya masih terhapus** tidak dapat
+  dipulihkan. Memulihkannya akan menghasilkan berkas yang menggantung pada judul
+  yang tidak terlihat di mana pun — lebih membingungkan daripada tetap berada di
+  kotak sampah. Pesannya menyebut apa yang harus dipulihkan lebih dulu.
+- Baris yang dihapus lunak **tetap memegang identitasnya** (barcode, nomor
+  anggota, ISBN), sehingga tidak dapat dipakai ulang data baru. Halaman ini yang
+  menjelaskan ke mana barcode itu pergi — sebelumnya pesan "Barcode sudah
+  digunakan" merujuk item yang tidak terlihat di layar mana pun.
+
+Antarmuka ini juga melahirkan kontrak `Core\Contracts\Restorable`, yang membuat
+"model ini dapat dipulihkan" menjadi pernyataan yang dapat diperiksa analisis
+statis — bukan asumsi bahwa metode `restore()` kebetulan ada.
+

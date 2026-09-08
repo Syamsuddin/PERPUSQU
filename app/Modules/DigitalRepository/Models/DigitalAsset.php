@@ -3,6 +3,7 @@
 namespace App\Modules\DigitalRepository\Models;
 
 use App\Modules\Catalog\Models\BibliographicRecord;
+use App\Modules\Core\Contracts\Restorable;
 use App\Modules\Identity\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +38,7 @@ use Illuminate\Support\Carbon;
  * @property-read BibliographicRecord $bibliographicRecord
  * @property-read User|null $uploadedBy
  */
-class DigitalAsset extends Model
+class DigitalAsset extends Model implements Restorable
 {
     use HasFactory, SoftDeletes;
 

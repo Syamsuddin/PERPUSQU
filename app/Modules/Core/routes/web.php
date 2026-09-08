@@ -3,6 +3,7 @@
 use App\Modules\Core\Http\Controllers\DashboardController;
 use App\Modules\Core\Http\Controllers\InstitutionProfileController;
 use App\Modules\Core\Http\Controllers\SystemSettingController;
+use App\Modules\Core\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -36,4 +37,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/guides/pustakawan', function () {
         return view('modules.core.guides.pustakawan');
     })->name('admin.guides.pustakawan');
+
+    // Kotak sampah lintas modul. Gerbang route-nya longgar dengan sengaja —
+    // cukup punya salah satu izin hapus untuk membukanya — karena tiap tab
+    // dijaga izinnya sendiri di controller.
+    Route::get('/admin/trash', [TrashController::class, 'index'])
+        ->name('admin.trash.index')
+        ->middleware('permission:catalog.delete|collections.delete|members.delete|digital_assets.delete|users.delete');
+
+    Route::post('/admin/trash/{type}/{id}/restore', [TrashController::class, 'restore'])
+        ->name('admin.trash.restore')
+        ->whereNumber('id')
+        ->middleware('permission:catalog.delete|collections.delete|members.delete|digital_assets.delete|users.delete');
 });

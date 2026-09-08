@@ -4,6 +4,7 @@ namespace App\Modules\Collection\Models;
 
 use App\Modules\Catalog\Models\BibliographicRecord;
 use App\Modules\Circulation\Models\Loan;
+use App\Modules\Core\Contracts\Restorable;
 use App\Modules\MasterData\Models\ItemCondition;
 use App\Modules\MasterData\Models\RackLocation;
 use Illuminate\Database\Eloquent\Collection;
@@ -32,7 +33,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static> keyword(?string $keyword)
  * @method static \Illuminate\Database\Eloquent\Builder<static> available()
  */
-class PhysicalItem extends Model
+class PhysicalItem extends Model implements Restorable
 {
     use HasFactory, SoftDeletes;
 

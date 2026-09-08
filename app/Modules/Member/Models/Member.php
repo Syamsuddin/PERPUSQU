@@ -4,6 +4,7 @@ namespace App\Modules\Member\Models;
 
 use App\Modules\Circulation\Models\Fine;
 use App\Modules\Circulation\Models\Loan;
+use App\Modules\Core\Contracts\Restorable;
 use App\Modules\Identity\Models\User;
 use App\Modules\MasterData\Models\Faculty;
 use App\Modules\MasterData\Models\StudyProgram;
@@ -42,7 +43,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static> active()
  * @method static \Illuminate\Database\Eloquent\Builder<static> blocked()
  */
-class Member extends Model
+class Member extends Model implements Restorable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
