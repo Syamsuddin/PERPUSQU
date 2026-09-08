@@ -62,6 +62,11 @@ class Loan extends Model
         return $this->hasMany(LoanRenewal::class);
     }
 
+    public function reminders(): HasMany
+    {
+        return $this->hasMany(LoanReminder::class);
+    }
+
     public function returnTransaction(): HasOne
     {
         return $this->hasOne(ReturnTransaction::class);

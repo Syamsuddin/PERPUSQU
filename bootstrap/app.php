@@ -16,6 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withProviders([
         ModuleRouteServiceProvider::class,
     ])
+    // Perintah artisan tiap modul ditemukan otomatis dari
+    // app/Modules/*/Console, sejalan dengan cara route modul dimuat
+    // ModuleRouteServiceProvider. Modul baru tidak perlu didaftarkan manual —
+    // pendaftaran manual adalah sumber drift yang sudah berulang di proyek ini.
+    ->withCommands(glob(__DIR__.'/../app/Modules/*/Console') ?: [])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',

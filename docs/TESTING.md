@@ -142,6 +142,28 @@ sana kegagalan keras lebih merugikan daripada tombol yang tidak muncul.
 Keduanya dikunci `StrictModeTest` dan `UnknownPermissionGuardTest` — jaring
 seperti ini mudah sekali hilang saat seseorang merapikan AppServiceProvider.
 
+## Pekerjaan terjadwal
+
+`routes/console.php` mendaftarkan tiga pekerjaan harian/mingguan: pengingat
+jatuh tempo (07:00), pelepasan embargo kedaluwarsa (01:00), dan pembersihan
+jejak audit (Senin 02:00, retensi 730 hari).
+
+Perintah artisan tiap modul ditemukan otomatis dari `app/Modules/*/Console`
+lewat `withCommands()` di `bootstrap/app.php`, sejalan dengan cara route modul
+dimuat. Modul baru tidak perlu didaftarkan manual — pendaftaran manual adalah
+sumber drift yang sudah berulang di proyek ini.
+
+Agar benar-benar berjalan, server produksi memerlukan satu baris cron:
+
+```
+* * * * * cd /path/ke/perpusqu && php artisan schedule:run >> /dev/null 2>&1
+```
+
+`ScheduledMaintenanceTest` menguji perintahnya **dan** pendaftarannya: perintah
+yang benar tetapi tidak pernah terjadwal sama tidak bergunanya dengan perintah
+yang tidak ada. Ikut diperiksa `withoutOverlapping()` dan `onOneServer()` —
+tanpa keduanya, satu anggota dapat menerima pengingat yang sama beberapa kali.
+
 ## Perkakas
 
 `tests/Concerns/ActsAsLibraryUser.php` menyediakan `userWith([...])` — pengguna

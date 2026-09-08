@@ -12,10 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 class Member extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'members';
 
@@ -32,6 +33,15 @@ class Member extends Model
             'is_blocked' => 'boolean',
             'blocked_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Alamat tujuan surat. Anggota punya emailnya sendiri, terpisah dari akun
+     * login — banyak anggota dilayani di meja sirkulasi tanpa pernah punya akun.
+     */
+    public function routeNotificationForMail(): ?string
+    {
+        return $this->email;
     }
 
     /**
