@@ -70,7 +70,7 @@ class OperationalRulesReaderTest extends TestCase
         $this->assertSame(7, $rules->renewalPeriodDays());
         $this->assertSame(2, $rules->maxRenewals());
         $this->assertSame(5, $rules->maxActiveLoans());
-        $this->assertSame(1000.0, $rules->fineDailyAmount());
+        $this->assertSame(1000, $rules->fineDailyAmount());
         $this->assertTrue($rules->renewalAllowed());
         $this->assertTrue($rules->requiresActiveMember());
         $this->assertTrue($rules->requiresUnblockedMember());
@@ -157,13 +157,13 @@ class OperationalRulesReaderTest extends TestCase
     {
         $this->clearSettings();
         $rules = $this->rules();
-        $this->assertSame(1000.0, $rules->fineDailyAmount());
+        $this->assertSame(1000, $rules->fineDailyAmount());
 
         SystemSetting::query()->updateOrCreate(['key' => 'fine_daily_amount'], ['value' => '5000']);
-        $this->assertSame(1000.0, $rules->fineDailyAmount(), 'masih memakai nilai yang sudah dibaca');
+        $this->assertSame(1000, $rules->fineDailyAmount(), 'masih memakai nilai yang sudah dibaca');
 
         $rules->refresh();
-        $this->assertSame(5000.0, $rules->fineDailyAmount());
+        $this->assertSame(5000, $rules->fineDailyAmount());
     }
 
     #[Test]
@@ -226,7 +226,7 @@ class OperationalRulesReaderTest extends TestCase
         $this->assertSame(7, $rules->renewalPeriodDays());
         $this->assertSame(2, $rules->maxRenewals());
         $this->assertSame(5, $rules->maxActiveLoans());
-        $this->assertSame(1000.0, $rules->fineDailyAmount());
+        $this->assertSame(1000, $rules->fineDailyAmount());
         $this->assertTrue($rules->renewalAllowed());
     }
 }

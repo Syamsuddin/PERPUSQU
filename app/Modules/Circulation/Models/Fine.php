@@ -19,7 +19,9 @@ class Fine extends Model
 
     protected function casts(): array
     {
-        return ['amount' => 'decimal:2', 'late_days' => 'integer'];
+        // Rupiah bulat: tidak ada satuan pecahan yang dipakai, dan cast
+        // desimal membuat setiap nilai melewati konversi float.
+        return ['amount' => 'integer', 'late_days' => 'integer'];
     }
 
     public function loan(): BelongsTo

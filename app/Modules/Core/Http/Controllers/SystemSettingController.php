@@ -32,7 +32,8 @@ class SystemSettingController extends Controller
             'loan_renewal_days' => 'required|integer|min:1|max:365',
             'loan_max_active_loans' => 'required|integer|min:1|max:50',
             'loan_max_renewal_count' => 'required|integer|min:0|max:10',
-            'fine_daily_amount' => 'required|numeric|min:0|max:99999999.99',
+            // Bilangan bulat, bukan numeric: tarif denda disimpan sebagai rupiah bulat.
+            'fine_daily_amount' => 'required|integer|min:0|max:99999999',
 
             'allow_renewal' => 'nullable|boolean',
             'require_active_member' => 'nullable|boolean',

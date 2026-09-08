@@ -75,9 +75,9 @@ class OperationalRules
         return $this->settings->integer('loan_max_active_loans');
     }
 
-    public function fineDailyAmount(): float
+    public function fineDailyAmount(): int
     {
-        return $this->settings->float('fine_daily_amount');
+        return $this->settings->integer('fine_daily_amount');
     }
 
     public function renewalAllowed(): bool

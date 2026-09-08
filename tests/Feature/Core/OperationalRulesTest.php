@@ -238,7 +238,7 @@ class OperationalRulesTest extends TestCase
         $loan = $this->overdueLoan(4);
         $result = app(ReturnProcessingService::class)->processReturn($loan->physicalItem->barcode);
 
-        $this->assertSame(10000.0, $result['fine_amount']);
+        $this->assertSame(10000, $result['fine_amount']);
         $this->assertDatabaseHas('fines', ['loan_id' => $loan->id, 'amount' => 10000]);
     }
 
@@ -262,7 +262,7 @@ class OperationalRulesTest extends TestCase
         $result = app(ReturnProcessingService::class)->processReturn($loan->physicalItem->barcode);
 
         $this->assertSame(6, $result['late_days']);
-        $this->assertSame(0.0, $result['fine_amount']);
+        $this->assertSame(0, $result['fine_amount']);
         $this->assertDatabaseCount('fines', 0);
         $this->assertDatabaseHas('return_transactions', ['loan_id' => $loan->id, 'late_days' => 6]);
     }

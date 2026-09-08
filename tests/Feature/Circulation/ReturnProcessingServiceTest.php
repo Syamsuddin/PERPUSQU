@@ -89,7 +89,7 @@ class ReturnProcessingServiceTest extends TestCase
 
     #[Test]
     #[DataProvider('lateReturns')]
-    public function a_late_return_raises_an_outstanding_fine(int $lateDays, float $expectedAmount): void
+    public function a_late_return_raises_an_outstanding_fine(int $lateDays, int $expectedAmount): void
     {
         $this->actingAsUserWith(['circulation.process_return']);
         $loan = $this->overdueLoan($lateDays);
@@ -112,9 +112,9 @@ class ReturnProcessingServiceTest extends TestCase
     public static function lateReturns(): array
     {
         return [
-            'terlambat 1 hari' => [1, 1000.0],
-            'terlambat 3 hari' => [3, 3000.0],
-            'terlambat 14 hari' => [14, 14000.0],
+            'terlambat 1 hari' => [1, 1000],
+            'terlambat 3 hari' => [3, 3000],
+            'terlambat 14 hari' => [14, 14000],
         ];
     }
 

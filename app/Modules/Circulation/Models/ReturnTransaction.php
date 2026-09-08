@@ -22,7 +22,7 @@ class ReturnTransaction extends Model
 
     protected function casts(): array
     {
-        return ['returned_at' => 'datetime', 'fine_amount' => 'decimal:2', 'late_days' => 'integer'];
+        return ['returned_at' => 'datetime', 'fine_amount' => 'integer', 'late_days' => 'integer'];
     }
 
     public function loan(): BelongsTo
