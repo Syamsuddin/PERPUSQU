@@ -142,6 +142,13 @@ jobs:
       - name: Jalankan Larastan
         run: vendor/bin/phpstan analyse --memory-limit=1G --no-progress
 
+      # Sengaja menggagalkan build, bukan sekadar memberi peringatan. Kerentanan
+      # yang hanya dicatat di log akan terlewat; kalau memang tidak dapat
+      # ditambal sekarang, keputusan menundanya pantas diambil sadar-sadar —
+      # bukan karena tidak ada yang melihatnya.
+      - name: Periksa kerentanan dependensi
+        run: composer audit
+
   lint:
     name: Gaya kode (Pint)
     runs-on: ubuntu-latest

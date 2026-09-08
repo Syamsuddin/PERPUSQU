@@ -12,7 +12,7 @@ seperti ini, dan cara menjalankannya.
 |---|---|
 | `test-sqlite` | seluruh suite pada PHP 8.4 |
 | `test-mysql` | suite yang sama pada driver produksi |
-| `analyse` | analisis statis Larastan (level 5) |
+| `analyse` | analisis statis Larastan (level 5) + `composer audit` |
 | `lint` | gaya kode Pint, **hanya pada berkas yang diubah PR** |
 | `migrations` | `migrate` → `db:seed` → `migrate:rollback` di MySQL |
 
@@ -31,6 +31,13 @@ menuntut PHP ≥ 8.4 (Symfony 8 / Laravel 13), sementara `phpspreadsheet` — le
 yang keliru: `composer install` pada 8.3 gagal sebelum satu test pun berjalan.
 `config.platform.php` disematkan ke `8.4.0` supaya resolusi di mesin pengembang
 sama dengan CI dan produksi.
+
+**Kerentanan dependensi menggagalkan build.** `composer audit` berjalan di job
+`analyse` dan sengaja tidak sekadar memberi peringatan: kerentanan yang hanya
+dicatat di log akan terlewat. Bila suatu saat ada CVE yang belum dapat ditambal,
+keputusan menundanya pantas diambil sadar-sadar — misalnya dengan
+`--ignore=<advisory>` yang disertai alasan — bukan karena tidak ada yang
+melihatnya.
 
 **Job `migrations` menguji jalur `down()`.** Test suite membangun skema dari nol
 setiap kali, jadi jalur `up` sudah terjamin. Yang tidak pernah tersentuh adalah
