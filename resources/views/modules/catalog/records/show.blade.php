@@ -64,9 +64,9 @@
 
             {{-- Detail Table --}}
             <table class="table table-sm mb-0">
-                <tr><th style="width:180px">Jenis Koleksi</th><td>{{ $record->collectionType->name ?? '-' }}</td></tr>
-                <tr><th>Penerbit</th><td>{{ $record->publisher->name ?? '-' }}</td></tr>
-                <tr><th>Bahasa</th><td>{{ $record->language->name ?? '-' }}</td></tr>
+                <tr><th style="width:180px">Jenis Koleksi</th><td>{{ $record->collectionType?->name ?? '-' }}</td></tr>
+                <tr><th>Penerbit</th><td>{{ $record->publisher?->name ?? '-' }}</td></tr>
+                <tr><th>Bahasa</th><td>{{ $record->language?->name ?? '-' }}</td></tr>
                 <tr><th>Klasifikasi</th><td>{{ $record->classification ? '['.$record->classification->code.'] '.$record->classification->name : '-' }}</td></tr>
                 <tr><th>Pengarang</th><td>@forelse($record->authors as $a)<span class="badge bg-primary me-1">{{ $a->name }}</span>@empty <span class="text-muted">-</span> @endforelse</td></tr>
                 <tr><th>Subjek</th><td>@forelse($record->subjects as $s)<span class="badge bg-info me-1">{{ $s->name }}</span>@empty <span class="text-muted">-</span> @endforelse</td></tr>
@@ -91,7 +91,7 @@
                         <td><code>{{ $pi->barcode }}</code></td>
                         <td>{{ $pi->call_number ?? '-' }}</td>
                         <td><span class="badge bg-{{ $pi->item_status === 'available' ? 'success' : 'secondary' }}">{{ ucfirst($pi->item_status) }}</span></td>
-                        <td>{{ $pi->itemCondition->name ?? '-' }}</td>
+                        <td>{{ $pi->itemCondition?->name ?? '-' }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -110,8 +110,8 @@
                 <tbody>
                     @foreach($record->digitalAssets as $da)
                     <tr>
-                        <td>{{ $da->title }}</td>
-                        <td>{{ $da->mime_type }}</td>
+                        <td>{{ $da->title ?? '-' }}</td>
+                        <td>{{ $da->mime_type ?? '-' }}</td>
                         <td><span class="badge bg-info">{{ ucfirst($da->publication_status) }}</span></td>
                     </tr>
                     @endforeach
@@ -126,8 +126,8 @@
     {{-- Right: Cover & Meta --}}
     <div class="col-md-4">
         <div class="card shadow-sm border-0 mb-3"><div class="card-body text-center">
-            @if($record->cover_path)
-            <img src="{{ asset('storage/' . $record->cover_path) }}" class="img-fluid rounded mb-2" alt="Cover" style="max-height:300px">
+            @if($record->cover_url)
+            <img src="{{ $record->cover_url }}" class="img-fluid rounded mb-2" alt="Cover" style="max-height:300px">
             @else
             <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height:200px">
                 <i class="bi bi-image text-muted" style="font-size:3rem"></i>
@@ -141,8 +141,8 @@
             <table class="table table-sm mb-0">
                 <tr><th>ID</th><td>{{ $record->id }}</td></tr>
                 <tr><th>Slug</th><td><small>{{ $record->slug }}</small></td></tr>
-                <tr><th>Dibuat</th><td>{{ $record->created_at->format('d M Y H:i') }}</td></tr>
-                <tr><th>Diperbarui</th><td>{{ $record->updated_at->format('d M Y H:i') }}</td></tr>
+                <tr><th>Dibuat</th><td>{{ $record->created_at?->format('d M Y H:i') ?? '-' }}</td></tr>
+                <tr><th>Diperbarui</th><td>{{ $record->updated_at?->format('d M Y H:i') ?? '-' }}</td></tr>
             </table>
         </div></div>
     </div>

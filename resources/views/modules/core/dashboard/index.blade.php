@@ -303,8 +303,8 @@
                     @forelse($widgets['recent_catalogs'] as $catalog)
                     <div class="activity-feed-item d-flex align-items-center gap-3 px-3 py-3">
                         <div class="rounded-3 flex-shrink-0 overflow-hidden d-flex align-items-center justify-content-center bg-light" style="width:48px;height:64px;box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
-                            @if($catalog->cover_path)
-                                <img src="{{ asset('storage/' . $catalog->cover_path) }}" style="width:100%;height:100%;object-fit:cover;">
+                            @if($catalog->cover_url)
+                                <img src="{{ $catalog->cover_url }}" style="width:100%;height:100%;object-fit:cover;">
                             @else
                                 <i class="bi bi-book text-muted fs-4"></i>
                             @endif

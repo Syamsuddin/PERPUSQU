@@ -141,8 +141,8 @@
     <div class="col-md-4">
         {{-- Cover --}}
         <div class="detail-card p-4 mb-3 text-center">
-            @if($record->cover_path)
-                <img src="{{ asset('storage/' . $record->cover_path) }}"
+            @if($record->cover_url)
+                <img src="{{ $record->cover_url }}"
                      class="img-fluid rounded shadow-sm"
                      alt="Cover {{ $record->title }}"
                      style="max-height:380px; object-fit:contain; border-radius:8px!important">

@@ -93,8 +93,8 @@
             <div class="d-flex gap-3">
                 <div class="flex-shrink-0">
                     <a href="{{ route('opac.record.show', $record->id) }}">
-                        @if($record->cover_path)
-                            <img src="{{ asset('storage/' . $record->cover_path) }}"
+                        @if($record->cover_url)
+                            <img src="{{ $record->cover_url }}"
                                  class="rounded shadow-sm"
                                  style="width:80px; height:110px; object-fit:cover; border-radius:8px!important;"
                                  alt="{{ $record->title }}">

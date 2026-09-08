@@ -13,6 +13,7 @@ class InstitutionProfileController extends Controller
     public function edit()
     {
         $profile = $this->profileService->getInstitutionProfile();
+
         return view('modules.core.institution_profile.edit', compact('profile'));
     }
 
@@ -29,7 +30,12 @@ class InstitutionProfileController extends Controller
             'logo' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $this->profileService->updateInstitutionProfile($request->all());
+        try {
+            $this->profileService->updateInstitutionProfile($request->all());
+        } catch (\InvalidArgumentException $e) {
+            return back()->withInput()->with('error', $e->getMessage());
+        }
+
         return back()->with('success', 'Profil institusi berhasil diperbarui.');
     }
 }
