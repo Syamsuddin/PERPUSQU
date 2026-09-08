@@ -3,9 +3,9 @@
 namespace App\Modules\Opac\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Opac\Services\OpacSearchService;
 use App\Modules\MasterData\Models\CollectionType;
 use App\Modules\MasterData\Models\Language;
+use App\Modules\Opac\Services\OpacSearchService;
 use Illuminate\Http\Request;
 
 class OpacSearchController extends Controller

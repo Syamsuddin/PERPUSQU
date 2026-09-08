@@ -3,8 +3,8 @@
 namespace App\Modules\Opac\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Opac\Services\OpacSearchService;
 use App\Modules\MasterData\Models\CollectionType;
+use App\Modules\Opac\Services\OpacSearchService;
 
 class OpacHomeController extends Controller
 {

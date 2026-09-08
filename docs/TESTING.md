@@ -164,6 +164,35 @@ yang benar tetapi tidak pernah terjadwal sama tidak bergunanya dengan perintah
 yang tidak ada. Ikut diperiksa `withoutOverlapping()` dan `onOneServer()` —
 tanpa keduanya, satu anggota dapat menerima pengingat yang sama beberapa kali.
 
+## Pencarian OPAC: dua jalur, dua cara menguji
+
+Pencarian berjalan dua tahap — FULLTEXT lebih dulu, lalu jatuh ke pencocokan
+substring bila tahap pertama tidak menghasilkan apa pun atau basis datanya
+bukan MySQL. Karena itu pengujiannya juga terbagi dua:
+
+`OpacSearchTest` menguji **apa yang ditemukan pengguna**, tanpa peduli jalur
+mana yang terpakai. Berjalan di kedua driver.
+
+`OpacFullTextSearchTest` menguji **jalur FULLTEXT itu sendiri** dan hanya
+berjalan di MySQL. Berkas ini memakai `DatabaseMigrations`, bukan
+`RefreshDatabase`, karena indeks FULLTEXT InnoDB **tidak melihat baris yang
+masih berada dalam transaksi yang belum di-commit** — di bawah
+`RefreshDatabase` setiap `MATCH` mengembalikan kosong, dan test justru akan
+menguji jalur cadangan tanpa disadari. Harganya migrasi ulang per test, dan
+itu sebabnya berkas tersebut dijaga tetap kecil.
+
+Sifat MySQL itu juga alasan jalur cadangan ada sejak awal. Selain transaksi,
+FULLTEXT mengabaikan token lebih pendek dari `innodb_ft_min_token_size`
+(bawaan 3), seluruh kata dalam daftar stopword, dan tidak mencakup ISBN maupun
+nama pengarang. Tanpa cadangan, pencarian yang dulu berhasil bisa mendadak
+tidak menemukan apa-apa — kemunduran yang jauh lebih merugikan daripada kueri
+yang lambat.
+
+Satu test memeriksa rencana kueri lewat `EXPLAIN` dan menuntut
+`type=fulltext`. Optimizer MySQL baru memilih jalur itu bila tabelnya cukup
+besar, jadi test tersebut menyemai puluhan baris lebih dulu — pada tabel satu
+baris ia memilih indeks lain, dan itu keputusan yang benar.
+
 ## Perkakas
 
 `tests/Concerns/ActsAsLibraryUser.php` menyediakan `userWith([...])` — pengguna

@@ -14,18 +14,18 @@ class PublicAssetPreviewController extends Controller
     {
         $asset = DigitalAsset::findOrFail($id);
 
-        if (!$this->previewService->canPreview($asset)) {
+        if (! $this->previewService->canPreview($asset)) {
             abort(403, 'Aset ini tidak tersedia untuk akses publik.');
         }
 
         $filePath = $this->previewService->getStreamPath($asset);
-        if (!$filePath) {
+        if (! $filePath) {
             abort(404, 'File tidak ditemukan.');
         }
 
         return response()->file($filePath, [
             'Content-Type' => $asset->mime_type,
-            'Content-Disposition' => 'inline; filename="' . $asset->original_file_name . '"',
+            'Content-Disposition' => 'inline; filename="'.$asset->original_file_name.'"',
         ]);
     }
 }

@@ -12,7 +12,7 @@ class OpacRecordController extends Controller
     public function show(int $id)
     {
         $record = $this->searchService->findPublicRecord($id);
-        if (!$record) {
+        if (! $record) {
             abort(404, 'Katalog tidak ditemukan atau tidak tersedia untuk publik.');
         }
 
