@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use PHPUnit\Framework\Attributes\Test;
+use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -56,13 +57,60 @@ class AuthenticationTest extends TestCase
     {
         $user = $this->user();
 
-        $response = $this->post(route('auth.login.attempt'), [
+        $this->post(route('auth.login.attempt'), [
             'login' => 'pustakawan',
             'password' => 'rahasia123',
         ]);
 
-        $response->assertRedirect(route('admin.dashboard.index'));
         $this->assertAuthenticatedAs($user);
+    }
+
+    /**
+     * Tujuan setelah login mengikuti wewenang, bukan selalu dashboard admin.
+     * Sebelumnya alamatnya ditulis mati, sehingga anggota perpustakaan —
+     * yang tidak punya `core.view_dashboard` — selalu mendarat di halaman 403
+     * tepat setelah berhasil masuk.
+     */
+    #[Test]
+    public function staff_land_on_the_dashboard_after_signing_in(): void
+    {
+        $user = $this->user();
+        $this->grant($user, ['core.view_dashboard']);
+
+        $this->post(route('auth.login.attempt'), ['login' => 'pustakawan', 'password' => 'rahasia123'])
+            ->assertRedirect(route('admin.dashboard.index'));
+    }
+
+    #[Test]
+    public function a_library_member_lands_on_their_own_portal(): void
+    {
+        $user = $this->user();
+        $this->grant($user, ['own_loans.view']);
+
+        $this->post(route('auth.login.attempt'), ['login' => 'pustakawan', 'password' => 'rahasia123'])
+            ->assertRedirect(route('member.portal.loans'));
+    }
+
+    #[Test]
+    public function a_user_with_neither_still_lands_somewhere_they_may_go(): void
+    {
+        $this->user();
+
+        $this->post(route('auth.login.attempt'), ['login' => 'pustakawan', 'password' => 'rahasia123'])
+            ->assertRedirect(route('opac.home'));
+    }
+
+    /**
+     * @param  list<string>  $permissions
+     */
+    private function grant(User $user, array $permissions): void
+    {
+        foreach ($permissions as $permission) {
+            Permission::findOrCreate($permission, 'web');
+        }
+
+        $user->syncPermissions($permissions);
+        $this->flushPermissionCache();
     }
 
     #[Test]

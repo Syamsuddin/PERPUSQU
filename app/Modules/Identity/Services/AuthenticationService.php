@@ -3,6 +3,7 @@
 namespace App\Modules\Identity\Services;
 
 use App\Modules\Identity\Models\User;
+use App\Modules\Identity\Support\HomeRedirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
@@ -85,7 +86,7 @@ class AuthenticationService
             ->withProperties(['ip' => request()->ip(), 'user_agent' => request()->userAgent()])
             ->log('Login berhasil');
 
-        return ['success' => true, 'user' => $user, 'redirect' => route('admin.dashboard.index')];
+        return ['success' => true, 'user' => $user, 'redirect' => HomeRedirect::urlFor($user)];
     }
 
     /**

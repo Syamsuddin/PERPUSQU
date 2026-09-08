@@ -3,6 +3,7 @@
 namespace App\Modules\Member\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Identity\Models\User;
 use App\Modules\MasterData\Models\Faculty;
 use App\Modules\MasterData\Models\StudyProgram;
 use App\Modules\Member\Http\Requests\BlockMemberRequest;
@@ -13,6 +14,7 @@ use App\Modules\Member\Services\MemberBlockingService;
 use App\Modules\Member\Services\MemberService;
 use App\Modules\Member\Support\MemberEligibilityResolver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Spatie\Activitylog\Models\Activity;
 
 class MemberController extends Controller
@@ -53,7 +55,7 @@ class MemberController extends Controller
     public function edit(Member $member)
     {
         return view('modules.member.edit', array_merge(
-            $this->getFormData(),
+            $this->getFormData($member),
             ['member' => $member]
         ));
     }
@@ -120,11 +122,31 @@ class MemberController extends Controller
         return view('modules.member.history', compact('member', 'activities'));
     }
 
-    protected function getFormData(): array
+    protected function getFormData(?Member $member = null): array
     {
         return [
             'faculties' => Faculty::active()->orderBy('name')->get(),
             'studyPrograms' => StudyProgram::active()->orderBy('name')->get(),
+            'linkableUsers' => $this->linkableUsers($member),
         ];
+    }
+
+    /**
+     * Akun yang boleh ditautkan: akun aktif yang belum dimiliki anggota lain.
+     * Akun milik anggota yang sedang disunting tetap disertakan agar tidak
+     * hilang dari daftar saat formnya dibuka kembali.
+     */
+    protected function linkableUsers(?Member $member): Collection
+    {
+        $taken = Member::query()
+            ->whereNotNull('user_id')
+            ->when($member, fn ($q) => $q->whereKeyNot($member->getKey()))
+            ->pluck('user_id');
+
+        return User::query()
+            ->active()
+            ->whereNotIn('id', $taken)
+            ->orderBy('name')
+            ->get(['id', 'name', 'username', 'email']);
     }
 }

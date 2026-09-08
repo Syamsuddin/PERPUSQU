@@ -95,12 +95,14 @@ class RolePermissionSeeder extends Seeder
 
         // Anggota Perpustakaan — self-service only
         $anggota = Role::findByName('Anggota Perpustakaan', 'web');
+        // Katalog publik terbuka tanpa login, jadi tidak ada izin OPAC yang
+        // perlu diberikan. Izin reservasi juga dilepas: modulnya belum ada,
+        // dan izin yang tidak menjaga apa pun hanya menjanjikan fitur yang
+        // tidak dapat ditepati.
         $anggota->syncPermissions([
             'own_profile.view', 'own_profile.update', 'own_password.change',
-            'opac.search', 'opac.view_detail',
             'own_loans.view', 'own_loans.view_history',
             'own_fines.view',
-            'own_reservations.view', 'own_reservations.create', 'own_reservations.cancel',
         ]);
     }
 }

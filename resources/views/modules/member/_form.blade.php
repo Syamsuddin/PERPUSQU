@@ -22,6 +22,20 @@
         </select>
         @error('member_type')<div class="invalid-feedback">{{ $message }}</div>@enderror
     </div>
+    {{-- Akun login --}}
+    <div class="col-md-4">
+        <label class="form-label fw-medium">Akun Login</label>
+        <select class="form-select @error('user_id') is-invalid @enderror" name="user_id">
+            <option value="">— Tanpa akun —</option>
+            @foreach($linkableUsers as $u)
+            <option value="{{ $u->id }}" {{ (string) old('user_id', $member->user_id ?? '') === (string) $u->id ? 'selected' : '' }}>
+                {{ $u->name }} ({{ $u->username }})
+            </option>
+            @endforeach
+        </select>
+        <div class="form-text">Menautkan akun membuka halaman Pinjaman Saya dan Denda Saya bagi anggota ini.</div>
+        @error('user_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+    </div>
     {{-- Identity Number --}}
     <div class="col-md-4">
         <label class="form-label fw-medium">No. Identitas (NIM/NIP/KTP)</label>

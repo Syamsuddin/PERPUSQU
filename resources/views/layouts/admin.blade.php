@@ -185,6 +185,23 @@
             </a>
             @endcan
 
+            {{-- Layanan mandiri anggota --}}
+            @can('own_loans.view')
+            <a href="{{ route('member.portal.loans') }}" class="pq-nav-item {{ request()->routeIs('member.portal.loans') ? 'active' : '' }}">
+                <i class="bi bi-journal-bookmark"></i> Pinjaman Saya
+            </a>
+            @endcan
+            @can('own_loans.view_history')
+            <a href="{{ route('member.portal.history') }}" class="pq-nav-item {{ request()->routeIs('member.portal.history') ? 'active' : '' }}">
+                <i class="bi bi-clock-history"></i> Riwayat Saya
+            </a>
+            @endcan
+            @can('own_fines.view')
+            <a href="{{ route('member.portal.fines') }}" class="pq-nav-item {{ request()->routeIs('member.portal.fines') ? 'active' : '' }}">
+                <i class="bi bi-cash-coin"></i> Denda Saya
+            </a>
+            @endcan
+
             {{-- Master Data --}}
             @canany(['authors.view','publishers.view','languages.view','classifications.view','subjects.view','collection_types.view','rack_locations.view','faculties.view','study_programs.view','item_conditions.view'])
             <a class="pq-nav-item pq-nav-toggle {{ request()->routeIs('admin.master-data.*') ? '' : 'collapsed' }}" data-bs-toggle="collapse" href="#menuMasterData" role="button" aria-expanded="{{ request()->routeIs('admin.master-data.*') ? 'true' : 'false' }}">

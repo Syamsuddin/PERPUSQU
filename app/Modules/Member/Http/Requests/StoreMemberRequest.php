@@ -17,6 +17,9 @@ class StoreMemberRequest extends FormRequest
     {
         return [
             'member_number' => 'required|string|min:3|max:100|unique:members,member_number',
+            // Satu akun login hanya boleh mewakili satu anggota; aturan ini
+            // mencerminkan indeks unik uq_members_user_id di basis data.
+            'user_id' => ['nullable', 'integer', 'exists:users,id', Rule::unique('members', 'user_id')],
             'member_type' => ['required', 'string', Rule::in(array_keys(MemberEligibilityResolver::TYPES))],
             'identity_number' => 'nullable|string|max:100|unique:members,identity_number',
             'name' => 'required|string|min:3|max:200',

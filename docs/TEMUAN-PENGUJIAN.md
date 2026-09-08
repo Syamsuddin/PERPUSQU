@@ -262,3 +262,65 @@ bukan salah tulis. Daftarnya tercatat sebagai baseline di
 memindai kode yang sesungguhnya — policy, Blade, dan middleware route — lalu
 mencocokkan setiap nama izin dan peran dengan yang didaftarkan seeder. Baseline
 hanya boleh menyusut; nama baru yang tidak terdaftar akan menggagalkan test.
+
+---
+
+### 8. Anggota Perpustakaan tidak dapat memakai aplikasinya sama sekali
+
+Dibuktikan langsung, bukan disimpulkan dari kode: anggota hasil seeder yang
+berhasil masuk mendapat `GET / → 302 /admin/dashboard → 403`. Delapan dari
+sembilan izinnya tidak punya route sama sekali, termasuk tiga izin
+`own_reservations.*` untuk modul reservasi yang tidak pernah dibuat.
+
+Penyebab strukturalnya: **`users` dan `members` sama sekali tidak berhubungan.**
+`MemberUserSeeder` membuat keduanya berdampingan tanpa kunci apa pun, hanya
+bertemu lewat email secara implisit — sehingga tidak ada cara mengetahui
+anggota mana yang sedang masuk.
+
+Yang dikerjakan:
+
+| Bagian | Perubahan |
+|---|---|
+| `2026_09_08_000003` | kolom `members.user_id` (unik, boleh kosong) + penautan data lama lewat email, hanya bila pasangannya tidak ambigu |
+| `MemberPortalController` | Pinjaman Saya, Riwayat, Denda Saya |
+| `HomeRedirect` | tujuan setelah login mengikuti wewenang, bukan alamat yang ditulis mati di dua tempat |
+| form anggota | petugas dapat menautkan akun; satu akun hanya untuk satu anggota |
+| seeder | `own_reservations.*` dan `opac.*` dicabut |
+
+Tiga catatan atas bentuknya:
+
+**Tidak ada parameter anggota di URL portal.** Setiap halaman selalu bicara
+tentang anggota yang sedang masuk, sehingga tidak ada id yang bisa ditebak
+untuk mengintip pinjaman orang lain. Isolasi datanya tetap diuji eksplisit.
+
+**Akun tanpa tautan mendapat penjelasan, bukan 403.** Izinnya benar; datanya
+yang belum disiapkan. Menjawab 403 akan menyesatkan petugas yang mencari
+penyebabnya.
+
+**Izin `opac.*` dan `own_reservations.*` dicabut, bukan dibiarkan.** OPAC
+terbuka tanpa login sehingga izinnya tidak pernah menjaga apa pun, dan izin
+untuk modul yang tidak ada adalah janji yang tidak dapat ditepati. Reservasi
+sengaja ditunda: ia membutuhkan penjadwal dan pemberitahuan, yang menjadi
+pekerjaan berikutnya.
+
+Foreign key `members.user_id` hanya dipasang di MySQL. SQLite tidak dapat
+membuang kolom yang masih dirujuk definisi foreign key — bahkan dengan
+penegakan dimatikan — sehingga `down()` akan macet permanen di driver itu.
+Indeks unik, yang menjaga aturan sesungguhnya, tetap berlaku di keduanya.
+
+---
+
+### 9. `MemberUserSeeder` menulis jenis anggota yang tidak dikenal sistem
+
+Seeder menulis `mahasiswa`, `dosen`, dan `umum`; aplikasi mengenal `student`,
+`lecturer`, `staff`, `alumni`, dan `guest`. Dibuktikan akibatnya: **dosen hasil
+seeder mendapat lama pinjam 14 hari, bukan 30**, karena jenisnya tidak punya
+kunci `loan_days_*` dan jatuh ke `loan_default_days`. Layar tetap menampilkan
+"Dosen" karena `typeLabel()` jatuh ke `ucfirst()`, sehingga tidak ada yang
+tampak salah.
+
+Penyebabnya sama seperti butir 7: daftar tersalin di lima tempat. Kini satu
+konstanta `MemberEligibilityResolver::TYPES`, dan `MemberTypeConsistencyTest`
+menjaga keselarasan dua arah antara daftar jenis anggota dan kunci
+`loan_days_*` di Aturan Operasional.
+

@@ -4,6 +4,7 @@ namespace App\Modules\Member\Models;
 
 use App\Modules\Circulation\Models\Fine;
 use App\Modules\Circulation\Models\Loan;
+use App\Modules\Identity\Models\User;
 use App\Modules\MasterData\Models\Faculty;
 use App\Modules\MasterData\Models\StudyProgram;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,7 @@ class Member extends Model
     protected $table = 'members';
 
     protected $fillable = [
-        'member_number', 'name', 'member_type', 'faculty_id', 'study_program_id',
+        'user_id', 'member_number', 'name', 'member_type', 'faculty_id', 'study_program_id',
         'identity_number', 'email', 'phone', 'is_active', 'is_blocked',
         'blocked_reason', 'blocked_at', 'notes',
     ];
@@ -31,6 +32,15 @@ class Member extends Model
             'is_blocked' => 'boolean',
             'blocked_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Akun login milik anggota ini, bila ada. Anggota yang hanya dilayani di
+     * meja sirkulasi tidak perlu punya akun.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function faculty(): BelongsTo

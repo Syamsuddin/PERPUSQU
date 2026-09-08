@@ -3,6 +3,7 @@
 namespace Tests\Feature\Member;
 
 use App\Modules\Circulation\Models\Fine;
+use App\Modules\Identity\Models\User;
 use App\Modules\MasterData\Models\Faculty;
 use App\Modules\Member\Models\Member;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -239,5 +240,78 @@ class MemberManagementTest extends TestCase
         $this->put(route('admin.members.update', $member), $this->validPayload())->assertForbidden();
         $this->delete(route('admin.members.destroy', $member))->assertForbidden();
         $this->post(route('admin.members.activate', $member))->assertForbidden();
+    }
+
+    // ── Penautan akun login ────────────────────────────────────────────
+
+    /**
+     * Tautan inilah yang membuka portal "Pinjaman Saya" bagi anggota; tanpa
+     * itu akun dan data keanggotaan hanya berdampingan tanpa hubungan.
+     */
+    #[Test]
+    public function a_member_can_be_linked_to_a_login_account(): void
+    {
+        $this->actingAsUserWith(['members.create', 'members.view']);
+        $akun = User::factory()->create();
+
+        $this->post(route('admin.members.store'), $this->validPayload(['user_id' => $akun->id]))
+            ->assertSessionHasNoErrors();
+
+        $member = Member::firstWhere('member_number', 'AGT-2026-0001');
+        $this->assertSame($akun->id, $member->user_id);
+        $this->assertSame($akun->id, $member->user->id);
+        $this->assertSame($member->id, $akun->fresh()->member->id);
+    }
+
+    #[Test]
+    public function a_member_may_exist_without_any_login_account(): void
+    {
+        $this->actingAsUserWith(['members.create', 'members.view']);
+
+        $this->post(route('admin.members.store'), $this->validPayload())->assertSessionHasNoErrors();
+
+        $this->assertNull(Member::firstWhere('member_number', 'AGT-2026-0001')->user_id);
+    }
+
+    /**
+     * Satu akun tidak boleh mewakili dua anggota: kalau bisa, portal tidak
+     * dapat menentukan pinjaman siapa yang harus ditampilkan.
+     */
+    #[Test]
+    public function one_account_cannot_be_linked_to_two_members(): void
+    {
+        $this->actingAsUserWith(['members.create', 'members.view']);
+        $akun = User::factory()->create();
+        Member::factory()->create(['user_id' => $akun->id]);
+
+        $this->post(route('admin.members.store'), $this->validPayload(['user_id' => $akun->id]))
+            ->assertSessionHasErrors('user_id');
+    }
+
+    #[Test]
+    public function editing_a_member_keeps_its_own_account_selectable(): void
+    {
+        $this->actingAsUserWith(['members.update', 'members.view']);
+        $akun = User::factory()->create();
+        $member = Member::factory()->create(['user_id' => $akun->id]);
+
+        $this->put(route('admin.members.update', $member), $this->validPayload([
+            'member_number' => $member->member_number,
+            'identity_number' => $member->identity_number,
+            'user_id' => $akun->id,
+            'name' => 'Nama Diperbarui',
+        ]))->assertSessionHasNoErrors();
+
+        $this->assertSame('Nama Diperbarui', $member->fresh()->name);
+        $this->assertSame($akun->id, $member->fresh()->user_id);
+    }
+
+    #[Test]
+    public function the_form_rejects_an_account_that_does_not_exist(): void
+    {
+        $this->actingAsUserWith(['members.create']);
+
+        $this->post(route('admin.members.store'), $this->validPayload(['user_id' => 999999]))
+            ->assertSessionHasErrors('user_id');
     }
 }

@@ -48,6 +48,13 @@ class RouteAccessControlTest extends TestCase
     ];
 
     /**
+     * Awalan URL yang menandai permukaan tertutup: area staf (`admin`) dan
+     * portal layanan mandiri anggota (`anggota`). Keduanya harus berada di
+     * belakang autentikasi dan izin; katalog publik sengaja di luar daftar.
+     */
+    private const GUARDED_PREFIXES = ['admin', 'anggota'];
+
+    /**
      * @return array<string, RoutingRoute>
      */
     private function adminRoutes(): array
@@ -58,7 +65,10 @@ class RouteAccessControlTest extends TestCase
             /** @var RoutingRoute $route */
             $name = $route->getName();
 
-            if ($name && str_starts_with($route->uri(), 'admin')) {
+            $guarded = collect(self::GUARDED_PREFIXES)
+                ->contains(fn (string $prefix) => str_starts_with($route->uri(), $prefix));
+
+            if ($name && $guarded) {
                 $routes[$name] = $route;
             }
         }

@@ -71,10 +71,13 @@ class MemberUserSeeder extends Seeder
 
             $user->assignRole('Anggota Perpustakaan');
 
-            // Create corresponding member record
+            // Create corresponding member record, tertaut ke akunnya. Tautan
+            // inilah yang membuat portal "Pinjaman Saya" tahu anggota mana yang
+            // sedang masuk; tanpa itu akun dan data anggota hanya berdampingan.
             Member::firstOrCreate(
                 ['member_number' => $data['member_number']],
                 [
+                    'user_id' => $user->id,
                     'name' => $data['name'],
                     'member_type' => $data['member_type'],
                     'identity_number' => $data['identity_number'],

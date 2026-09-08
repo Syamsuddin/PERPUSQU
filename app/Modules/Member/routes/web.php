@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Member\Http\Controllers\MemberController;
+use App\Modules\Member\Http\Controllers\MemberPortalController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->prefix('admin/members')->name('admin.members.')->group(function () {
@@ -23,4 +24,16 @@ Route::middleware('auth')->prefix('admin/members')->name('admin.members.')->grou
 
     // History
     Route::get('{member}/history', [MemberController::class, 'history'])->name('history')->middleware('permission:members.view');
+});
+
+// ── Portal layanan mandiri anggota ──────────────────────────────────────
+// Tidak ada parameter anggota di URL: setiap halaman selalu bicara tentang
+// anggota yang sedang masuk, sehingga tidak ada id yang bisa ditebak.
+Route::middleware('auth')->prefix('anggota')->name('member.portal.')->group(function () {
+    Route::get('pinjaman', [MemberPortalController::class, 'loans'])
+        ->name('loans')->middleware('permission:own_loans.view');
+    Route::get('riwayat', [MemberPortalController::class, 'history'])
+        ->name('history')->middleware('permission:own_loans.view_history');
+    Route::get('denda', [MemberPortalController::class, 'fines'])
+        ->name('fines')->middleware('permission:own_fines.view');
 });
