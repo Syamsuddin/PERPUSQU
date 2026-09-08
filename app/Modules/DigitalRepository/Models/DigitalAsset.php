@@ -2,6 +2,7 @@
 
 namespace App\Modules\DigitalRepository\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Modules\Catalog\Models\BibliographicRecord;
 use App\Modules\Identity\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DigitalAsset extends Model
 {
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'digital_assets';
 
@@ -39,7 +40,9 @@ class DigitalAsset extends Model
 
     public function bibliographicRecord(): BelongsTo
     {
-        return $this->belongsTo(BibliographicRecord::class);
+        // Aset digital tetap dapat menunjuk induk yang dihapus lunak,
+        // sehingga layar pengelolaan aset tidak menampilkan judul kosong.
+        return $this->belongsTo(BibliographicRecord::class)->withTrashed();
     }
 
     public function uploadedBy(): BelongsTo

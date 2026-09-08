@@ -5,6 +5,7 @@ namespace App\Modules\Circulation\Services;
 use App\Modules\Circulation\Models\Loan;
 use App\Modules\Circulation\Support\DueDateCalculator;
 use App\Modules\Collection\Models\PhysicalItem;
+use App\Modules\Core\Services\OperationalRules;
 use App\Modules\Collection\Models\PhysicalItemStatusHistory;
 use App\Modules\Member\Models\Member;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ class LoanTransactionService
 {
     public function __construct(
         protected LoanEligibilityService $eligibility,
+        protected OperationalRules $rules,
     ) {}
 
     public function createLoan(int $memberId, string $barcode, ?string $notes = null): Loan
@@ -38,7 +40,10 @@ class LoanTransactionService
 
         return DB::transaction(function () use ($member, $item, $notes) {
             $loanDate = now();
-            $dueDate = DueDateCalculator::calculate($member->member_type, $loanDate);
+            $dueDate = DueDateCalculator::calculate(
+                $this->rules->loanPeriodDays($member->member_type),
+                $loanDate
+            );
 
             // Create loan
             $loan = Loan::create([

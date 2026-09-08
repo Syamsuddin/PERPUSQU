@@ -9,8 +9,8 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div><h5 class="fw-semibold mb-0">Pinjaman Aktif</h5><small class="text-muted">{{ $items->total() }} pinjaman aktif</small></div>
     <div class="d-flex gap-2">
-        @can('circulation.create')<a href="{{ route('admin.circulation.loans.create') }}" class="btn btn-sm btn-primary"><i class="bi bi-plus-circle me-1"></i>Pinjam Baru</a>@endcan
-        @can('circulation.return')<a href="{{ route('admin.circulation.returns.create') }}" class="btn btn-sm btn-success"><i class="bi bi-box-arrow-in-left me-1"></i>Pengembalian</a>@endcan
+        @can('circulation.process_loan')<a href="{{ route('admin.circulation.loans.create') }}" class="btn btn-sm btn-primary"><i class="bi bi-plus-circle me-1"></i>Pinjam Baru</a>@endcan
+        @can('circulation.process_return')<a href="{{ route('admin.circulation.returns.create') }}" class="btn btn-sm btn-success"><i class="bi bi-box-arrow-in-left me-1"></i>Pengembalian</a>@endcan
     </div>
 </div>
 <div class="card shadow-sm border-0 mb-3"><div class="card-body p-3">

@@ -41,15 +41,22 @@ class BibliographicRecordController extends Controller
     {
         $this->authorize('create', BibliographicRecord::class);
 
-        $this->service->create($request->validated());
+        try {
+            $this->service->create($request->validated());
 
-        return redirect()->route('admin.catalog.records.index')->with('success', 'Katalog berhasil ditambahkan.');
+            return redirect()->route('admin.catalog.records.index')->with('success', 'Katalog berhasil ditambahkan.');
+        } catch (\InvalidArgumentException $e) {
+            return back()->withInput()->with('error', $e->getMessage());
+        }
     }
 
     public function show(BibliographicRecord $record)
     {
         $this->authorize('view', $record);
 
+        // findWithRelations() sudah menangani kegagalan relasi digitalAssets.
+        // Error lain (termasuk record tidak ditemukan) sengaja diteruskan agar
+        // menghasilkan status HTTP yang benar, bukan halaman setengah jadi.
         $record = $this->service->findWithRelations($record->id);
 
         return view('modules.catalog.records.show', compact('record'));
@@ -69,16 +76,24 @@ class BibliographicRecordController extends Controller
     {
         $this->authorize('update', $record);
 
-        $this->service->update($record, $request->validated());
+        try {
+            $this->service->update($record, $request->validated());
 
-        return redirect()->route('admin.catalog.records.index')->with('success', 'Katalog berhasil diperbarui.');
+            return redirect()->route('admin.catalog.records.index')->with('success', 'Katalog berhasil diperbarui.');
+        } catch (\InvalidArgumentException $e) {
+            return back()->withInput()->with('error', $e->getMessage());
+        }
     }
 
     public function destroy(BibliographicRecord $record)
     {
         $this->authorize('delete', $record);
 
-        $this->service->delete($record);
+        try {
+            $this->service->delete($record);
+        } catch (\InvalidArgumentException $e) {
+            return back()->with('error', $e->getMessage());
+        }
 
         return redirect()->route('admin.catalog.records.index')->with('success', 'Katalog berhasil dihapus.');
     }

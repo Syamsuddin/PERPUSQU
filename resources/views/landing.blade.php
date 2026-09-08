@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $profile->library_name ?? 'GIBTHA LIBRARY' }} — Sistem Informasi Perpustakaan</title>
+    <title>{{ $profile->library_name ?? $appName }} — Sistem Informasi Perpustakaan</title>
     <meta name="description" content="{{ $profile->about_text ?? 'Perpustakaan digital terpadu untuk mendukung pendidikan dan riset islami.' }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -350,7 +350,7 @@
             @else
                 <div class="brand-icon"><i class="bi bi-book-half"></i></div>
             @endif
-            <span>{{ $profile->library_name ?? 'GIBTHA LIBRARY' }}</span>
+            <span>{{ $profile->library_name ?? $appName }}</span>
         </a>
         <div class="nav-actions">
             <a href="{{ route('opac.home') }}" class="btn-nav-opac">
@@ -379,7 +379,7 @@
             </h1>
 
             <p>
-                Selamat datang di <strong>{{ $profile->library_name ?? 'GIBTHA LIBRARY' }}</strong> —
+                Selamat datang di <strong>{{ $profile->library_name ?? $appName }}</strong> —
                 temukan ribuan koleksi buku, jurnal ilmiah, dan repositori digital dalam satu platform
                 yang dirancang untuk mendukung perjalanan belajar Anda.
             </p>
@@ -461,7 +461,7 @@
 
     {{-- ── Footer ───────────────────────────────────────────────────── --}}
     <footer class="site-footer">
-        <div class="footer-brand-name">{{ $profile->library_name ?? 'GIBTHA LIBRARY' }}</div>
+        <div class="footer-brand-name">{{ $profile->library_name ?? $appName }}</div>
         @if($profile && $profile->address)
         <p>{{ $profile->address }}</p>
         @endif

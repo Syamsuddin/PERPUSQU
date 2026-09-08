@@ -2,16 +2,27 @@
 
 namespace App\Modules\Opac\Services;
 
+use App\Modules\Core\Services\SystemSettings;
 use App\Modules\DigitalRepository\Models\DigitalAsset;
 use Illuminate\Support\Facades\Storage;
 
 class PublicAssetPreviewService
 {
+    public function __construct(
+        protected SystemSettings $settings,
+    ) {}
+
     /**
      * Check if a digital asset is publicly accessible for preview
      */
     public function canPreview(DigitalAsset $asset): bool
     {
+        // Saklar tingkat instalasi: menutup pratinjau publik untuk SELURUH aset
+        // sekaligus, tanpa perlu mengubah status publikasi satu per satu.
+        if (! $this->settings->publicPreviewEnabled()) {
+            return false;
+        }
+
         // Must be published + public
         if ($asset->publication_status !== 'published' || !$asset->is_public) {
             return false;

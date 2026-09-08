@@ -8,11 +8,16 @@ use App\Modules\Circulation\Models\ReturnTransaction;
 use App\Modules\Circulation\Support\FineAmountCalculator;
 use App\Modules\Collection\Models\PhysicalItem;
 use App\Modules\Collection\Models\PhysicalItemStatusHistory;
+use App\Modules\Core\Services\OperationalRules;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
 class ReturnProcessingService
 {
+    public function __construct(
+        protected OperationalRules $rules,
+    ) {}
+
     public function processReturn(string $barcode, ?int $returnedConditionId = null, ?string $notes = null): array
     {
         $item = PhysicalItem::where('barcode', $barcode)->first();
@@ -31,7 +36,9 @@ class ReturnProcessingService
         return DB::transaction(function () use ($loan, $item, $returnedConditionId, $notes) {
             $returnedAt = now();
             $lateDays = max(0, (int) $loan->due_date->diffInDays($returnedAt, false));
-            $fineAmount = $lateDays > 0 ? FineAmountCalculator::calculate($lateDays) : 0;
+            $fineAmount = $lateDays > 0
+                ? FineAmountCalculator::calculate($lateDays, $this->rules->fineDailyAmount())
+                : 0;
 
             // Create return transaction
             $return = ReturnTransaction::create([

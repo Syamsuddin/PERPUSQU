@@ -42,6 +42,12 @@ class PermissionSeeder extends Seeder
             // Catalog
             'catalog.view', 'catalog.view_detail', 'catalog.create', 'catalog.update', 'catalog.delete',
             'catalog.publish', 'catalog.unpublish',
+            // Dua izin di bawah dirujuk BibliographicRecordPolicy sejak awal
+            // tetapi tidak pernah didaftarkan, sehingga cabang policy yang
+            // memakainya tidak pernah bisa terpenuhi.
+            // `update_any`/`delete_own` melengkapi pasangan `update`/`delete`
+            // yang hanya berlaku atas record buatan pengguna itu sendiri.
+            'catalog.update_any', 'catalog.delete_own',
 
             // Collection
             'collections.view', 'collections.view_detail', 'collections.create', 'collections.update', 'collections.delete',

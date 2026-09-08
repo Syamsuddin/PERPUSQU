@@ -2,45 +2,25 @@
 
 namespace App\Modules\Circulation\Support;
 
+/**
+ * Aritmetika tanggal jatuh tempo — dan hanya itu.
+ *
+ * Kelas ini sengaja tidak tahu-menahu soal jenis anggota maupun kebijakan
+ * perpustakaan. Lama pinjam datang sebagai argumen dari OperationalRules,
+ * sehingga kebijakan punya satu rumah (tabel `system_settings`) dan perhitungan
+ * tanggal tetap dapat diuji tanpa basis data.
+ */
 class DueDateCalculator
 {
-    /**
-     * Default loan period by member type (in days)
-     */
-    protected static array $loanPeriods = [
-        'student' => 14,
-        'lecturer' => 30,
-        'staff' => 14,
-        'alumni' => 7,
-        'guest' => 7,
-    ];
-
-    protected static int $defaultPeriod = 14;
-
-    protected static int $renewalPeriod = 7;
-
-    protected static int $maxRenewals = 2;
-
-    public static function calculate(string $memberType, ?\DateTime $loanDate = null): \DateTime
+    public static function calculate(int $loanPeriodDays, ?\DateTime $loanDate = null): \DateTime
     {
-        $days = self::$loanPeriods[$memberType] ?? self::$defaultPeriod;
         $base = $loanDate ?? now();
 
-        return (clone $base)->addDays($days);
+        return (clone $base)->addDays(max(0, $loanPeriodDays));
     }
 
-    public static function calculateRenewal(\DateTime $currentDueDate): \DateTime
+    public static function calculateRenewal(\DateTime $currentDueDate, int $renewalPeriodDays): \DateTime
     {
-        return (clone $currentDueDate)->addDays(self::$renewalPeriod);
-    }
-
-    public static function maxRenewals(): int
-    {
-        return self::$maxRenewals;
-    }
-
-    public static function loanPeriodDays(string $memberType): int
-    {
-        return self::$loanPeriods[$memberType] ?? self::$defaultPeriod;
+        return (clone $currentDueDate)->addDays(max(0, $renewalPeriodDays));
     }
 }

@@ -3,11 +3,14 @@
 namespace App\Modules\Circulation\Models;
 
 use App\Modules\Member\Models\Member;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Fine extends Model
 {
+    use HasFactory;
+
     protected $table = 'fines';
 
     protected $fillable = [
@@ -26,7 +29,9 @@ class Fine extends Model
 
     public function member(): BelongsTo
     {
-        return $this->belongsTo(Member::class);
+        // Denda tetap harus menyebut anggotanya walau keanggotaannya
+        // sudah dihapus lunak — tagihan tidak ikut terhapus.
+        return $this->belongsTo(Member::class)->withTrashed();
     }
 
     public function scopeOutstanding($query)

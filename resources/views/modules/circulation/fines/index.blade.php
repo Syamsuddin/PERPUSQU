@@ -65,7 +65,7 @@
                 <td class="text-center">
                     @if($item->status === 'outstanding')
                     <div class="btn-group btn-group-sm">
-                        @can('circulation.fine')
+                        @can('circulation.view_fines')
                         <form method="POST" action="{{ route('admin.circulation.fines.settle', $item) }}" class="d-inline" onsubmit="return confirm('Lunasi denda ini?')">@csrf
                             <button type="submit" class="btn btn-outline-success" title="Lunasi"><i class="bi bi-check-circle"></i></button>
                         </form>

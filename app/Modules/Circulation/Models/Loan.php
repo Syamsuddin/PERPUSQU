@@ -5,6 +5,7 @@ namespace App\Modules\Circulation\Models;
 use App\Modules\Collection\Models\PhysicalItem;
 use App\Modules\Identity\Models\User;
 use App\Modules\Member\Models\Member;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Loan extends Model
 {
+    use HasFactory;
+
     protected $table = 'loans';
 
     protected $fillable = [
@@ -30,12 +33,18 @@ class Loan extends Model
 
     public function member(): BelongsTo
     {
-        return $this->belongsTo(Member::class);
+        // Peminjaman adalah catatan historis: ia harus tetap dapat menyebut
+        // anggota-nya walau baris itu sudah dihapus lunak, kalau tidak
+        // riwayat dan denda kehilangan identitas pihak yang terlibat.
+        return $this->belongsTo(Member::class)->withTrashed();
     }
 
     public function physicalItem(): BelongsTo
     {
-        return $this->belongsTo(PhysicalItem::class);
+        // Peminjaman adalah catatan historis: ia harus tetap dapat menyebut
+        // item-nya walau baris itu sudah dihapus lunak, kalau tidak
+        // riwayat dan denda kehilangan identitas pihak yang terlibat.
+        return $this->belongsTo(PhysicalItem::class)->withTrashed();
     }
 
     public function loanedBy(): BelongsTo

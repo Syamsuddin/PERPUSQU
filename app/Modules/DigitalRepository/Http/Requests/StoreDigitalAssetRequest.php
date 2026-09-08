@@ -2,6 +2,7 @@
 
 namespace App\Modules\DigitalRepository\Http\Requests;
 
+use App\Modules\Core\Services\SystemSettings;
 use App\Support\Validation\Rules\SecureMimeType;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -10,6 +11,15 @@ class StoreDigitalAssetRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Batas ukuran unggahan diambil dari Aturan Operasional, bukan angka tetap,
+     * sehingga pengelola dapat menyesuaikannya dengan kapasitas server.
+     */
+    protected function maxUploadKilobytes(): int
+    {
+        return app(SystemSettings::class)->maxUploadSizeKilobytes();
     }
 
     public function rules(): array
@@ -27,7 +37,7 @@ class StoreDigitalAssetRequest extends FormRequest
                 'required',
                 'file',
                 'mimes:pdf',
-                'max:51200', // 50 MB
+                'max:'.$this->maxUploadKilobytes(),
                 new SecureMimeType(['application/pdf']),
             ],
             'publication_status' => 'nullable|string|in:draft,published,unpublished,archived',
@@ -40,7 +50,7 @@ class StoreDigitalAssetRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'file.max' => 'Ukuran file maksimum 50 MB.',
+            'file.max' => 'Ukuran file maksimum '.app(SystemSettings::class)->maxUploadSizeMb().' MB.',
             'file.mimes' => 'Hanya file PDF yang didukung.',
             'bibliographic_record_id.required' => 'Katalog bibliografi wajib dipilih.',
             'bibliographic_record_id.exists' => 'Katalog bibliografi tidak ditemukan.',

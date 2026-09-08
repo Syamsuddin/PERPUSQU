@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'OPAC') — GIBTHA LIBRARY</title>
-    <meta name="description" content="@yield('meta-description', 'Online Public Access Catalog — Perpustakaan GIBTHA LIBRARY')">
+    <title>@yield('title', 'OPAC') — {{ $appName }}</title>
+    <meta name="description" content="@yield('meta-description', 'Online Public Access Catalog — Perpustakaan '.$appName)">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -219,7 +219,7 @@
     <nav class="opac-navbar">
         <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
             <a href="{{ route('opac.home') }}" class="brand-text">
-                <i class="bi bi-book-half me-2"></i>GIBTHA LIBRARY OPAC
+                <i class="bi bi-book-half me-2"></i>{{ $appName }} OPAC
             </a>
             <div class="d-flex gap-1 align-items-center flex-wrap">
                 <a href="{{ url('/') }}" class="nav-link">
@@ -257,10 +257,10 @@
         <div class="container text-center">
             <p class="mb-1">
                 <i class="bi bi-book-half me-1" style="color:var(--gold-light)"></i>
-                <strong style="color:#fff">GIBTHA LIBRARY</strong> — Online Public Access Catalog
+                <strong style="color:#fff">{{ $appName }}</strong> — Online Public Access Catalog
             </p>
             <hr class="footer-divider">
-            <p class="mb-0">&copy; {{ date('Y') }} Perpustakaan GIBTHA LIBRARY. Hak cipta dilindungi.</p>
+            <p class="mb-0">&copy; {{ date('Y') }} Perpustakaan {{ $appName }}. Hak cipta dilindungi. <span class="opacity-75">v{{ $appVersion }}</span></p>
         </div>
     </footer>
 

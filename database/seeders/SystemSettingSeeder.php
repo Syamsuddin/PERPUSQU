@@ -10,7 +10,15 @@ class SystemSettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
+            // Lama pinjam per jenis anggota; `loan_default_days` menjadi cadangan
+            // untuk jenis anggota di luar kelima ini.
+            ['key' => 'loan_days_student', 'value' => '14', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
+            ['key' => 'loan_days_lecturer', 'value' => '30', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
+            ['key' => 'loan_days_staff', 'value' => '14', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
+            ['key' => 'loan_days_alumni', 'value' => '7', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
+            ['key' => 'loan_days_guest', 'value' => '7', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
             ['key' => 'loan_default_days', 'value' => '14', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
+            ['key' => 'loan_renewal_days', 'value' => '7', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
             ['key' => 'loan_max_active_loans', 'value' => '5', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
             ['key' => 'loan_max_renewal_count', 'value' => '2', 'type' => 'integer', 'group_name' => 'circulation', 'is_public' => false],
             ['key' => 'allow_renewal', 'value' => 'true', 'type' => 'boolean', 'group_name' => 'circulation', 'is_public' => false],

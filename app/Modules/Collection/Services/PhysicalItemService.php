@@ -41,7 +41,7 @@ class PhysicalItemService
         activity('collection')
             ->causedBy(auth()->user())
             ->performedOn($item)
-            ->log('Item fisik dibuat: ' . $item->barcode);
+            ->log('Item fisik dibuat: '.$item->barcode);
 
         return $item;
     }
@@ -56,7 +56,7 @@ class PhysicalItemService
         activity('collection')
             ->causedBy(auth()->user())
             ->performedOn($item)
-            ->log('Item fisik diperbarui: ' . $item->barcode);
+            ->log('Item fisik diperbarui: '.$item->barcode);
 
         return $item;
     }
@@ -70,9 +70,11 @@ class PhysicalItemService
         activity('collection')
             ->causedBy(auth()->user())
             ->performedOn($item)
-            ->log('Item fisik dihapus: ' . $item->barcode);
+            ->log('Item fisik dihapus: '.$item->barcode);
 
-        $item->statusHistories()->delete();
+        // Penghapusan bersifat lunak, jadi riwayat status sengaja dibiarkan
+        // utuh: item yang dipulihkan harus kembali lengkap dengan jejaknya,
+        // dan riwayat itu sendiri adalah bukti audit yang tidak boleh hilang.
         $item->delete();
     }
 

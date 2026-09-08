@@ -22,6 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'is_active',
+        // AuthenticationService mencatat waktu login lewat mass assignment.
+        // Tanpa baris ini nilainya dibuang diam-diam dan kolom tetap NULL.
+        'last_login_at',
     ];
 
     protected $hidden = [

@@ -2,10 +2,13 @@
 
 namespace App\Modules\Core\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class InstitutionProfile extends Model
 {
+    use HasFactory;
+
     protected $table = 'institution_profiles';
 
     protected $fillable = [

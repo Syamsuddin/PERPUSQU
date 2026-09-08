@@ -37,10 +37,10 @@
 
         {{-- Renewal --}}
         @if($loan->loan_status === 'active')
-        @can('circulation.renew')
+        @can('circulation.process_renewal')
         <div class="card shadow-sm border-0 mb-3"><div class="card-body">
-            <h6 class="fw-semibold mb-3"><i class="bi bi-arrow-repeat me-1"></i>Perpanjangan ({{ $loan->renewals->count() }}/{{ \App\Modules\Circulation\Support\DueDateCalculator::maxRenewals() }})</h6>
-            @if($loan->renewals->count() < \App\Modules\Circulation\Support\DueDateCalculator::maxRenewals() && !$isOverdue)
+            <h6 class="fw-semibold mb-3"><i class="bi bi-arrow-repeat me-1"></i>Perpanjangan ({{ $loan->renewals->count() }}/{{ $maxRenewals }})</h6>
+            @if($renewalAllowed && $loan->renewals->count() < $maxRenewals && !$isOverdue)
             <form method="POST" action="{{ route('admin.circulation.loans.renew', $loan) }}" onsubmit="return confirm('Perpanjang pinjaman ini?')">
                 @csrf
                 <div class="row g-2">
@@ -49,7 +49,7 @@
                 </div>
             </form>
             @else
-            <p class="text-muted mb-0">@if($isOverdue) Pinjaman overdue tidak dapat diperpanjang. @else Batas perpanjangan tercapai. @endif</p>
+            <p class="text-muted mb-0">@if(!$renewalAllowed) Perpanjangan sedang tidak diizinkan. @elseif($isOverdue) Pinjaman overdue tidak dapat diperpanjang. @else Batas perpanjangan tercapai. @endif</p>
             @endif
         </div></div>
         @endcan

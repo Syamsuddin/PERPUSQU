@@ -71,7 +71,7 @@ class LoanPolicy
     public function waiveFines(User $user, Loan $loan): bool
     {
         // Only users with specific permission can waive fines
-        return $user->can('circulation.waive_fines') || $user->hasRole('super-admin');
+        return $user->can('circulation.waive_fines') || $user->hasRole('Super Admin');
     }
 
     /**
@@ -87,6 +87,6 @@ class LoanPolicy
      */
     public function forceReturn(User $user, Loan $loan): bool
     {
-        return $user->can('circulation.force_return') || $user->hasRole('super-admin');
+        return $user->can('circulation.force_return') || $user->hasRole('Super Admin');
     }
 }

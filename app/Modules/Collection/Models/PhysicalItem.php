@@ -2,12 +2,16 @@
 
 namespace App\Modules\Collection\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PhysicalItem extends Model
 {
+    use HasFactory, SoftDeletes;
+
     protected $table = 'physical_items';
 
     protected $fillable = [
@@ -20,7 +24,7 @@ class PhysicalItem extends Model
         return ['acquisition_date' => 'date'];
     }
 
-    public function bibliographicRecord(): BelongsTo { return $this->belongsTo(\App\Modules\Catalog\Models\BibliographicRecord::class); }
+    public function bibliographicRecord(): BelongsTo { return $this->belongsTo(\App\Modules\Catalog\Models\BibliographicRecord::class)->withTrashed(); }
     public function rackLocation(): BelongsTo { return $this->belongsTo(\App\Modules\MasterData\Models\RackLocation::class); }
     public function itemCondition(): BelongsTo { return $this->belongsTo(\App\Modules\MasterData\Models\ItemCondition::class); }
     public function statusHistories(): HasMany { return $this->hasMany(PhysicalItemStatusHistory::class); }

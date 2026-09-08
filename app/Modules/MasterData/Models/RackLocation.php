@@ -2,11 +2,14 @@
 
 namespace App\Modules\MasterData\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RackLocation extends Model
 {
+    use HasFactory;
+
     protected $table = 'rack_locations';
     protected $fillable = ['code', 'name', 'floor', 'room', 'description', 'is_active'];
     protected function casts(): array { return ['is_active' => 'boolean']; }

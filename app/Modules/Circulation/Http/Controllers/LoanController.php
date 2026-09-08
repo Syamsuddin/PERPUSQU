@@ -8,6 +8,7 @@ use App\Modules\Circulation\Http\Requests\StoreLoanRequest;
 use App\Modules\Circulation\Models\Loan;
 use App\Modules\Circulation\Services\LoanRenewalService;
 use App\Modules\Circulation\Services\LoanTransactionService;
+use App\Modules\Core\Services\OperationalRules;
 use App\Modules\Member\Models\Member;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class LoanController extends Controller
     public function __construct(
         protected LoanTransactionService $loanService,
         protected LoanRenewalService $renewalService,
+        protected OperationalRules $rules,
     ) {}
 
     public function create()
@@ -47,7 +49,13 @@ class LoanController extends Controller
     {
         $loan->load(['member', 'physicalItem.bibliographicRecord', 'loanedBy', 'closedBy', 'returnTransaction', 'fine', 'renewals.renewedBy']);
 
-        return view('modules.circulation.loans.show', compact('loan'));
+        // Aturan perpanjangan disuplai dari sini, bukan dipanggil langsung di
+        // Blade: batasnya kini berasal dari Aturan Operasional, dan view tidak
+        // semestinya menjangkau layanan sendiri.
+        $maxRenewals = $this->rules->maxRenewals();
+        $renewalAllowed = $this->rules->renewalAllowed();
+
+        return view('modules.circulation.loans.show', compact('loan', 'maxRenewals', 'renewalAllowed'));
     }
 
     public function history(Request $request)

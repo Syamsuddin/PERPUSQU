@@ -2,6 +2,7 @@
 
 namespace App\Modules\DigitalRepository\Http\Requests;
 
+use App\Modules\Core\Services\SystemSettings;
 use App\Support\Validation\Rules\SecureMimeType;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -10,6 +11,15 @@ class UpdateDigitalAssetRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Batas ukuran unggahan diambil dari Aturan Operasional, bukan angka tetap,
+     * sehingga pengelola dapat menyesuaikannya dengan kapasitas server.
+     */
+    protected function maxUploadKilobytes(): int
+    {
+        return app(SystemSettings::class)->maxUploadSizeKilobytes();
     }
 
     public function rules(): array
@@ -30,7 +40,7 @@ class UpdateDigitalAssetRequest extends FormRequest
                 'nullable',
                 'file',
                 'mimes:pdf',
-                'max:51200', // 50 MB
+                'max:'.$this->maxUploadKilobytes(),
                 new SecureMimeType(['application/pdf']),
             ],
         ];
@@ -39,7 +49,7 @@ class UpdateDigitalAssetRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'replacement_file.max' => 'Ukuran file pengganti maksimum 50 MB.',
+            'replacement_file.max' => 'Ukuran file pengganti maksimum '.app(SystemSettings::class)->maxUploadSizeMb().' MB.',
             'replacement_file.mimes' => 'File pengganti hanya mendukung format PDF.',
             'asset_type.required' => 'Tipe aset wajib dipilih.',
             'publication_status.required' => 'Status publikasi wajib dipilih.',

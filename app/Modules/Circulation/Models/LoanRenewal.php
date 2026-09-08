@@ -3,11 +3,14 @@
 namespace App\Modules\Circulation\Models;
 
 use App\Modules\Identity\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LoanRenewal extends Model
 {
+    use HasFactory;
+
     protected $table = 'loan_renewals';
 
     public $timestamps = false;

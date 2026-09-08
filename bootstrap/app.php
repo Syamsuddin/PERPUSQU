@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Core\Http\Middleware\EnsurePublicCatalogueIsOpen;
 use App\Providers\ModuleRouteServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Application;
@@ -38,7 +39,13 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Halaman login bernama `auth.login`, bukan `login`. Tanpa pemetaan ini
+        // middleware `auth` jatuh ke route('login') yang tidak ada, sehingga
+        // tamu yang membuka URL admin menerima error 500, bukan halaman login.
+        $middleware->redirectGuestsTo(fn () => route('auth.login'));
+
         $middleware->alias([
+            'catalogue.open' => EnsurePublicCatalogueIsOpen::class,
             'role' => RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,

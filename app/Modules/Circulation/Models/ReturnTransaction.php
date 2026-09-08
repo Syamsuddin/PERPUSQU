@@ -5,11 +5,14 @@ namespace App\Modules\Circulation\Models;
 use App\Modules\Collection\Models\PhysicalItem;
 use App\Modules\Identity\Models\User;
 use App\Modules\MasterData\Models\ItemCondition;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ReturnTransaction extends Model
 {
+    use HasFactory;
+
     protected $table = 'return_transactions';
 
     protected $fillable = [
@@ -29,7 +32,9 @@ class ReturnTransaction extends Model
 
     public function physicalItem(): BelongsTo
     {
-        return $this->belongsTo(PhysicalItem::class);
+        // Bukti pengembalian bersifat historis; item yang sudah dihapus
+        // lunak tetap harus dapat disebut.
+        return $this->belongsTo(PhysicalItem::class)->withTrashed();
     }
 
     public function returnedBy(): BelongsTo

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Dashboard') — GIBTHA LIBRARY Admin</title>
+    <title>@yield('title', 'Dashboard') — {{ $appName }} Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -175,7 +175,7 @@
     {{-- ── Sidebar ── --}}
     <aside class="pq-sidebar" id="pqSidebar">
         <a href="{{ route('admin.dashboard.index') }}" class="pq-sidebar-brand">
-            <i class="bi bi-book-half me-2"></i> GIBTHA LIBRARY
+            <i class="bi bi-book-half me-2"></i> {{ $appName }}
         </a>
         <nav class="pq-sidebar-nav">
             {{-- Dashboard (standalone) --}}
@@ -429,7 +429,7 @@
 
     {{-- ── Footer ── --}}
     <footer class="pq-footer">
-        &copy; {{ date('Y') }} GIBTHA LIBRARY — Hak Cipta <strong>Syamsuddin</strong>
+        &copy; {{ date('Y') }} {{ $appName }} <span class="text-muted">v{{ $appVersion }}</span> — Hak Cipta <strong>Syamsuddin</strong>
         <a href="https://wa.me/6281349694696" target="_blank" rel="noopener" title="Hubungi via WhatsApp" style="color: #25D366; margin-left: 0.5rem; font-size: 1.1rem; vertical-align: middle;">
             <i class="bi bi-whatsapp"></i>
         </a>

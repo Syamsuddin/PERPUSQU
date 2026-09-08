@@ -2,16 +2,28 @@
 
 namespace App\Modules\DigitalRepository\Services;
 
+use App\Modules\Core\Services\SystemSettings;
 use App\Modules\DigitalRepository\Models\DigitalAsset;
 use App\Modules\DigitalRepository\Models\OcrText;
 
 class OcrProcessingService
 {
+    public function __construct(
+        protected SystemSettings $settings,
+    ) {}
+
     /**
      * State flow: NOT_REQUESTED → QUEUED → PROCESSING → SUCCESS / FAILED
      */
     public function requestOcr(DigitalAsset $asset): DigitalAsset
     {
+        // OCR memerlukan mesin pengenal teks di server. Selama saklarnya mati,
+        // permintaan ditolak di sini alih-alih mengantre selamanya di status
+        // `queued` tanpa ada yang memprosesnya.
+        if (! $this->settings->ocrEnabled()) {
+            throw new \InvalidArgumentException('Fitur OCR sedang dinonaktifkan pada Aturan Operasional.');
+        }
+
         if (! in_array($asset->ocr_status, ['not_requested', 'failed'])) {
             throw new \InvalidArgumentException('OCR hanya dapat diminta untuk status not_requested atau failed.');
         }

@@ -98,12 +98,14 @@ class ReportController extends Controller
 
     private function circulationData(int $year, ?string $month): array
     {
+        $monthExpression = $this->monthExpression('loan_date');
+
         $monthlyLoans = Loan::select(
-            DB::raw('MONTH(loan_date) as month'),
+            DB::raw("{$monthExpression} as month"),
             DB::raw('count(*) as total')
         )
             ->whereYear('loan_date', $year)
-            ->groupBy(DB::raw('MONTH(loan_date)'))
+            ->groupBy(DB::raw($monthExpression))
             ->orderBy('month')
             ->pluck('total', 'month');
 
@@ -143,13 +145,15 @@ class ReportController extends Controller
             'count_waived'      => Fine::where('status', 'waived')->count(),
         ];
 
+        $monthExpression = $this->monthExpression('created_at');
+
         $monthlyFines = Fine::select(
-            DB::raw('MONTH(created_at) as month'),
+            DB::raw("{$monthExpression} as month"),
             DB::raw('sum(amount) as total'),
             DB::raw('count(*) as count')
         )
             ->whereYear('created_at', $year)
-            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->groupBy(DB::raw($monthExpression))
             ->orderBy('month')
             ->get()
             ->keyBy('month');
@@ -160,7 +164,11 @@ class ReportController extends Controller
             'count' => $monthlyFines->get($m)?->count ?? 0,
         ]);
 
+        // `having` tanpa GROUP BY diterima MySQL tetapi ditolak SQLite.
+        // Mengelompokkan berdasarkan primary key membuat klausanya sah di
+        // kedua mesin tanpa mengubah baris yang dihasilkan.
         $topDebtors = Member::withSum(['fines as outstanding_amount' => fn ($q) => $q->where('status', 'outstanding')], 'amount')
+            ->groupBy('members.id')
             ->having('outstanding_amount', '>', 0)
             ->orderByDesc('outstanding_amount')
             ->limit(10)
@@ -173,5 +181,19 @@ class ReportController extends Controller
             ->get();
 
         return compact('summary', 'months', 'topDebtors', 'recentFines', 'year');
+    }
+
+    /**
+     * Ekspresi SQL yang mengambil nomor bulan dari sebuah kolom tanggal.
+     *
+     * MySQL punya MONTH(); SQLite tidak. Produksi tetap menghasilkan SQL yang
+     * persis sama seperti sebelumnya — cabang SQLite hanya dipakai test suite,
+     * yang tanpa ini tidak bisa menjangkau laporan sirkulasi dan denda sama sekali.
+     */
+    private function monthExpression(string $column): string
+    {
+        return DB::connection()->getDriverName() === 'sqlite'
+            ? "CAST(strftime('%m', {$column}) AS INTEGER)"
+            : "MONTH({$column})";
     }
 }

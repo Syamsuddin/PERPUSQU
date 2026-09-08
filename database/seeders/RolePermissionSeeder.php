@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class RolePermissionSeeder extends Seeder
@@ -21,8 +21,7 @@ class RolePermissionSeeder extends Seeder
 
         // Admin Perpustakaan — all except audit management
         $admin = Role::findByName('Admin Perpustakaan', 'web');
-        $adminPerms = array_filter($allPermissions, fn ($p) =>
-            !str_starts_with($p, 'queue_monitor.manage') &&
+        $adminPerms = array_filter($allPermissions, fn ($p) => ! str_starts_with($p, 'queue_monitor.manage') &&
             $p !== 'audit_logs.export'
         );
         $admin->syncPermissions($adminPerms);
@@ -41,6 +40,9 @@ class RolePermissionSeeder extends Seeder
             'item_conditions.view',
             'faculties.view', 'study_programs.view',
             'catalog.view', 'catalog.view_detail', 'catalog.create', 'catalog.update',
+            // Pustakawan adalah pengatalog utama: ia harus dapat memperbaiki
+            // deskripsi koleksi siapa pun, bukan hanya record buatannya sendiri.
+            'catalog.update_any',
             'catalog.publish', 'catalog.unpublish',
             'collections.view', 'collections.view_detail', 'collections.create', 'collections.update',
             'collections.change_status', 'collections.view_history',

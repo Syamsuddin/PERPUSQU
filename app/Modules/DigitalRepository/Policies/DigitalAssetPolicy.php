@@ -122,7 +122,10 @@ class DigitalAssetPolicy
      */
     public function runOcr(User $user, DigitalAsset $asset): bool
     {
-        return $user->can('digital_assets.ocr');
+        // Nama izin yang didaftarkan PermissionSeeder adalah `run_ocr`;
+        // `digital_assets.ocr` tidak pernah ada, sehingga cabang ini dulu
+        // selalu gagal dan OCR mustahil dijalankan selain oleh Super Admin.
+        return $user->can('digital_assets.run_ocr');
     }
 
     /**
